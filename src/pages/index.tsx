@@ -1,12 +1,36 @@
-// import Map from '../components/Map';
-import dynamic from 'next/dynamic';
-  const Map = dynamic(() => import('../components/Map/index'), {ssr: false});
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { GetServerSideProps } from "next";
 
-export default function Home() {
-  
+interface Props {
+  apiKey: string;
+}
+
+export default function Home({ apiKey }: Props) {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: apiKey,
+  });
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 w-[900px] h-[900px] mx-auto rounded-lg">
-      <Map />
-    </main>
+    <GoogleMap
+      zoom={10}
+      center={{lat: 44, lng: -80}}
+      mapContainerClassName='map-container'
+    >
+    </GoogleMap>
   )
+}
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+  const res = await fetch('http://localhost:3000/api/maps');
+  const { apiKey } = await res.json();
+
+  return {
+    props: {
+      apiKey,
+    },
+  };
 }
