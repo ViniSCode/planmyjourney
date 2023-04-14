@@ -25,7 +25,7 @@ export default function Home({ apiKey }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  const res = await fetch('http://localhost:3000/api/maps');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
   const { apiKey } = await res.json();
 
   return {
