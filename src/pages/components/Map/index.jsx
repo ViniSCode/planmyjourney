@@ -7,8 +7,8 @@ export default function Map({apiKey}) {
   const [markers, setMarkers] = useState([]);
   const [query, setQuery] = useState('');
   const maxBounds = [
-    [-90, -180], // Southwest coordinates
-    [90, 180], // Northeast coordinates
+    [-90, -180],
+    [90, 180],
   ];
 
   const handleMarkerClick = (index) => {
