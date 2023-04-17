@@ -1,8 +1,7 @@
 // import Map from '../components/Map';
 import { GetServerSideProps } from 'next';
-import { MapDynamic } from './components/Map/DynamicMap';
-// import dynamic from 'next/dynamic';
-// const Map = dynamic(() => import('./components/Map/index'), {ssr: false});
+import dynamic from 'next/dynamic';
+const Map = dynamic(() => import('./components/Map/index'), {ssr: false});
 
 interface Props {
   apiKey: string;
@@ -11,7 +10,7 @@ interface Props {
 export default function Home({apiKey}: any) {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 w-[900px] h-[900px] mx-auto rounded-lg">
-      {MapDynamic({apiKey: apiKey})}
+      <Map apiKey={apiKey}/>
     </main>
   )
 }
