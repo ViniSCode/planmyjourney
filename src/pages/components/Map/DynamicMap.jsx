@@ -6,7 +6,7 @@ const DynamicMap = dynamic(() => import('./index'), {
   loading: () => <p>Loading map...</p>,
 });
 
-export function dynamicMap({ apiKey }) {
+export function MapDynamic({ apiKey }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -20,4 +20,4 @@ export function dynamicMap({ apiKey }) {
   return <DynamicMap apiKey={apiKey} />;
 }
 
-export default dynamicMap;
+export default MapDynamic;
