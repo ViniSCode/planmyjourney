@@ -21,6 +21,7 @@ export default function Map({apiKey}) {
     // Update markers state when the markers array changes
   }, [markers]);
 
+
   return (
     <MapContainer
       center={[51.505, -0.09]}
