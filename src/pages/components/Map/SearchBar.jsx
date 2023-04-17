@@ -82,7 +82,7 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
         ))
       ) : (
         <div className='searchbar text-black px-8 py-4 cursor-pointer hover:bg-pink-100 transition-colors flex items-center justify-center'>
-          <PulseLoader className='searchbar' color="#36d7b7" size={10}/>
+          <PulseLoader className='searchbar' color="#f35fc7" size={10}/>
         </div>
       )}
       </div>
