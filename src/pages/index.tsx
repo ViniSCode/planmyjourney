@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next';
-import dynamic from "next/dynamic";
-const DynamicMap = dynamic(() => import("./components/Map/index"), { ssr:false })
+// const DynamicMap = dynamic(() => import("./components/Map/index"), { ssr:false })
 
 interface Props {
   apiKey: string;
