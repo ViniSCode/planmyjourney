@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { MapContainer, Marker, Popup } from 'react-leaflet';
 // import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import { MapContainer } from 'react-leaflet';
 // import { SearchBar } from './SearchBar';
 
 export default function Map({apiKey}) {
@@ -24,37 +24,34 @@ export default function Map({apiKey}) {
 
 
   return (
-    <>
-      <MapContainer
-        center={[51.505, -0.09]}
-        zoom={10}
-        scrollWheelZoom={true}
-        minZoom={2}
-        maxBounds={maxBounds}
-        className="map-container"
-      >
-        {/* <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
-          {/* <SearchBar
-            apiKey={apiKey}
-            markers={markers}
-            setMarkers={setMarkers}
-            setResults={setResults} 
-            results={results}
-            query={query}
-            setQuery={setQuery}
-          /> */}
-        {/* {markers.map((marker, index) => (
-          <Marker key={index} position={[marker.lat, marker.lng]} eventHandlers={{
-              click: () => handleMarkerClick(index)
-            }}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        ))} */}
-      </MapContainer>
-      <h1 className='text-black'>teste</h1>
-    </>
+    <MapContainer
+      center={[51.505, -0.09]}
+      zoom={10}
+      scrollWheelZoom={true}
+      minZoom={2}
+      maxBounds={maxBounds}
+      className="map-container"
+    >
+      {/* <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <SearchBar
+          apiKey={apiKey}
+          markers={markers}
+          setMarkers={setMarkers}
+          setResults={setResults} 
+          results={results}
+          query={query}
+          setQuery={setQuery}
+        /> */}
+      {markers.map((marker, index) => (
+        <Marker key={index} position={[marker.lat, marker.lng]} eventHandlers={{
+            click: () => handleMarkerClick(index)
+          }}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      ))}
+    </MapContainer>
   );
 }

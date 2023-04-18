@@ -1,22 +1,15 @@
 import { GetStaticProps } from 'next';
-import { useEffect, useState } from 'react';
+import dynamic from "next/dynamic";
+const DynamicMap = dynamic(() => import("./components/Map/index"), { ssr:false })
 
 interface Props {
   apiKey: string;
 }
 
 export default function Home({ apiKey }: Props) {
-  const [Map, setMap] = useState<React.FC<{apiKey: string}> | null>(null);
-
-  useEffect(() => {
-    import('./components/Map/index').then((module) => {
-      setMap(() => module.default);
-    });
-  }, []);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 w-[900px] h-[900px] mx-auto rounded-lg">
-      {Map ? <Map apiKey={apiKey} /> : <p>Loading...</p>}
+      <DynamicMap apiKey={apiKey} />
     </main>
   );
 }
