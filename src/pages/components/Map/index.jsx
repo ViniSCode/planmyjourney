@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup } from 'react-leaflet';
-// import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-// import { SearchBar } from './SearchBar';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { SearchBar } from './SearchBar';
 
 export default function Map({apiKey}) {
   const [results, setResults] = useState([]);
@@ -32,7 +31,7 @@ export default function Map({apiKey}) {
       maxBounds={maxBounds}
       className="map-container"
     >
-      {/* <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <SearchBar
           apiKey={apiKey}
@@ -42,7 +41,7 @@ export default function Map({apiKey}) {
           results={results}
           query={query}
           setQuery={setQuery}
-        /> */}
+        />
       {markers.map((marker, index) => (
         <Marker key={index} position={[marker.lat, marker.lng]} eventHandlers={{
             click: () => handleMarkerClick(index)
