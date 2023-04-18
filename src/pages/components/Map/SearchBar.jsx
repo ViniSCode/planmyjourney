@@ -7,8 +7,8 @@ import { PulseLoader } from 'react-spinners';
 export function SearchBar({ apiKey, markers, setMarkers, setResults, results, query, setQuery }) {
 
   const [loading, setLoading] = useState(false);
+
   const map = useMapEvents({
-    
     click(e) {
       // Check if the target of the click event isn't the map
       if (!document.querySelector('.searchbar').contains(e.originalEvent.target)) {
