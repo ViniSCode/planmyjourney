@@ -4,7 +4,7 @@ const DynamicMap = dynamic(() => import("../components/Map/index"), { ssr:false,
 
 export default function Home({ apiKey }) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-14">
       <DynamicMap apiKey={apiKey} />
     </main>
   )

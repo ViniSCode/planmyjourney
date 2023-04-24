@@ -4,15 +4,29 @@ import { RiSearch2Line } from 'react-icons/ri';
 import { useMapEvents } from 'react-leaflet';
 import { PulseLoader } from 'react-spinners';
 
-export function SearchBar({ apiKey, markers, setMarkers, setResults, results, query, setQuery }) {
-
+export function SearchBar({ apiKey, markers, setMarkers, setResults, results, query, setQuery, setLocationInfo, locationInfo }) {
   const [loading, setLoading] = useState(false);
+
 
   const map = useMapEvents({
     click(e) {
       // Check if the target of the click event isn't the map
       if (!document.querySelector('.searchbar').contains(e.originalEvent.target)) {
-        setMarkers([...markers, e.latlng]);
+        fetch(
+          `https://api.opencagedata.com/geocode/v1/json?q=${e.latlng.lat}+${e.latlng.lng}&key=${apiKey}`
+        ).then(response => response.json())
+        .then( data => {
+          if (data.results) {
+              setLocationInfo(data.results[0])
+            }
+          }
+        )
+
+        setMarkers([...markers, {
+          lat: e.latlng.lat,
+          lng: e.latlng.lng,
+          formatted: locationInfo.formatted
+        }]);
       }
     },
   });
@@ -28,11 +42,7 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
           .then(response => response.json())
           .then(data => {
             // Extract the coordinates from the API response
-            const coordinates = data.results[0].geometry;
             setResults(data.results)
-            
-            // Add the coordinates to the markers state
-            setMarkers([...markers, coordinates]);
           })
           .catch(error => {
             console.error(error);
@@ -50,16 +60,20 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
 
   const handleResultClick = (result) => {
     setQuery('');
-    const coordinates = result.geometry;
-    
+    const coordinates = result.geometry;    
     // Move the map to the clicked result
     map.flyTo(coordinates, 15);
     
     // Add a marker to the clicked result
+    setMarkers([...markers, {
+      lat: coordinates.lat,
+      lng: coordinates.lng,
+      formatted: result.formatted
+    }]);
   }  
   
   return (
-    <div className='searchbar cursor-default absolute z-[9999] w-full h-fit max-w-[620px] top-3 right-0 left-0 mx-auto mb-4'>
+    <div className='searchbar cursor-default absolute z-[9999] h-fit max-w-[620px] top-3 right-0 left-0 mx-auto mb-4 w-[70%]'>
       <div className="searchbar relative">
         <RiSearch2Line size={22} className="searchbar absolute text-black top-[15px] left-3"/>
         <div className="searchbar cursor-pointer absolute text-black top-[15px] right-3">
@@ -77,7 +91,7 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
       {!loading ? (
         results.map((result, index) => (
           <div className='searchbar text-black px-8 py-4 cursor-pointer hover:bg-pink-100 transition-colors' key={index} onClick={() => handleResultClick(result)}>
-            <p className='searchbar'>{result?.formatted}</p>
+            <p className='searchbar' onClick={() => handleResultClick(result)}>{result?.formatted}</p>
           </div>
         ))
       ) : (
