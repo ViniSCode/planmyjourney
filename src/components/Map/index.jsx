@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { RiDeleteBin5Fill, RiEdit2Fill } from 'react-icons/ri';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { SearchBar } from './SearchBar';
 
 export default function Map({apiKey}) {
-  const [locationInfo, setLocationInfo] = useState({})
   const [results, setResults] = useState([]);
   const [markers, setMarkers] = useState([]);
   const [query, setQuery] = useState('');
@@ -20,12 +20,12 @@ export default function Map({apiKey}) {
 
   useEffect(() => {
     // console.log('markers', markers)
-  }, [markers, locationInfo]);
+  }, [markers]);
   
   return (
     <div className="w-full h-full">
       <MapContainer
-        center={[51.505, -0.09]}
+        center={[-27.762680689038014, -54.48266029357911]}
         zoom={10}
         scrollWheelZoom={true}
         minZoom={2}
@@ -42,20 +42,20 @@ export default function Map({apiKey}) {
             results={results}
             query={query}
             setQuery={setQuery}
-            setLocationInfo={setLocationInfo}
-            locationInfo={locationInfo}
           />
         {markers.map((marker, index) => (
           <Marker key={index} position={[marker.lat, marker.lng]} eventHandlers={{
-              click: () => handleRemoveMarker(index)
+              click: () => handleRemoveMarker(index),
+              // mouseover: () => display tooltip
             }}>
+            <Popup keepInView>{marker.formatted}</Popup>
           </Marker>
         ))}
       </MapContainer>
 
-      <div className="mt-10">
+      <div className="mt-10 flex flex-wrap gap-2">
           {markers && markers.map((place, index) => (
-            <p key={index}>1° Location: {place.formatted}</p>
+            <p key={index} className='text-sm flex gap-2 items-center justify-between shadow-lg px-4 py-2 rounded-md max-w-fit'>{index + 1}° Location: {place.formatted} <RiEdit2Fill className="text-red-500" size={15}/><RiDeleteBin5Fill className="text-red-500" size={15}/></p>
           ))}
       </div>
     </div>
