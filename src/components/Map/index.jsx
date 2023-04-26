@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import { RiDeleteBin5Fill, RiEdit2Fill } from 'react-icons/ri';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { SearchBar } from './SearchBar';
 
-export default function Map({apiKey}) {
+export default function Map({apiKey, markers, setMarkers}) {
   const [results, setResults] = useState([]);
-  const [markers, setMarkers] = useState([]);
   const [query, setQuery] = useState('');
   const maxBounds = [
     [-90, -180],
@@ -52,12 +50,12 @@ export default function Map({apiKey}) {
           </Marker>
         ))}
       </MapContainer>
-
-      <div className="mt-10 flex flex-wrap gap-2">
+      
+      {/* <div className="mt-10 flex flex-wrap gap-2">
           {markers && markers.map((place, index) => (
             <p key={index} className='text-sm flex gap-2 items-center justify-between shadow-lg px-4 py-2 rounded-md max-w-fit'>{index + 1}° Location: {place.formatted} <RiEdit2Fill className="text-red-500" size={15}/><RiDeleteBin5Fill className="text-red-500" size={15}/></p>
           ))}
-      </div>
+      </div> */}
     </div>
   );
 }
