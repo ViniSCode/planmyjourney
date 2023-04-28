@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import useMap from '@/hooks/useMap';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { SearchBar } from './SearchBar';
 
 export default function Map({apiKey, markers, setMarkers}) {
-  const [results, setResults] = useState([]);
-  const [query, setQuery] = useState('');
+  const {results, setResults, query, setQuery} = useMap();
+
   const maxBounds = [
     [-90, -180],
     [90, 180],
@@ -16,10 +16,6 @@ export default function Map({apiKey, markers, setMarkers}) {
     setMarkers(updatedMarkers);
   };
 
-  useEffect(() => {
-    // console.log('markers', markers)
-  }, [markers]);
-  
   return (
     <div className="w-full h-full">
       <MapContainer

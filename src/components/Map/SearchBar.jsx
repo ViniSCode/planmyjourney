@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
 import { FiX } from 'react-icons/fi';
 import { RiSearch2Line } from 'react-icons/ri';
-import { useMapEvents } from 'react-leaflet';
+import { useMap, useMapEvents } from 'react-leaflet';
 import { PulseLoader } from 'react-spinners';
 
 export function SearchBar({ apiKey, markers, setMarkers, setResults, results, query, setQuery }) {
-  const [loading, setLoading] = useState(false);
+  const {loading, setLoading} = useMap();
 
   // Add marker
   const map = useMapEvents({
@@ -28,34 +27,6 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
       }
     },
   });
-
-  // search location
-  useEffect(() => {
-    // convert query to coordinates
-    const endpoint = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${encodeURIComponent(query)}&limit=5`;
-
-    const delayDebounceFn = setTimeout(() => {
-      if (query) {
-        setLoading(true);
-        fetch(endpoint)
-          .then(response => response.json())
-          .then(data => {
-            // Extract the coordinates from the API response
-            setResults(data.results)
-          })
-          .catch(error => {
-            console.error(error);
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-        } else {
-          setResults([])
-        }
-    }, 1000);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [query]);
 
   // go to location
   const handleResultClick = (result) => {
