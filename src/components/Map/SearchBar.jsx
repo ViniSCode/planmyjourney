@@ -2,6 +2,7 @@ import { FiX } from 'react-icons/fi';
 import { RiSearch2Line } from 'react-icons/ri';
 import { useMap, useMapEvents } from 'react-leaflet';
 import { PulseLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 export function SearchBar({ apiKey, markers, setMarkers, setResults, results, query, setQuery }) {
   const {loading, setLoading} = useMap();
@@ -11,6 +12,11 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
     click(e) {
       // Check if the target of the click event isn't the map
       if (!document.querySelector('.searchbar').contains(e.originalEvent.target)) {
+        if (markers.length === 15) {
+          toast.warn("Oops! Maximum of 15 locations allowed. Please remove one or more to continue.");
+          return;
+        }
+
         fetch(
           `https://api.opencagedata.com/geocode/v1/json?q=${e.latlng.lat}+${e.latlng.lng}&key=${apiKey}`
         ).then(response => response.json())
@@ -44,7 +50,7 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
   }  
   
   return (
-    <div className='text-[#B6B6B6] searchbar cursor-default absolute z-[9999] h-fit max-w-[620px] top-3 right-0 left-0 mx-auto mb-4 w-[70%]'>
+    <div className='text-[#B6B6B6] searchbar cursor-default absolute z-[9999] h-fit max-w-[620px] top-3 right-0 left-10 mx-auto mb-4 w-[70%]'>
       <div className="searchbar relative">
         <RiSearch2Line size={22} className="searchbar absolute text-[#B6B6B6] top-[15px] left-3"/>
         <div className="searchbar cursor-pointer absolute text-[#B6B6B6] top-[15px] right-3">
