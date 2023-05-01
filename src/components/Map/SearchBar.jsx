@@ -13,7 +13,7 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
       // Check if the target of the click event isn't the map
       if (!document.querySelector('.searchbar').contains(e.originalEvent.target)) {
         if (markers.length === 15) {
-          toast.warn("Oops! Maximum of 15 locations allowed. Please remove one or more to continue.");
+          toast.warn("Oops! Maximum of 15 locations allowed.");
           return;
         }
 

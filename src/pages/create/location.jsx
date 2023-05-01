@@ -34,7 +34,7 @@ export default function Location ({ apiKey }) {
       <div className="overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 flex justify-center flex-col gap-3 bg-gray-900 w-full h-screen text-gray-300 px-10">
         <h2 className="mb-4 text-center text-[24px] text-white">Reorder your locations</h2>
         <p className="mb-14 text-center text-gray-300 text-sm">Create a Logical Sequence for Your Trip Plan</p>
-        <div className="overflow-y-scroll scrollbar-thumb-gray-500 w-full py-2 px-4 max-h-96 max-w-[90%] md:max-w-[80%] lg:max-w-[400px] mx-auto">
+        <div className="overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 w-full py-2 px-4 max-h-96 max-w-[90%] md:max-w-[80%] lg:max-w-[400px] mx-auto">
           {markers.length > 0 ? markers.map((place, index) => (
             <div className="flex items-center gap-3 mx-auto w-full md:max-w-full lg:max-w-[320px] mt-3" key={index}>
               <IoReorderTwo size={20} className="cursor-pointer reorder-handle"
