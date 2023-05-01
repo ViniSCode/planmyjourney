@@ -50,9 +50,9 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
   }  
   
   return (
-    <div className='text-[#B6B6B6] searchbar cursor-default absolute z-[9999] h-fit max-w-[620px] top-3 right-0 left-10 mx-auto mb-4 w-[70%]'>
+    <div className='text-[#B6B6B6] searchbar cursor-default absolute z-[9999] h-fit max-w-[620px] top-3 right-0 left-10 mx-auto mb-4 w-[70%] font-poppins'>
       <div className="searchbar relative">
-        <RiSearch2Line size={22} className="searchbar absolute text-[#B6B6B6] top-[15px] left-3"/>
+        <RiSearch2Line size={22} className="searchbar absolute text-[#B6B6B6] top-[12px] left-3"/>
         <div className="searchbar cursor-pointer absolute text-[#B6B6B6] top-[15px] right-3">
           {query && <FiX size={22} className="searchbar" onClick={() => setQuery('')}/>}
         </div>
@@ -60,7 +60,7 @@ export function SearchBar({ apiKey, markers, setMarkers, setResults, results, qu
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="searchbar w-full py-4 px-11 rounded-lg text-[16px] placeholder:text-[16px] placeholder:text-[#B6B6B6] bg-[#222222]"
+          className="searchbar w-full py-3 px-11 rounded-lg text-[16px] placeholder:text-[16px] placeholder:text-[#B6B6B6] bg-[#222222]"
           placeholder='Search a location'
         />
       </div>

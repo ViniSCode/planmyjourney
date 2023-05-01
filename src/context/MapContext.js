@@ -8,7 +8,7 @@ export function MapContextProvider ({children, apiKey}) {
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   // search location
   useEffect(() => {
@@ -39,7 +39,7 @@ export function MapContextProvider ({children, apiKey}) {
   }, [query]);
 
   return (
-    <MapContext.Provider value={{results, markers, query, setQuery, loading, setLoading, setMarkers}}>
+    <MapContext.Provider value={{results, markers, query, setQuery, loading, setLoading, setMarkers, isModalOpen, setIsModalOpen}}>
       {children}
     </MapContext.Provider>
   )

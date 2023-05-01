@@ -19,7 +19,7 @@ export default function Map({apiKey, markers, setMarkers}) {
   return (
     <div className="w-full h-full">
       <MapContainer
-        center={[-27.762680689038014, -54.48266029357911]}
+        center={[-23.580240737140624, -46.678485074276736]}
         zoom={10}
         scrollWheelZoom={true}
         minZoom={2}

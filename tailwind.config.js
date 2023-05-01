@@ -26,7 +26,9 @@ module.exports = {
     
     extend: {
       gridTemplateColumns: {
-        ['map-grid']: 'auto 30rem',
+        ['map-grid']: 'auto 25rem',
+        ['map-grid-lg']: 'auto 25rem',
+        ['share-plan']: '50% 50%',
       },
 
       fontFamily: {

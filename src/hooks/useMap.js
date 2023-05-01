@@ -9,7 +9,9 @@ export default function useMap () {
     setQuery, 
     loading, 
     setLoading, 
-    setMarkers
+    setMarkers,
+    isModalOpen,
+    setIsModalOpen,
   } = useContext(MapContext)
 
   return {
@@ -19,6 +21,8 @@ export default function useMap () {
     setQuery, 
     loading, 
     setLoading, 
-    setMarkers
+    setMarkers,
+    isModalOpen,
+    setIsModalOpen,
   }
 }
