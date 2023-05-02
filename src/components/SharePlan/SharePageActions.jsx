@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { RiArrowRightCircleLine } from "react-icons/ri";
 
-export function CreatePageActions ({href}) {
+export function SharePageActions ({href}) {
   return (
     <div className="mt-12 flex-col md:flex-row flex items-center gap-4 mx-auto w-full max-w-[400px]">
     <button 
@@ -11,7 +11,7 @@ export function CreatePageActions ({href}) {
       Cancel
     </button>
     <Link href={href} className='w-full'>
-      <button type='submit'
+      <button
         className="px-2 py-3 rounded-lg text-white bg-blue-500 w-full flex items-center gap-2 justify-center hover:bg-blue-600 transition-colors">
         Next
         <RiArrowRightCircleLine size={25}/>

@@ -1,4 +1,5 @@
 import { MapContextProvider } from '@/context/MapContext';
+import { SharePlanContextProvider } from '@/context/SharePlanContext';
 import '@/styles/globals.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -6,19 +7,21 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function App({ Component, pageProps }) {
   return (
     <MapContextProvider apiKey={pageProps.apiKey}>
-      <ToastContainer
-        position="top-right"
-        autoClose={7000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      <Component {...pageProps} />
+      <SharePlanContextProvider>
+        <ToastContainer
+          position="top-right"
+          autoClose={7000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <Component {...pageProps} />
+      </SharePlanContextProvider>
     </MapContextProvider>
   )
 }
