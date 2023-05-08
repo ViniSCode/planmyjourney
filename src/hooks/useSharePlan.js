@@ -1,32 +1,32 @@
-import { SharePlanContext } from "@/context/SharePlanContext"
-import { useContext } from "react"
+import { SharePlanContext } from "@/context/SharePlanContext";
+import { useContext } from "react";
 
-export function useSharePlan () {
+export function useSharePlan() {
   const {
-  handleSetBus, 
-  handleSetSubway, 
-  handleSetWalking, 
-  handleSetCar, 
-  days, 
-  handleIncreaseDays, 
-  handleDecreaseDays,
-  expenses, 
-  setExpenses,
-  setDays,
-  transportation
-} = useContext(SharePlanContext)
+    handleSetBus,
+    handleSetSubway,
+    handleSetWalking,
+    handleSetCar,
+    days,
+    handleIncreaseDays,
+    handleDecreaseDays,
+    expenses,
+    setExpenses,
+    setDays,
+    transportation,
+  } = useContext(SharePlanContext);
 
   return {
-    handleSetBus, 
-    handleSetSubway, 
-    handleSetWalking, 
-    handleSetCar, 
-    days, 
-    handleIncreaseDays, 
+    handleSetBus,
+    handleSetSubway,
+    handleSetWalking,
+    handleSetCar,
+    days,
+    handleIncreaseDays,
     handleDecreaseDays,
-    expenses, 
+    expenses,
     setDays,
     setExpenses,
-    transportation
-  }
+    transportation,
+  };
 }

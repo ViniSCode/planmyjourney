@@ -1,28 +1,28 @@
-import { MapContext } from "@/context/MapContext"
-import { useContext } from "react"
+import { MapContext } from "@/context/MapContext";
+import { useContext } from "react";
 
-export default function useMap () {
+export default function useMap() {
   const {
-    results, 
-    markers, 
-    query, 
-    setQuery, 
-    loading, 
-    setLoading, 
+    results,
+    markers,
+    query,
+    setQuery,
+    loading,
+    setLoading,
     setMarkers,
     isModalOpen,
     setIsModalOpen,
-  } = useContext(MapContext)
+  } = useContext(MapContext);
 
   return {
-    results, 
-    markers, 
-    query, 
-    setQuery, 
-    loading, 
-    setLoading, 
+    results,
+    markers,
+    query,
+    setQuery,
+    loading,
+    setLoading,
     setMarkers,
     isModalOpen,
     setIsModalOpen,
-  }
+  };
 }

@@ -13,8 +13,8 @@ export function SharePlanContextProvider ({children}) {
   });
 
   const [expenses, setExpenses] = useState({
-    min: null,
-    max: null
+    min: 0,
+    max: 0
   });
 
   function handleSetCar () {

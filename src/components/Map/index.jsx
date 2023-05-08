@@ -1,9 +1,9 @@
-import useMap from '@/hooks/useMap';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import { SearchBar } from './SearchBar';
+import useMap from "@/hooks/useMap";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { SearchBar } from "./SearchBar";
 
-export default function Map({apiKey, markers, setMarkers}) {
-  const {results, setResults, query, setQuery} = useMap();
+export default function Map({ apiKey, markers, setMarkers }) {
+  const { results, setResults, query, setQuery } = useMap();
 
   const maxBounds = [
     [-90, -180],
@@ -26,22 +26,28 @@ export default function Map({apiKey, markers, setMarkers}) {
         maxBounds={maxBounds}
         className="map-container"
       >
-        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <SearchBar
-            apiKey={apiKey}
-            markers={markers}
-            setMarkers={setMarkers}
-            setResults={setResults} 
-            results={results}
-            query={query}
-            setQuery={setQuery}
-          />
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <SearchBar
+          apiKey={apiKey}
+          markers={markers}
+          setMarkers={setMarkers}
+          setResults={setResults}
+          results={results}
+          query={query}
+          setQuery={setQuery}
+        />
         {markers.map((marker, index) => (
-          <Marker key={index} position={[marker.lat, marker.lng]} eventHandlers={{
+          <Marker
+            key={index}
+            position={[marker.lat, marker.lng]}
+            eventHandlers={{
               click: () => handleRemoveMarker(index),
               // mouseover: () => display tooltip
-            }}>
+            }}
+          >
             <Popup keepInView>{marker.formatted}</Popup>
           </Marker>
         ))}
