@@ -1,21 +1,49 @@
 import { Modal } from "@/components/Modal";
 import useMap from "@/hooks/useMap";
+import { useSharePlan } from "@/hooks/useSharePlan";
 import { motion, useDragControls } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import { FiEdit2, FiX } from "react-icons/fi";
 import { IoReorderTwo } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const DynamicMap = dynamic(() => import("../../components/Map/index"), { ssr:false, loading: () => <div>Loading Map...</div> })
 
 export default function Location ({ apiKey }) {
+  const router = useRouter();
   const controls = useDragControls()
 
   const {markers, setMarkers, isModalOpen, setIsModalOpen} = useMap();
+  const {days, expenses, transportation} = useSharePlan()
 
   function handleRemoveLocation(index) {
     const updatedMarkersLocation = [...markers];
     updatedMarkersLocation.splice(index, 1);
     setMarkers(updatedMarkersLocation);
+  }
+
+  function handleSubmit (e) {
+    e.preventDefault();
+
+    const isTransportationDefined = Object.values(transportation).some(value => value === true)
+
+    if (!isTransportationDefined) {
+      toast.error("Oops! You forgot to select a mode of transportation. Please go back to the previous page and select at least one option.");
+      return;
+    }
+    if (!days) {
+      toast.error("Hold on! You haven't entered the number of days for your trip. Please go back to the previous page and fill in this field.")
+      return;
+    }
+    if (!expenses.min || !expenses.max) {
+      toast.error("Oops! You forgot to enter your estimated expenses. Please go back to the previous page and make sure you've entered both the minimum and maximum values.")
+      return;
+    }
+    if (markers.length < 2) {
+      toast.error("Please select at least two locations on the map to proceed.");
+      return;
+    }
   }
   
   return (
@@ -56,14 +84,14 @@ export default function Location ({ apiKey }) {
               />
             </div>
           )) : (
-              <p className="mb-14 text-center text-gray-300 text-sm">No location selected yet.</p>              
+              <p className="mb-14 text-center text-gray-300 text-sm">No location selected yet. Please select at least two locations on the map to proceed.</p>              
             )
           }
         </div>
-          <div className="mt-20 flex items-center gap-4 mx-auto w-full max-w-xs">
-            <button className="px-2 py-2 rounded-lg text-gray-600 bg-white w-full">Cancel</button>
-            {markers.length > 0 && (<motion.button initial={{opacity: 0}} animate={{opacity: 1}} className="px-2 py-2 rounded-lg text-white bg-blue-500 w-full">Next</motion.button>)}
-          </div>
+          <form onSubmit={handleSubmit} className="mt-20 flex items-center gap-4 mx-auto w-full max-w-xs">
+            <button type="button" onClick={() => router.back()} className="px-2 py-2 rounded-lg text-gray-600 bg-white w-full">Previous</button>
+            <motion.button type="submit" initial={{opacity: 0}} animate={{opacity: 1}} className="px-2 py-2 rounded-lg text-white bg-blue-500 w-full">Next</motion.button>
+          </form>
       </div>
     </main>
   )

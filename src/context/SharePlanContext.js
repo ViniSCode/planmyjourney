@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const SharePlanContext = createContext({});
 
 export function SharePlanContextProvider ({children}) {
-  const [days, setDays] = useState(1);
+  const [days, setDays] = useState(0);
 
   const [transportation, setTransportation] = useState({
     car: false,
@@ -13,8 +13,8 @@ export function SharePlanContextProvider ({children}) {
   });
 
   const [expenses, setExpenses] = useState({
-    min: 800,
-    max: 1500
+    min: null,
+    max: null
   });
 
   function handleSetCar () {
@@ -46,19 +46,19 @@ export function SharePlanContextProvider ({children}) {
   }
   function handleIncreaseDays () {
     //validate days
-    if (days + 1 > 999) {
+    if (Number(days) + 1 > 999) {
       return;
     }
-    setDays(days + 1);
+    setDays(Number(days) + 1);
   }
 
   function handleDecreaseDays () {
     // validate days
-    if (days - 1 < 1) {
+    if (Number(days) - 1 < 1) {
       return;
     }
 
-    setDays(days - 1);
+    setDays(Number(days) - 1);
   }
 
   return (

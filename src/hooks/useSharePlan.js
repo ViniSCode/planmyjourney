@@ -12,6 +12,7 @@ export function useSharePlan () {
   handleDecreaseDays,
   expenses, 
   setExpenses,
+  setDays,
   transportation
 } = useContext(SharePlanContext)
 
@@ -24,6 +25,7 @@ export function useSharePlan () {
     handleIncreaseDays, 
     handleDecreaseDays,
     expenses, 
+    setDays,
     setExpenses,
     transportation
   }

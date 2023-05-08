@@ -1,4 +1,5 @@
 import { TransportationButton } from '@/components/SharePlan/TransportationButton';
+import { ValidateShareButtons } from '@/components/SharePlan/ValidateShareButtons';
 import { useSharePlan } from '@/hooks/useSharePlan';
 import { BiBus } from 'react-icons/bi';
 import { BsCarFrontFill } from 'react-icons/bs';
@@ -9,6 +10,7 @@ export default function Share() {
     handleDecreaseDays, 
     handleIncreaseDays, 
     days,
+    setDays,
     handleSetBus, 
     handleSetSubway, 
     handleSetWalking, 
@@ -31,8 +33,9 @@ export default function Share() {
             <input
               type="number" name="number" maxLength={3} min={1} id="number"
               className="numberOfDays text-xl font-medium bg-gray-200 rounded-lg w-12 h-12 flex items-center text-center text-gray-900 justify-center placeholder:text-center placeholder:text-gray-500"
-              placeholder="1"
+              placeholder="0"
               value={days}
+              onChange={(e) => setDays(e.target.value)}
             />
             <span className="cursor-pointer w-12 h-12 flex items-center justify-center text-xl font-medium bg-gray-200 rounded-lg" onClick={handleIncreaseDays}>+</span>
             <span className="ml-2 text-lg block text-gray-700 font-medium">days</span>
@@ -58,7 +61,10 @@ export default function Share() {
             </TransportationButton>
           </div>
 
-          <SharePageActions href={'/share/expenses'}/>
+          {days && Object.values(transportation).some(value => value === true) 
+            ? (<SharePageActions href={'/share/expenses'}/>)
+            : (<ValidateShareButtons alert="Please select at least one mode of transportation. Also, enter the number of days for your trip plan."/>)
+          }
         </div>
       </div>
     </div>

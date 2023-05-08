@@ -1,4 +1,5 @@
 import { SharePageActions } from '@/components/SharePlan/SharePageActions';
+import { ValidateShareButtons } from '@/components/SharePlan/ValidateShareButtons';
 import { useSharePlan } from '@/hooks/useSharePlan';
 
 export default function Expenses () {
@@ -22,6 +23,7 @@ export default function Expenses () {
               onChange={(e) => setExpenses({...expenses, min: e.target.value})}
               className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-20 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500"
               placeholder="$800"
+              value={expenses.min}
             />
             <span className="text-lg block text-gray-700 font-medium">To</span>
             <input
@@ -29,9 +31,13 @@ export default function Expenses () {
               type="number" name="number" maxLength={3} min={1} id="number"
               className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-20 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500"
               placeholder="$1500" 
+              value={expenses.max}
             />
           </div>
-          <SharePageActions href={'/share/location'}/>
+          {expenses.min && expenses.max
+            ? (<SharePageActions href={'/share/location'}/>)
+            : (<ValidateShareButtons alert="Please fill out the estimated expenses field to proceed."/>)
+          }
         </div>
       </div>
     </div>
