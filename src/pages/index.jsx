@@ -1,11 +1,5 @@
 import { signIn } from "next-auth/react";
-import dynamic from "next/dynamic";
 import Link from "next/link";
-
-const DynamicMap = dynamic(() => import("../components/Map/index"), {
-  ssr: false,
-  loading: () => <div>Loading Map...</div>,
-});
 
 export default function Home({ apiKey }) {
   async function handleLogin() {
