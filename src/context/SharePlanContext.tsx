@@ -4,7 +4,31 @@ interface SharePlanContextProviderProps {
   children: ReactNode;
 }
 
-export const SharePlanContext = createContext({});
+interface SharePlanContextData {
+  days: number;
+  transportation: {
+    car: boolean;
+    bus: boolean;
+    subway: boolean;
+    walking: boolean;
+  };
+  expenses: {
+    min: number;
+    max: number;
+  };
+  handleIncreaseDays: () => void;
+  handleDecreaseDays: () => void;
+  handleSetWalking: () => void;
+  handleSetSubway: () => void;
+  handleSetCar: () => void;
+  handleSetBus: () => void;
+  setDays: any;
+  setExpenses: any;
+}
+
+export const SharePlanContext = createContext<SharePlanContextData>(
+  {} as SharePlanContextData
+);
 
 export function SharePlanContextProvider({
   children,

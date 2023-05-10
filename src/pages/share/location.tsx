@@ -1,3 +1,4 @@
+import { Loading } from "@/components/Loading";
 import { Modal } from "@/components/Modal";
 import useMap from "@/hooks/useMap";
 import { useSharePlan } from "@/hooks/useSharePlan";
@@ -12,7 +13,7 @@ import { toast } from "react-toastify";
 
 const DynamicMap = dynamic(() => import("../../components/Map/index"), {
   ssr: false,
-  loading: () => <div>Loading Map...</div>,
+  loading: () => <Loading />,
 });
 
 export default function Location({ apiKey }: any) {
