@@ -1,9 +1,11 @@
 import { Modal } from "@/components/Modal";
 import useMap from "@/hooks/useMap";
 import { useSharePlan } from "@/hooks/useSharePlan";
-import { motion, useDragControls } from "framer-motion";
+import { motion } from "framer-motion";
+import type { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { FormEvent } from "react";
 import { FiEdit2, FiX } from "react-icons/fi";
 import { IoReorderTwo } from "react-icons/io5";
 import { toast } from "react-toastify";
@@ -13,20 +15,19 @@ const DynamicMap = dynamic(() => import("../../components/Map/index"), {
   loading: () => <div>Loading Map...</div>,
 });
 
-export default function Location({ apiKey }) {
+export default function Location({ apiKey }: any) {
   const router = useRouter();
-  const controls = useDragControls();
 
   const { markers, setMarkers, isModalOpen, setIsModalOpen } = useMap();
   const { days, expenses, transportation } = useSharePlan();
 
-  function handleRemoveLocation(index) {
+  function handleRemoveLocation(index: number) {
     const updatedMarkersLocation = [...markers];
     updatedMarkersLocation.splice(index, 1);
     setMarkers(updatedMarkersLocation);
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     const isTransportationDefined = Object.values(transportation).some(
@@ -99,7 +100,6 @@ export default function Location({ apiKey }) {
                 <IoReorderTwo
                   size={20}
                   className="cursor-pointer reorder-handle"
-                  onPointerDown={(e) => controls.start(e)}
                 />
                 <p className="truncate text-sm w-[90%]">{place.formatted}</p>
                 <FiEdit2
@@ -146,7 +146,7 @@ export default function Location({ apiKey }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const url =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/maps";
 
@@ -166,4 +166,4 @@ export async function getServerSideProps(context) {
       },
     };
   }
-}
+};

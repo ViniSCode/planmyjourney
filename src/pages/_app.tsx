@@ -2,26 +2,28 @@ import { Loading } from "@/components/Loading";
 import { MapContextProvider } from "@/context/MapContext";
 import { SharePlanContextProvider } from "@/context/SharePlanContext";
 import "@/styles/globals.css";
+import { GetServerSideProps } from "next";
 import { SessionProvider } from "next-auth/react";
+import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function App({ Component, pageProps, router, session }) {
+export default function App({ Component, pageProps, router }: AppProps) {
   const [isPageLoading, setIsPageLoading] = useState(false);
 
   useEffect(() => {
-    router.events.on("routerChangeStart", (url) => {
+    router.events.on("routeChangeStart", (url) => {
       setIsPageLoading(true);
     });
 
-    router.events.on("routerChangeComplete", (url) => {
+    router.events.on("routeChangeComplete", (url) => {
       setIsPageLoading(false);
     });
   }, []);
 
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={pageProps.session}>
       <MapContextProvider apiKey={pageProps.apiKey}>
         {isPageLoading && <Loading />}
         <SharePlanContextProvider>
@@ -44,7 +46,7 @@ export default function App({ Component, pageProps, router, session }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const url =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/maps";
   try {
@@ -64,4 +66,4 @@ export async function getServerSideProps(context) {
       },
     };
   }
-}
+};

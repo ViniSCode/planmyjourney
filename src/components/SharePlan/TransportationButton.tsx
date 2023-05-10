@@ -1,4 +1,14 @@
-export function TransportationButton({ children, transportation, ...rest }) {
+import { ButtonHTMLAttributes } from "react";
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  transportation: boolean;
+}
+
+export function TransportationButton({
+  children,
+  transportation,
+  ...rest
+}: Props) {
   return (
     <button
       type="button"

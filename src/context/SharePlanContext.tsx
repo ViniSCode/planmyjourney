@@ -1,8 +1,14 @@
-import { createContext, useState } from "react";
+import { ReactNode, createContext, useState } from "react";
+
+interface SharePlanContextProviderProps {
+  children: ReactNode;
+}
 
 export const SharePlanContext = createContext({});
 
-export function SharePlanContextProvider ({children}) {
+export function SharePlanContextProvider({
+  children,
+}: SharePlanContextProviderProps) {
   const [days, setDays] = useState(0);
 
   const [transportation, setTransportation] = useState({
@@ -14,37 +20,37 @@ export function SharePlanContextProvider ({children}) {
 
   const [expenses, setExpenses] = useState({
     min: 0,
-    max: 0
+    max: 0,
   });
 
-  function handleSetCar () {
+  function handleSetCar() {
     setTransportation({
       ...transportation,
       car: !transportation.car,
     });
   }
 
-  function handleSetBus () {
+  function handleSetBus() {
     setTransportation({
       ...transportation,
       bus: !transportation.bus,
     });
   }
 
-  function handleSetSubway () {
+  function handleSetSubway() {
     setTransportation({
       ...transportation,
       subway: !transportation.subway,
     });
   }
 
-  function handleSetWalking () {
+  function handleSetWalking() {
     setTransportation({
       ...transportation,
       walking: !transportation.walking,
     });
   }
-  function handleIncreaseDays () {
+  function handleIncreaseDays() {
     //validate days
     if (Number(days) + 1 > 999) {
       return;
@@ -52,7 +58,7 @@ export function SharePlanContextProvider ({children}) {
     setDays(Number(days) + 1);
   }
 
-  function handleDecreaseDays () {
+  function handleDecreaseDays() {
     // validate days
     if (Number(days) - 1 < 1) {
       return;
@@ -62,22 +68,22 @@ export function SharePlanContextProvider ({children}) {
   }
 
   return (
-    <SharePlanContext.Provider 
+    <SharePlanContext.Provider
       value={{
-        handleSetBus, 
-        handleSetSubway, 
-        handleSetWalking, 
-        handleSetCar, 
-        days, 
-        setDays, 
-        expenses, 
+        handleSetBus,
+        handleSetSubway,
+        handleSetWalking,
+        handleSetCar,
+        days,
+        setDays,
+        expenses,
         setExpenses,
-        handleIncreaseDays, 
+        handleIncreaseDays,
         handleDecreaseDays,
-        transportation
+        transportation,
       }}
     >
       {children}
     </SharePlanContext.Provider>
-  )
+  );
 }

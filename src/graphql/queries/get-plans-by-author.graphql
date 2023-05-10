@@ -1,0 +1,12 @@
+query GetPlansByAuthor($email: String!) {
+  plans(where: { author: { member: { email: $email } } }) {
+    days
+    expenses
+    transportation
+    location
+    likes
+    images {
+      id
+    }
+  }
+}

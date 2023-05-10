@@ -1,8 +1,12 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { RiArrowRightCircleLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 
-export function SharePageActions({ href }) {
+interface Props {
+  alert: string;
+}
+
+export function ValidateShareButtons({ alert }: Props) {
   const router = useRouter();
 
   return (
@@ -14,12 +18,15 @@ export function SharePageActions({ href }) {
       >
         Previous
       </button>
-      <Link href={href} className="w-full">
-        <button className="px-2 py-3 rounded-lg text-white bg-blue-500 w-full flex items-center gap-2 justify-center hover:bg-blue-600 transition-colors">
+      <div className="w-full">
+        <button
+          onClick={() => toast.error(alert)}
+          className="px-2 py-3 rounded-lg text-white bg-blue-500 w-full flex items-center gap-2 justify-center hover:bg-blue-600 transition-colors"
+        >
           Next
           <RiArrowRightCircleLine size={25} />
         </button>
-      </Link>
+      </div>
     </div>
   );
 }
