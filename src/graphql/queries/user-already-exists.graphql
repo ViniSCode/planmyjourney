@@ -1,0 +1,5 @@
+query UserAlreadyExists($email: String!) {
+  members(where: { email: $email }) {
+    id
+  }
+}

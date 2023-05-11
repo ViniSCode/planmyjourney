@@ -62,18 +62,18 @@ export default function Location({ apiKey }: any) {
   }
 
   return (
-    <main className="grid lg:grid-cols-map-grid-lg xl:grid-cols-map-grid select-none overflow-hidden">
-      <div className="mt-10 mb-20 w-full max-w-[80%] md:max-w-[70%] lg:max-w-[80%] xl:w-[80%] xl:max-w-[1280px] mx-auto">
+    <main className="grid lg:grid-cols-map-grid-lg xl:grid-cols-map-grid-xl select-none overflow-hidden">
+      <div className="xl:flex xl:flex-col xl:justify-center mt-10 mb-20 lg:mb-0 w-full max-w-[80%] md:max-w-[70%] lg:max-w-[80%] xl:w-[80%] xl:max-w-[1280px] 2xl:max-w-[60%] mx-auto">
         <h1 className="text-3xl font-medium text-center">PlanMyJourney</h1>
-        <h2 className="mt-20 xl:mt-10 text-2xl font-medium">
+        <h2 className="mt-10 xl:mt-20 text-2xl font-medium">
           Destination Planner
         </h2>
-        <p className="text-sm font-medium mt-2 text-gray-700 xl:text-base">
+        <p className="xl:mt-4 text-sm font-medium mt-2 text-gray-700 xl:text-base">
           Select Locations for Your Trip Plan: Use the interactive map to choose
           the places you have visited. Simply click on the map to select and
           organize the locations, and share your trip plan with others.
         </p>
-        <div className="mt-10">
+        <div className="mt-5 xl:mt-5">
           <DynamicMap
             apiKey={apiKey}
             markers={markers}

@@ -27,6 +27,7 @@ module.exports = {
       gridTemplateColumns: {
         ["map-grid"]: "auto 25rem",
         ["map-grid-lg"]: "auto 25rem",
+        ["map-grid-xl"]: "auto 40rem",
         ["share-plan"]: "50% 50%",
       },
 
