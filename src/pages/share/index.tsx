@@ -1,12 +1,15 @@
 import { TransportationButton } from "@/components/SharePlan/TransportationButton";
 import { ValidateShareButtons } from "@/components/SharePlan/ValidateShareButtons";
 import { useSharePlan } from "@/hooks/useSharePlan";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 import { BiBus } from "react-icons/bi";
 import { BsCarFrontFill } from "react-icons/bs";
 import { FaSubway, FaWalking } from "react-icons/fa";
 import { SharePageActions } from "../../components/SharePlan/SharePageActions";
-export default function Share() {
+
+export default function Share({ session }: any) {
   const {
     handleDecreaseDays,
     handleIncreaseDays,
@@ -117,3 +120,22 @@ export default function Share() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+};

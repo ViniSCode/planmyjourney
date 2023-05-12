@@ -1,9 +1,11 @@
 import { SharePageActions } from "@/components/SharePlan/SharePageActions";
 import { ValidateShareButtons } from "@/components/SharePlan/ValidateShareButtons";
 import { useSharePlan } from "@/hooks/useSharePlan";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 
-export default function Expenses() {
+export default function Expenses({ session }: any) {
   const { setExpenses, expenses } = useSharePlan();
 
   return (
@@ -69,3 +71,22 @@ export default function Expenses() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+};

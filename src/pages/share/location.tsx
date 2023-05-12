@@ -196,7 +196,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (session) {
     return {
       redirect: {
-        destination: "/share",
+        destination: "/login",
         permanent: false,
       },
     };
