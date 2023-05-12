@@ -1,21 +1,25 @@
 import { ReactNode, createContext, useState } from "react";
 
+export type Transportation = {
+  car: boolean;
+  bus: boolean;
+  subway: boolean;
+  walking: boolean;
+};
+
+export type Expenses = {
+  min: number;
+  max: number;
+};
+
 interface SharePlanContextProviderProps {
   children: ReactNode;
 }
 
 interface SharePlanContextData {
   days: number;
-  transportation: {
-    car: boolean;
-    bus: boolean;
-    subway: boolean;
-    walking: boolean;
-  };
-  expenses: {
-    min: number;
-    max: number;
-  };
+  transportation: Transportation;
+  expenses: Expenses;
   handleIncreaseDays: () => void;
   handleDecreaseDays: () => void;
   handleSetWalking: () => void;

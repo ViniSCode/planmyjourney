@@ -5,7 +5,7 @@ interface MapContextProviderProps {
   apiKey: string;
 }
 
-interface Marker {
+export interface Marker {
   lat: number;
   lng: number;
   formatted: string;
