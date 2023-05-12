@@ -1,28 +1,15 @@
-import { useSharePlan } from "@/hooks/useSharePlan";
 import type { GetServerSideProps } from "next";
 import { getSession, signIn } from "next-auth/react";
 import Image from "next/image";
-import { FaGithub, FaGoogle } from "react-icons/fa";
+import { useRouter } from "next/router";
+import { FaGoogle } from "react-icons/fa";
 import { FiArrowLeftCircle } from "react-icons/fi";
 export default function Login({ session }: any) {
-  const {
-    handleDecreaseDays,
-    handleIncreaseDays,
-    days,
-    setDays,
-    handleSetBus,
-    handleSetSubway,
-    handleSetWalking,
-    handleSetCar,
-    transportation,
-  } = useSharePlan();
+  const router = useRouter();
 
   async function handleLogin() {
     await signIn("google");
-  }
-
-  async function handleLoginWithGithub() {
-    await signIn("google");
+    router.push("/share");
   }
 
   return (
@@ -45,17 +32,12 @@ export default function Login({ session }: any) {
             Sign in with Google
           </button>
 
-          <button
-            onClick={handleLoginWithGithub}
-            className="flex items-center justify-center gap-4 mt-4 px-2 py-4 rounded-lg text-white bg-gray-900 w-full hover:bg-gray-700 transition-colors"
-          >
-            <FaGithub size={22} />
-            Sign in with Github
-          </button>
-
           <div className="mt-10 mb-8 bg-gray-300 h-[2px] w-full"></div>
 
-          <button className="flex gap-4 items-center justify-center mt-4 px-2 py-4 rounded-lg text-red-500 border border-red-500 w-full hover:bg-red-500 hover:text-white transition-colors">
+          <button
+            className="flex gap-4 items-center justify-center mt-4 px-2 py-4 rounded-lg text-red-500 border border-red-500 w-full hover:bg-red-500 hover:text-white transition-colors"
+            onClick={() => router.push("/")}
+          >
             <FiArrowLeftCircle size={22} />
             Cancel
           </button>
@@ -78,7 +60,7 @@ export default function Login({ session }: any) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  if (!session) {
+  if (session) {
     return {
       redirect: {
         destination: "/share",

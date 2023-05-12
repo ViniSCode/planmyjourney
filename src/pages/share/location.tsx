@@ -1,24 +1,36 @@
 import { Loading } from "@/components/Loading";
 import { Modal } from "@/components/Modal";
+import { Marker } from "@/context/MapContext";
+import { Expenses, Transportation } from "@/context/SharePlanContext";
 import useMap from "@/hooks/useMap";
 import { useSharePlan } from "@/hooks/useSharePlan";
 import { motion } from "framer-motion";
 import type { GetServerSideProps } from "next";
+import { Session } from "next-auth";
+import { getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { FiEdit2, FiX } from "react-icons/fi";
 import { IoReorderTwo } from "react-icons/io5";
 import { toast } from "react-toastify";
+
+export interface TripPlanDataProps {
+  location: Marker[];
+  days: number;
+  expenses: Expenses;
+  transportation: Transportation;
+  session: Session;
+}
 
 const DynamicMap = dynamic(() => import("../../components/Map/index"), {
   ssr: false,
   loading: () => <Loading />,
 });
 
-export default function Location({ apiKey }: any) {
+export default function Location({ apiKey, session }: any) {
+  const [tripPlanData, setTripPlanData] = useState<TripPlanDataProps>();
   const router = useRouter();
-
   const { markers, setMarkers, isModalOpen, setIsModalOpen } = useMap();
   const { days, expenses, transportation } = useSharePlan();
 
@@ -28,12 +40,15 @@ export default function Location({ apiKey }: any) {
     setMarkers(updatedMarkersLocation);
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-
     const isTransportationDefined = Object.values(transportation).some(
       (value) => value === true
     );
+
+    if (!session) {
+      return;
+    }
 
     if (!isTransportationDefined) {
       toast.error(
@@ -41,23 +56,51 @@ export default function Location({ apiKey }: any) {
       );
       return;
     }
+
     if (!days) {
       toast.error(
         "Hold on! You haven't entered the number of days for your trip. Please go back to the previous page and fill in this field."
       );
       return;
     }
+
     if (!expenses.min || !expenses.max) {
       toast.error(
         "Oops! You forgot to enter your estimated expenses. Please go back to the previous page and make sure you've entered both the minimum and maximum values."
       );
       return;
     }
+
     if (markers.length < 2) {
       toast.error(
         "Please select at least two locations on the map to proceed."
       );
       return;
+    }
+
+    setTripPlanData({
+      session,
+      days,
+      expenses,
+      transportation,
+      location: markers,
+    });
+
+    try {
+      const reqData = await fetch("/api/share", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          session,
+          tripPlanData,
+        }),
+      }).then((res) => res.json());
+
+      console.log(reqData);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -148,6 +191,17 @@ export default function Location({ apiKey }: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/share",
+        permanent: false,
+      },
+    };
+  }
+
   const url =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/maps";
 
@@ -164,6 +218,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         apiKey: "",
+        session,
       },
     };
   }
