@@ -1,8 +1,12 @@
 import type { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 import Link from "next/link";
 
 export default function Home({ session }: any) {
+  async function handleLogout() {
+    signOut();
+  }
+
   return (
     <>
       <header>
@@ -17,6 +21,14 @@ export default function Home({ session }: any) {
             Create
           </button>
         </Link>
+        {session && (
+          <button
+            className="px-10 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        )}
       </main>
     </>
   );
