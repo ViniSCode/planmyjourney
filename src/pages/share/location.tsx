@@ -6,11 +6,10 @@ import useMap from "@/hooks/useMap";
 import { useSharePlan } from "@/hooks/useSharePlan";
 import { motion } from "framer-motion";
 import type { GetServerSideProps } from "next";
-import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { FiEdit2, FiX } from "react-icons/fi";
 import { IoReorderTwo } from "react-icons/io5";
 import { toast } from "react-toastify";
@@ -20,7 +19,6 @@ export interface TripPlanDataProps {
   days: number;
   expenses: Expenses;
   transportation: Transportation;
-  session: Session;
 }
 
 const DynamicMap = dynamic(() => import("../../components/Map/index"), {
@@ -29,10 +27,19 @@ const DynamicMap = dynamic(() => import("../../components/Map/index"), {
 });
 
 export default function Location({ apiKey, session }: any) {
-  const [tripPlanData, setTripPlanData] = useState<TripPlanDataProps>();
   const router = useRouter();
   const { markers, setMarkers, isModalOpen, setIsModalOpen } = useMap();
-  const { days, expenses, transportation } = useSharePlan();
+  const {
+    days,
+    expenses,
+    transportation,
+    setDays,
+    setExpenses,
+    handleSetBus,
+    handleSetSubway,
+    handleSetWalking,
+    handleSetCar,
+  } = useSharePlan();
 
   function handleRemoveLocation(index: number) {
     const updatedMarkersLocation = [...markers];
@@ -78,14 +85,6 @@ export default function Location({ apiKey, session }: any) {
       return;
     }
 
-    setTripPlanData({
-      session,
-      days,
-      expenses,
-      transportation,
-      location: markers,
-    });
-
     try {
       const reqData = await fetch("/api/share", {
         method: "POST",
@@ -94,12 +93,23 @@ export default function Location({ apiKey, session }: any) {
         },
         body: JSON.stringify({
           session,
-          tripPlanData,
+          tripPlanData: {
+            days,
+            expenses,
+            transportation,
+            location: markers,
+          },
         }),
       }).then((res) => res.json());
 
-      console.log(reqData);
+      if (reqData?.success) {
+        toast.success(reqData.message);
+        router.push("/");
+      } else {
+        toast.error(reqData?.message);
+      }
     } catch (err) {
+      toast.error("An error occurred while sharing the plan");
       console.log(err);
     }
   }
@@ -211,6 +221,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         apiKey,
+        session,
       },
     };
   } catch (err) {
