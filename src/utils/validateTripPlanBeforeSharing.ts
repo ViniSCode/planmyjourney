@@ -1,58 +1,62 @@
-// import { Marker } from "@/context/MapContext";
-// import { Expenses, Transportation } from "@/context/SharePlanContext";
-// import { Session } from "next-auth";
-// import { useState } from "react";
+import { Marker } from "@/context/MapContext";
+import { Expenses, Transportation } from "@/context/SharePlanContext";
+import { TripPlanDataProps } from "@/pages/share/location";
+import { Session } from "next-auth";
 
 export interface ValidationResponse {
-  //   error: boolean;
-  //   message: string;
-  // }
-  // export type tripPlanDataProps = {
-  //   location: Marker[];
-  //   days: number;
-  //   expenses: Expenses;
-  //   transportation: Transportation;
-  // };
-  // export interface ValidateTripPlanBeforeSharingProps {
-  //   session: Session;
-  //   tripPlanData: tripPlanDataProps;
-  // }
-  // export function validateTripPlanBeforeSharing({
-  //   session,
-  //   tripPlanData,
-  // }: ValidateTripPlanBeforeSharingProps): ValidationResponse {
-  //   const [message, setMessage] = useState("");
-  //   const [error, setError] = useState(false);
-  //   // check if "transportation" is defined
-  //   const isTransportationDefined = Object.values(
-  //     tripPlanData.transportation
-  //   ).some((value) => value === true);
-  //   // check if user is logged in
-  //   if (!session) {
-  //     setMessage("User not logged in");
-  //     setError(true);
-  //   }
-  //   if (!isTransportationDefined) {
-  //     setMessage("Please select transportation options");
-  //     setError(true);
-  //   }
-  //   // check if "days" is defined
-  //   if (!tripPlanData.days) {
-  //     setMessage("Please provide the number of days");
-  //     setError(true);
-  //   }
-  //   // check if "expenses" is defined
-  //   if (!tripPlanData.expenses.min || !tripPlanData.expenses.max) {
-  //     setMessage("Please provide valid expense details");
-  //     setError(true);
-  //   }
-  //   // check if "location" is defined
-  //   if (tripPlanData.location.length < 2) {
-  //     setMessage("Please select at least two locations");
-  //     setError(true);
-  //   }
-  //   return {
-  //     error,
-  //     message,
-  //   };
+  error: boolean;
+  message: string;
+}
+export type tripPlanDataProps = {
+  location: Marker[];
+  days: number;
+  expenses: Expenses;
+  transportation: Transportation;
+};
+
+export interface ValidateTripPlanBeforeSharingProps {
+  session: Session;
+  tripPlanData: tripPlanDataProps;
+}
+
+export function validateTripPlanBeforeSharing(
+  session: Session,
+  tripPlanData: TripPlanDataProps
+): ValidationResponse {
+  let message = "";
+  let error = false;
+
+  // check if "transportation" is defined
+  const isTransportationDefined = Object.values(
+    tripPlanData.transportation
+  ).some((value) => value === true);
+
+  // check if user is logged in
+  if (!session) {
+    message = "User not logged in";
+    error = true;
+  }
+  if (!isTransportationDefined) {
+    message = "Please select transportation options";
+    error = true;
+  }
+  // check if "days" is defined
+  if (!tripPlanData.days) {
+    message = "Please provide the number of days";
+    error = true;
+  }
+  // check if "expenses" is defined
+  if (!tripPlanData.expenses.min || !tripPlanData.expenses.max) {
+    message = "Please provide valid expense details";
+    error = true;
+  }
+  // check if "location" is defined
+  if (tripPlanData.location.length < 2) {
+    message = "Please select at least two locations";
+    error = true;
+  }
+  return {
+    error,
+    message,
+  };
 }
