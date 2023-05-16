@@ -9,7 +9,7 @@ import type { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { FiEdit2, FiX } from "react-icons/fi";
 import { IoReorderTwo } from "react-icons/io5";
 import { toast } from "react-toastify";
@@ -27,6 +27,7 @@ const DynamicMap = dynamic(() => import("../../components/Map/index"), {
 });
 
 export default function Location({ apiKey, session }: any) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const { markers, setMarkers, isModalOpen, setIsModalOpen } = useMap();
   const {
@@ -48,6 +49,13 @@ export default function Location({ apiKey, session }: any) {
   }
 
   async function handleSubmit(e: FormEvent) {
+    if (isSubmitting) {
+      toast.warning("submitting");
+      return;
+    } else {
+      setIsSubmitting(true);
+    }
+
     e.preventDefault();
     const isTransportationDefined = Object.values(transportation).some(
       (value) => value === true
@@ -190,7 +198,8 @@ export default function Location({ apiKey, session }: any) {
             type="submit"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="px-2 py-2 rounded-lg text-white bg-blue-500 w-full"
+            disabled={isSubmitting}
+            className="px-2 py-2 rounded-lg text-white bg-blue-500 w-full disabled:animate-pulse disabled:bg-blue-900"
           >
             Next
           </motion.button>
