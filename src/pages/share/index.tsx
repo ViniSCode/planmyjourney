@@ -123,7 +123,6 @@ export default function Share({ session }: any) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
-
   if (!session) {
     return {
       redirect: {
