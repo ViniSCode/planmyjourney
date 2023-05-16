@@ -29,7 +29,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } else {
       try {
         // continue with share
-        const uniqueId = uuidv4();
         // 1 check if author already exists
         const {
           data: { members },
