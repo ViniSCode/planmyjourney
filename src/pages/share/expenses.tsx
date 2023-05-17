@@ -62,7 +62,7 @@ export default function Expenses({ session }: any) {
             />
           </div>
           {expenses.min && expenses.max ? (
-            <SharePageActions href={"/share/location"} />
+            <SharePageActions href={"/share/images"} />
           ) : (
             <ValidateShareButtons alert="Please fill out the estimated expenses field to proceed." />
           )}
