@@ -15,7 +15,7 @@ export default function Home({ session }: any) {
 
   return (
     <>
-      <header className="h-[50vh] md:h-[80vh] w-full relative flex flex-col px-2">
+      <header className="h-[80vh] md:h-[80vh] w-full relative flex flex-col px-2">
         <Image
           src="/assets/header.png"
           fill
@@ -89,7 +89,7 @@ export default function Home({ session }: any) {
           </button>
         </div>
       </header>
-      <main className="mt-[5rem] flex flex-col items-center justify-center gap-4">
+      <main className="mt-[45rem] flex flex-col items-center justify-center gap-4">
         <Link href="/login">
           <button className="px-10 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors">
             Create

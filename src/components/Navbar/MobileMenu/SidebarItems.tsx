@@ -44,7 +44,7 @@ export function SidebarItems({
             handleLogout();
           }
         }}
-        className="ml-10 flex items-center gap-4 cursor-pointer transition-colors hover:text-yellow-500"
+        className="ml-10 flex items-center gap-4 cursor-pointer text-white transition-colors hover:text-pink-500"
         whileHover={{ scale: 1.1 }}
         variants={itemVariants}
         transition={{ duration: 0.2 }}

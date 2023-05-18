@@ -76,7 +76,7 @@ export function MobileMenu() {
             animate={open ? "open" : "closed"}
             variants={aside}
             transition={{ duration: 0.2 }}
-            className="flex flex-col bg-gray-700 py-36 h-[100%] w-0 fixed top-0 left-0 right-0 bottom-0 z-50 shadow-lg overflow-x-hidden"
+            className="flex flex-col bg-blue-900 py-36 h-[100%] w-0 fixed top-0 left-0 right-0 bottom-0 z-50 shadow-lg overflow-x-hidden"
           >
             <motion.div
               animate={open ? "open" : "closed"}
