@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FiMapPin } from "react-icons/fi";
 
@@ -65,9 +66,8 @@ export function PopularPlansSlide() {
           className="rounded-2xl flex gap-16 justify-start h-full"
         >
           {popularTripPlan.map((plan, index) => (
-            <div className="w-56 h-fit relative">
-              <img
-                key={index}
+            <div className="w-56 h-fit relative" key={index}>
+              <Image
                 src={plan.url}
                 alt="location name"
                 draggable={false}
