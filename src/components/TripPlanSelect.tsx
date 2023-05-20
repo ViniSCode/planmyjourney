@@ -4,7 +4,7 @@ import { RiArrowDownSLine, RiCalendarLine, RiStarLine } from "react-icons/ri";
 export function TripPlanSelect() {
   return (
     <div className="flex flex-col max-w-[270px] md:flex-row md:flex absolute left-1/2 right-1/2 -translate-x-1/2 bottom-[-200px] md:bottom-[-50px] w-[95%] md:max-w-[730px] mx-auto bg-white gap-4 md:gap-10 rounded-2xl px-4 py-6 md:px-4 md:py-4 shadow-lg items-center justify-center">
-      <div className="gap-8 items-baseline flex-col justify-center flex md:items-center md:gap-10 md:flex-row">
+      <div className="gap-8 items-baseline flex-col justify-center flex md:items-center md:gap-8 md:flex-row">
         <div>
           <div className="flex items-center gap-2 md:gap-2 text-gray-900">
             <FiMapPin size={16} />
