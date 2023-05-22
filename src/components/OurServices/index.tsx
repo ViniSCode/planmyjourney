@@ -16,7 +16,7 @@ export function OurServices() {
             />
           </div>
           <div className="mt-12 max-w-[370px] md:max-w-[666px] lg:max-w-[548px] md:mt-16">
-            <strong className="text-3xl md:text-5xl lg:text-[40px]">
+            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px]">
               Discover and Share Travel Plans
             </strong>
             <p className="font-medium text-gray-700 mt-6 text-xs md:text-base">
@@ -77,7 +77,7 @@ export function OurServices() {
           </div>
 
           <div className="mt-12 max-w-[370px] md:max-w-[666px] lg:max-w-[548px] md:mt-16 order-1">
-            <strong className="text-3xl md:text-5xl lg:text-[40px]">
+            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px]">
               Find Your Dream Travel Plan
             </strong>
             <p className="font-medium text-gray-700 mt-6 text-xs md:text-base">
