@@ -1,10 +1,14 @@
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { useSession } from "next-auth/react";
-import { AiOutlineLogin, AiOutlinePhone } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { FiPhone } from "react-icons/fi";
-import { GiRunningShoe } from "react-icons/gi";
+import {
+  AiOutlineEnvironment,
+  AiOutlineGlobal,
+  AiOutlineLogin,
+  AiOutlinePhone,
+  AiOutlineStar,
+} from "react-icons/ai";
 import { HiMenuAlt3 } from "react-icons/hi";
+import { RiMapPinAddLine } from "react-icons/ri";
 import { SidebarItems } from "./SidebarItems";
 
 const itemVariants = {
@@ -43,14 +47,23 @@ export function MobileMenu() {
   const { data: session } = useSession();
 
   const menuItems = [
-    { icon: <GiRunningShoe size={22} />, href: "/", name: "Services" },
+    { icon: <AiOutlineGlobal size={22} />, href: "/", name: "Services" },
     {
-      icon: <AiOutlinePhone size={22} />,
+      icon: <AiOutlineEnvironment size={23} />,
+      href: "/",
+      name: "All Plans",
+    },
+    {
+      icon: <AiOutlineStar size={23} />,
       href: "/",
       name: "Popular Plans",
     },
-    { icon: <CgProfile size={22} />, href: "/", name: "Create Plan" },
-    { icon: <FiPhone size={22} />, href: "/", name: "Contact" },
+    {
+      icon: <RiMapPinAddLine size={22} />,
+      href: "/",
+      name: "Create Plan",
+    },
+    { icon: <AiOutlinePhone size={22} />, href: "/", name: "Contact" },
     {
       icon: <AiOutlineLogin size={22} />,
       href: "/",
