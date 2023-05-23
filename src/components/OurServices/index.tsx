@@ -54,10 +54,10 @@ export function OurServices() {
               width={335}
               height={136}
               quality={100}
-              className="absolute top-[-30px] left-0 lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px]"
+              className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px]"
             />
           </div>
-          <button className="min-w-fit max-w-fit bg-pink-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
+          <button className="ml-4 min-w-fit max-w-fit bg-pink-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
             Share Your Plan
           </button>
         </div>
@@ -113,10 +113,10 @@ export function OurServices() {
               width={335}
               height={136}
               quality={100}
-              className="absolute top-[-30px] left-0 lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px]"
+              className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px]"
             />
           </div>
-          <button className="min-w-fit max-w-fit bg-pink-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
+          <button className="ml-4 min-w-fit max-w-fit bg-pink-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
             Share Your Plan
           </button>
         </div>

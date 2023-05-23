@@ -56,8 +56,9 @@ export function PopularPlansSlide() {
 
   return (
     <section className="w-full h-full">
+      <h2 className="text-3xl font-bold text-center">Popular Trip Plans</h2>
       <div
-        className="carousel w-full md:max-w-[660px] lg:max-w-full mx-auto overflow-x-hidden flex h-full relative"
+        className="mt-20 carousel w-full md:max-w-[660px] lg:max-w-full mx-auto overflow-x-hidden flex h-full relative"
         ref={slideRef}
       >
         <motion.div
