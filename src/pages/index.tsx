@@ -1,3 +1,4 @@
+import { Benefits } from "@/components/Benefits";
 import { Header } from "@/components/Navbar/Header";
 import { HeaderText } from "@/components/Navbar/Header/HeaderText";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
@@ -32,6 +33,7 @@ export default function Home({ session }: any) {
       <main className="px-6 mt-80 max-w-[1120px] mx-auto md:mt-48 flex flex-col items-center justify-center gap-20">
         <PopularPlansSlide />
         <OurServices />
+        <Benefits />
       </main>
     </div>
   );
