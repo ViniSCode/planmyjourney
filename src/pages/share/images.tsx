@@ -44,16 +44,31 @@ export default function Images({ apiKey, session }: any) {
           adventure.
         </p>
         <div className="mt-5 xl:mt-5 w-full h-[55vh] bg-gray-900 px-16 rounded-2xl flex items-center justify-center">
-          <input
-            type="file"
-            accept="image/*"
-            className="px-3 py-3 rounded-full file:hidden file:bg-white cursor-pointer text-gray-900 bg-white w-full max-w-[380px] font-medium"
-            // onChange={handleImageChange}
-          />
+          <button
+            className="px-3 py-3 rounded-full cursor-pointer text-gray-900 bg-white w-full max-w-[380px] font-medium"
+            onClick={setIsModalOpen}
+          >
+            Upload Image
+          </button>
         </div>
       </div>
 
-      {isModalOpen && <Modal />}
+      {isModalOpen && (
+        <Modal>
+          <div className="flex gap-2 flex-col lg:flex-row w-full h-[300px] sm:h-[400px] md:h-[400px] justify-between overflow-hidden lg:pl-4">
+            <div className="bg-gray-200 w-full h-full rounded-2xl"></div>
+            <div className="lg:px-4 w-full h-20 sm:h-28 lg:max-w-[140px] lg:h-full flex flex-row justify-between gap-2 md:gap-4 lg:flex-col overflow-y-scroll scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-900">
+              {
+                // if images.length < 4 then show the remaining empty divs else show the images
+              }
+              <div className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"></div>
+              <div className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"></div>
+              <div className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"></div>
+              <div className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"></div>
+            </div>
+          </div>
+        </Modal>
+      )}
 
       <div className="overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 flex justify-center flex-col gap-3 bg-gray-900 w-full h-screen text-gray-300 px-10">
         <h2 className="mb-4 text-center text-[24px] text-white">

@@ -27,10 +27,12 @@ export function Header({ session }: HeaderProps) {
               <Link href="/">Popular Plans</Link>
             </li>
             <li className="text-white hidden md:block transition-colors hover:text-pink-500 cursor-pointer text-shadow">
-              <Link href="/">Create Plan</Link>
+              <Link href="/share">Create Plan</Link>
             </li>
             <li className="text-white hidden md:block transition-colors hover:text-pink-500 cursor-pointer text-shadow">
-              <Link href="/">Contact</Link>
+              <Link href="https://www.linkedin.com/in/vinicius-rodrigues-5897831b8/">
+                Contact
+              </Link>
             </li>
             {session?.user?.image ? (
               <li className="hidden md:block transition-colors hover:text-yellow-500 cursor-pointer">

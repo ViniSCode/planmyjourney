@@ -6,14 +6,10 @@ import { OurServices } from "@/components/OurServices";
 import { PopularPlansSlide } from "@/components/PopularPlansSlider";
 import { TripPlanSelect } from "@/components/TripPlanSelect";
 import type { GetServerSideProps } from "next";
-import { getSession, signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 
 export default function Home({ session }: any) {
-  async function handleLogout() {
-    signOut();
-  }
-
   return (
     <div className="pb-20">
       <header className="h-[100vh] md:h-[90vh] w-full relative flex flex-col px-2">

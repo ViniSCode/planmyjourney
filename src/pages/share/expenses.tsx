@@ -42,7 +42,7 @@ export default function Expenses({ session }: any) {
               onChange={(e) =>
                 setExpenses({ ...expenses, min: e.target.value })
               }
-              className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-20 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500"
+              className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500"
               placeholder="$800"
               value={expenses.min ? expenses.min : ""}
             />
@@ -56,7 +56,7 @@ export default function Expenses({ session }: any) {
               maxLength={3}
               min={1}
               id="number"
-              className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-20 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500"
+              className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500"
               placeholder="$1500"
               value={expenses.max ? expenses.max : ""}
             />

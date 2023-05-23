@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     screens: {
+      xxs: "280px",
+
+      xs: "420px",
+
       sm: "640px",
       // => @media (min-width: 640px) { ... }
 
@@ -29,6 +33,7 @@ module.exports = {
         ["map-grid-lg"]: "auto 25rem",
         ["map-grid-xl"]: "auto 40rem",
         ["share-plan"]: "50% 50%",
+        ["images"]: "auto 8.5rem",
       },
 
       fontFamily: {

@@ -143,7 +143,25 @@ export default function Location({ apiKey, session }: any) {
         </div>
       </div>
 
-      {isModalOpen && <Modal />}
+      {isModalOpen && (
+        <Modal>
+          <div>
+            <h1 className="text-[20px] md:text-2xl font-medium">
+              Change Location Name
+            </h1>
+            <p className="mt-4 text-gray-500 text-xs font-medium md:text-sm">
+              Is the name of your chosen location incorrect or incomplete?
+              Change the name to something more accurate and complete to avoid
+              confusion and make your trip planning more efficient.
+            </p>
+            <input
+              type="text"
+              placeholder="Location Name"
+              className="mt-4 border rounded-md px-2 py-2 w-full"
+            />
+          </div>
+        </Modal>
+      )}
 
       <div className="overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 flex justify-center flex-col gap-3 bg-gray-900 w-full h-screen text-gray-300 px-10">
         <h2 className="mb-4 text-center text-[24px] text-white">
