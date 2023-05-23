@@ -116,7 +116,7 @@ export function OurServices() {
               className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px]"
             />
           </div>
-          <button className="ml-4 min-w-fit max-w-fit bg-pink-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
+          <button className="ml-4 min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base">
             Share Your Plan
           </button>
         </div>
