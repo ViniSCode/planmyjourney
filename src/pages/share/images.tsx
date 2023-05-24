@@ -1,14 +1,15 @@
+import { EditImages } from "@/components/EditImages";
 import { Modal } from "@/components/Modal";
 import { Marker } from "@/context/MapContext";
 import { Expenses, Transportation } from "@/context/SharePlanContext";
 import useMap from "@/hooks/useMap";
 import { useSharePlan } from "@/hooks/useSharePlan";
-import { motion } from "framer-motion";
 import type { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
-import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
-
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 export interface TripPlanDataProps {
   location: Marker[];
   days: number;
@@ -17,6 +18,9 @@ export interface TripPlanDataProps {
 }
 
 export default function Images({ apiKey, session }: any) {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const [lastImage, setLastImage] = useState<File>();
   const router = useRouter();
   const { markers, setMarkers, isModalOpen, setIsModalOpen } = useMap();
   const {
@@ -31,6 +35,26 @@ export default function Images({ apiKey, session }: any) {
     handleSetCar,
   } = useSharePlan();
 
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (selectedImages.length === 4) {
+      toast.warning("You can upload a maximum of 4 images.");
+      return;
+    }
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const newImages = Array.from(files).slice(0, 15); // Limit to max 15 images
+      setSelectedImages((prevImages) => [...prevImages, ...newImages]);
+      setLastImage(selectedImages[selectedImages.length - 1]);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+
+  useEffect(() => {
+    setLastImage(selectedImages[selectedImages.length - 1]);
+  }, [selectedImages, fileInputRef]);
+
   return (
     <main className="grid lg:grid-cols-map-grid-lg xl:grid-cols-map-grid-xl select-none overflow-hidden">
       <div className="xl:flex xl:flex-col xl:justify-center mt-10 mb-20 lg:mb-0 w-full max-w-[80%] md:max-w-[70%] lg:max-w-[80%] xl:w-[80%] xl:max-w-[1280px] 2xl:max-w-[60%] mx-auto">
@@ -43,91 +67,108 @@ export default function Images({ apiKey, session }: any) {
           showcase your favorite moments and inspirations for your upcoming
           adventure.
         </p>
-        <div className="mt-5 xl:mt-5 w-full h-[55vh] bg-gray-900 px-16 rounded-2xl flex items-center justify-center">
-          <button
-            className="px-3 py-3 rounded-full cursor-pointer text-gray-900 bg-white w-full max-w-[380px] font-medium"
-            onClick={setIsModalOpen}
-          >
-            Upload Image
-          </button>
+        <div className="mt-5 bg-gray-900 p-4 rounded-2xl flex gap-2 flex-col lg:flex-row w-full h-[300px] sm:h-[400px] md:h-[400px] justify-between overflow-hidden">
+          <div className="relative bg-gray-200 w-full h-full rounded-2xl flex items-center justify-center">
+            {lastImage && (
+              <Image
+                src={URL.createObjectURL(lastImage)}
+                fill
+                alt="trip image"
+                className="z-0 absolute object-cover brightness-75 rounded-2xl"
+              />
+            )}
+            <label
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              htmlFor="file_input"
+            />
+            <input
+              className="relative z-20 block w-full max-w-[90%] md:max-w-[60%] text-sm text-gray-900 border border-gray-300 rounded-full cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              id="file_input"
+              type="file"
+              onChange={handleImageUpload}
+              ref={fileInputRef}
+              multiple
+            />
+          </div>
+          <div className="lg:px-4 w-full h-20 sm:h-28 lg:max-w-[140px] lg:h-full flex flex-row justify-between gap-2 md:gap-4 lg:flex-col overflow-y-scroll scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-900">
+            {selectedImages.length > 0 &&
+              selectedImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"
+                  style={{
+                    backgroundImage: `url(${URL.createObjectURL(image)})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+              ))}
+            {selectedImages.length < 4 &&
+              Array(4 - selectedImages.length)
+                .fill(null)
+                .map((_, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"
+                  />
+                ))}
+          </div>
         </div>
       </div>
 
       {isModalOpen && (
         <Modal>
           <div className="flex gap-2 flex-col lg:flex-row w-full h-[300px] sm:h-[400px] md:h-[400px] justify-between overflow-hidden lg:pl-4">
-            <div className="bg-gray-200 w-full h-full rounded-2xl"></div>
+            <div className="relative bg-gray-200 w-full h-full rounded-2xl flex items-center justify-center">
+              {lastImage && (
+                <Image
+                  src={URL.createObjectURL(lastImage)}
+                  fill
+                  alt="trip image"
+                  className="z-0 absolute object-cover brightness-75"
+                />
+              )}
+              <label
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="file_input"
+              />
+              <input
+                className="relative z-20 block w-full max-w-[60%] text-sm text-gray-900 border border-gray-300 rounded-full cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                id="file_input"
+                type="file"
+                onChange={handleImageUpload}
+                ref={fileInputRef}
+                multiple
+              />
+            </div>
             <div className="lg:px-4 w-full h-20 sm:h-28 lg:max-w-[140px] lg:h-full flex flex-row justify-between gap-2 md:gap-4 lg:flex-col overflow-y-scroll scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-900">
-              {
-                // if images.length < 4 then show the remaining empty divs else show the images
-              }
-              <div className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"></div>
-              <div className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"></div>
-              <div className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"></div>
-              <div className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"></div>
+              {selectedImages.length > 0 &&
+                selectedImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"
+                    style={{
+                      backgroundImage: `url(${URL.createObjectURL(image)})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  />
+                ))}
+              {selectedImages.length < 4 &&
+                Array(4 - selectedImages.length)
+                  .fill(null)
+                  .map((_, index) => (
+                    <div
+                      key={index}
+                      className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"
+                    />
+                  ))}
             </div>
           </div>
         </Modal>
       )}
 
-      <div className="overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 flex justify-center flex-col gap-3 bg-gray-900 w-full h-screen text-gray-300 px-10">
-        <h2 className="mb-4 text-center text-[24px] text-white">
-          Uploaded Images
-        </h2>
-        <p className="mb-14 text-center text-gray-300 text-sm">
-          Remove or edit your uploaded images
-        </p>
-        <div className="overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 w-full py-2 px-4 max-h-96 max-w-[90%] md:max-w-[80%] lg:max-w-[400px] mx-auto">
-          {/* {images.length > 0 ? (
-            images.map((place, index) => (
-              <div
-                className="flex items-center gap-3 mx-auto w-full md:max-w-full lg:max-w-[320px] mt-3"
-                key={index}
-              >
-                <IoReorderTwo
-                  size={20}
-                  className="cursor-pointer reorder-handle"
-                />
-                <p className="truncate text-sm w-[90%]">{image.imageName}</p>
-                <FiEdit2
-                  className="text-red-500 cursor-pointer hover:text-red-300 transition-colors"
-                  size={18}
-                  onClick={setIsModalOpen}
-                />
-                <FiX
-                  className="text-red-500 cursor-pointer hover:text-red-300 transition-colors"
-                  size={20}
-                  // onClick={() => handleRemoveImage(index)}
-                />
-              </div>
-            ))
-          ) : (
-            <p className="mb-14 text-center text-gray-300 text-sm">
-              No location selected yet. Please select at least two locations on
-              the map to proceed.
-            </p>
-          )} */}
-        </div>
-        <div className="mt-20 flex items-center gap-4 mx-auto w-full max-w-xs">
-          <button
-            type="button"
-            onClick={() => router.back()}
-            className="px-2 py-2 rounded-lg text-gray-600 bg-white w-full hover:brightness-75 transition-[filter]"
-          >
-            Previous
-          </button>
-          <Link href="/share/location" className="w-full">
-            <motion.button
-              type="button"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="px-2 py-2 rounded-lg text-white bg-blue-500 w-full hover:brightness-75 transition-[filter]"
-            >
-              Next
-            </motion.button>
-          </Link>
-        </div>
-      </div>
+      <EditImages setImages={setSelectedImages} images={selectedImages} />
     </main>
   );
 }

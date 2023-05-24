@@ -10,6 +10,7 @@
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "flowbite": "^1.6.5",
     "framer-motion": "^10.12.10",
     "graphql": "^16.6.0",
     "leaflet": "^1.9.3",
