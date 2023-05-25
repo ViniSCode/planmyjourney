@@ -73,11 +73,19 @@ async function sharePlan(
   let days = planData.days;
   let expenses = planData.expenses;
   let transportation = planData.transportation;
+  let images = planData.images;
+
   const locationArray = planData.location.map(
     (obj) =>
       `{ lat: ${obj.lat}, lng: ${obj.lng}, formatted: "${obj.formatted}" }`
   );
   const locationString = `[${locationArray.join(", ")}]`;
+
+  const urls = images;
+
+  const jsonFormat = urls.map((url, index) => {
+    return { [`url${index + 1}`]: url };
+  });
 
   try {
     const data = await fetch(
@@ -95,8 +103,13 @@ async function sharePlan(
                 days: ${days},
                 planId: "${planId}",
                 expenses: {min: ${expenses.min}, max: ${expenses.max}},
-                transportation: {car: ${transportation.car}, bus: ${transportation.bus}, subway: ${transportation.subway}, walking: ${transportation.walking}},
+                transportation: {car: ${transportation.car}, bus: ${
+            transportation.bus
+          }, subway: ${transportation.subway}, walking: ${
+            transportation.walking
+          }},
                 location: ${locationString}
+                images: ${JSON.stringify(images)}
                 member: {connect: {email: "${email}"}},
               }) {
               id

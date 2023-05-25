@@ -19,6 +19,7 @@ export interface TripPlanDataProps {
   days: number;
   expenses: Expenses;
   transportation: Transportation;
+  images: string[];
 }
 
 const DynamicMap = dynamic(() => import("../../components/Map/index"), {
@@ -30,17 +31,7 @@ export default function Location({ apiKey, session }: any) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const { markers, setMarkers, isModalOpen, setIsModalOpen } = useMap();
-  const {
-    days,
-    expenses,
-    transportation,
-    setDays,
-    setExpenses,
-    handleSetBus,
-    handleSetSubway,
-    handleSetWalking,
-    handleSetCar,
-  } = useSharePlan();
+  const { days, expenses, transportation, imagesURL } = useSharePlan();
 
   function handleRemoveLocation(index: number) {
     const updatedMarkersLocation = [...markers];
@@ -106,6 +97,7 @@ export default function Location({ apiKey, session }: any) {
             expenses,
             transportation,
             location: markers,
+            images: imagesURL,
           },
         }),
       }).then((res) => res.json());
