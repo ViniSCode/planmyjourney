@@ -14,6 +14,10 @@ export function useSharePlan() {
     setExpenses,
     setDays,
     transportation,
+    selectedImages,
+    setSelectedImages,
+    setImagesURL,
+    imagesURL,
   } = useContext(SharePlanContext);
 
   return {
@@ -28,5 +32,9 @@ export function useSharePlan() {
     setDays,
     setExpenses,
     transportation,
+    selectedImages,
+    setSelectedImages,
+    setImagesURL,
+    imagesURL,
   };
 }

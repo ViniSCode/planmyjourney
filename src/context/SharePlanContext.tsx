@@ -28,6 +28,10 @@ interface SharePlanContextData {
   handleSetBus: () => void;
   setDays: any;
   setExpenses: any;
+  selectedImages: any;
+  setSelectedImages: any;
+  setImagesURL: any;
+  imagesURL: any;
 }
 
 export const SharePlanContext = createContext<SharePlanContextData>(
@@ -37,8 +41,9 @@ export const SharePlanContext = createContext<SharePlanContextData>(
 export function SharePlanContextProvider({
   children,
 }: SharePlanContextProviderProps) {
+  const [imagesURL, setImagesURL] = useState<string[]>();
   const [days, setDays] = useState(0);
-
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [transportation, setTransportation] = useState({
     car: false,
     bus: false,
@@ -109,6 +114,10 @@ export function SharePlanContextProvider({
         handleIncreaseDays,
         handleDecreaseDays,
         transportation,
+        selectedImages,
+        setSelectedImages,
+        setImagesURL,
+        imagesURL,
       }}
     >
       {children}

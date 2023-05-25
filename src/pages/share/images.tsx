@@ -18,11 +18,11 @@ export interface TripPlanDataProps {
 }
 
 export default function Images({ apiKey, session }: any) {
+  const { setSelectedImages, selectedImages } = useSharePlan();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [lastImage, setLastImage] = useState<File>();
-  const router = useRouter();
   const { markers, setMarkers, isModalOpen, setIsModalOpen } = useMap();
+  const router = useRouter();
   const {
     days,
     expenses,
@@ -43,7 +43,7 @@ export default function Images({ apiKey, session }: any) {
     const files = event.target.files;
     if (files && files.length > 0) {
       const newImages = Array.from(files).slice(0, 15); // Limit to max 15 images
-      setSelectedImages((prevImages) => [...prevImages, ...newImages]);
+      setSelectedImages((prevImages: any) => [...prevImages, ...newImages]);
       setLastImage(selectedImages[selectedImages.length - 1]);
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
@@ -91,8 +91,9 @@ export default function Images({ apiKey, session }: any) {
             />
           </div>
           <div className="lg:px-4 w-full h-20 sm:h-28 lg:max-w-[140px] lg:h-full flex flex-row justify-between gap-2 md:gap-4 lg:flex-col overflow-y-scroll scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-900">
-            {selectedImages.length > 0 &&
-              selectedImages.map((image, index) => (
+            {selectedImages &&
+              selectedImages.length > 0 &&
+              selectedImages.map((image: any, index: any) => (
                 <div
                   key={index}
                   className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"
@@ -143,7 +144,7 @@ export default function Images({ apiKey, session }: any) {
             </div>
             <div className="lg:px-4 w-full h-20 sm:h-28 lg:max-w-[140px] lg:h-full flex flex-row justify-between gap-2 md:gap-4 lg:flex-col overflow-y-scroll scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-900">
               {selectedImages.length > 0 &&
-                selectedImages.map((image, index) => (
+                selectedImages.map((image: any, index: any) => (
                   <div
                     key={index}
                     className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"
