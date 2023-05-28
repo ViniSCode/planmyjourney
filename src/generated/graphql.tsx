@@ -47,7 +47,6 @@ export type Asset = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
-  imagesPlan: Array<Plan>;
   /** System Locale field */
   locale: Locale;
   /** Get the other localizations for this document */
@@ -100,20 +99,6 @@ export type AssetHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
   stageOverride?: InputMaybe<Stage>;
-};
-
-
-/** Asset system model */
-export type AssetImagesPlanArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
-  last?: InputMaybe<Scalars['Int']>;
-  locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<PlanOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PlanWhereInput>;
 };
 
 
@@ -190,7 +175,6 @@ export type AssetCreateInput = {
   fileName: Scalars['String'];
   handle: Scalars['String'];
   height?: InputMaybe<Scalars['Float']>;
-  imagesPlan?: InputMaybe<PlanCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']>;
@@ -292,9 +276,6 @@ export type AssetManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  imagesPlan_every?: InputMaybe<PlanWhereInput>;
-  imagesPlan_none?: InputMaybe<PlanWhereInput>;
-  imagesPlan_some?: InputMaybe<PlanWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -367,7 +348,6 @@ export type AssetUpdateInput = {
   fileName?: InputMaybe<Scalars['String']>;
   handle?: InputMaybe<Scalars['String']>;
   height?: InputMaybe<Scalars['Float']>;
-  imagesPlan?: InputMaybe<PlanUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']>;
@@ -600,9 +580,6 @@ export type AssetWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  imagesPlan_every?: InputMaybe<PlanWhereInput>;
-  imagesPlan_none?: InputMaybe<PlanWhereInput>;
-  imagesPlan_some?: InputMaybe<PlanWhereInput>;
   mimeType?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   mimeType_contains?: InputMaybe<Scalars['String']>;
@@ -1910,10 +1887,11 @@ export type Plan = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
-  images: Array<Asset>;
+  images?: Maybe<Scalars['Json']>;
   likes?: Maybe<Scalars['Json']>;
   likesCount?: Maybe<Scalars['Int']>;
-  location: Scalars['Json'];
+  location?: Maybe<Scalars['Json']>;
+  location2: Array<Scalars['Json']>;
   member?: Maybe<Member>;
   planId: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
@@ -1948,19 +1926,6 @@ export type PlanHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
   stageOverride?: InputMaybe<Stage>;
-};
-
-
-export type PlanImagesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
-  last?: InputMaybe<Scalars['Int']>;
-  locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<AssetOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<AssetWhereInput>;
 };
 
 
@@ -2015,10 +1980,11 @@ export type PlanCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   days: Scalars['Int'];
   expenses: Scalars['Json'];
-  images?: InputMaybe<AssetCreateManyInlineInput>;
+  images?: InputMaybe<Scalars['Json']>;
   likes?: InputMaybe<Scalars['Json']>;
   likesCount?: InputMaybe<Scalars['Int']>;
-  location: Scalars['Json'];
+  location?: InputMaybe<Scalars['Json']>;
+  location2?: InputMaybe<Array<Scalars['Json']>>;
   member?: InputMaybe<MemberCreateOneInlineInput>;
   planId: Scalars['String'];
   transportation: Scalars['Json'];
@@ -2120,9 +2086,15 @@ export type PlanManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  images_every?: InputMaybe<AssetWhereInput>;
-  images_none?: InputMaybe<AssetWhereInput>;
-  images_some?: InputMaybe<AssetWhereInput>;
+  /** All values containing the given json path. */
+  images_json_path_exists?: InputMaybe<Scalars['String']>;
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  images_value_recursive?: InputMaybe<Scalars['Json']>;
   likesCount?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
   likesCount_gt?: InputMaybe<Scalars['Int']>;
@@ -2147,6 +2119,15 @@ export type PlanManyWhereInput = {
    * Note: This filter fails if you try to look for a non scalar JSON value!
    */
   likes_value_recursive?: InputMaybe<Scalars['Json']>;
+  /** All values containing the given json path. */
+  location2_json_path_exists?: InputMaybe<Scalars['String']>;
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  location2_value_recursive?: InputMaybe<Scalars['Json']>;
   /** All values containing the given json path. */
   location_json_path_exists?: InputMaybe<Scalars['String']>;
   /**
@@ -2243,10 +2224,11 @@ export type PlanUpdateInput = {
   clhhxvtbl1kuq01ulht0s2v33?: InputMaybe<MemberUpdateManyInlineInput>;
   days?: InputMaybe<Scalars['Int']>;
   expenses?: InputMaybe<Scalars['Json']>;
-  images?: InputMaybe<AssetUpdateManyInlineInput>;
+  images?: InputMaybe<Scalars['Json']>;
   likes?: InputMaybe<Scalars['Json']>;
   likesCount?: InputMaybe<Scalars['Int']>;
   location?: InputMaybe<Scalars['Json']>;
+  location2?: InputMaybe<Array<Scalars['Json']>>;
   member?: InputMaybe<MemberUpdateOneInlineInput>;
   planId?: InputMaybe<Scalars['String']>;
   transportation?: InputMaybe<Scalars['Json']>;
@@ -2272,9 +2254,11 @@ export type PlanUpdateManyInlineInput = {
 export type PlanUpdateManyInput = {
   days?: InputMaybe<Scalars['Int']>;
   expenses?: InputMaybe<Scalars['Json']>;
+  images?: InputMaybe<Scalars['Json']>;
   likes?: InputMaybe<Scalars['Json']>;
   likesCount?: InputMaybe<Scalars['Int']>;
   location?: InputMaybe<Scalars['Json']>;
+  location2?: InputMaybe<Array<Scalars['Json']>>;
   transportation?: InputMaybe<Scalars['Json']>;
 };
 
@@ -2399,9 +2383,15 @@ export type PlanWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  images_every?: InputMaybe<AssetWhereInput>;
-  images_none?: InputMaybe<AssetWhereInput>;
-  images_some?: InputMaybe<AssetWhereInput>;
+  /** All values containing the given json path. */
+  images_json_path_exists?: InputMaybe<Scalars['String']>;
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  images_value_recursive?: InputMaybe<Scalars['Json']>;
   likesCount?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
   likesCount_gt?: InputMaybe<Scalars['Int']>;
@@ -2426,6 +2416,15 @@ export type PlanWhereInput = {
    * Note: This filter fails if you try to look for a non scalar JSON value!
    */
   likes_value_recursive?: InputMaybe<Scalars['Json']>;
+  /** All values containing the given json path. */
+  location2_json_path_exists?: InputMaybe<Scalars['String']>;
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  location2_value_recursive?: InputMaybe<Scalars['Json']>;
   /** All values containing the given json path. */
   location_json_path_exists?: InputMaybe<Scalars['String']>;
   /**
@@ -4354,34 +4353,6 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
-export type GetPlansByAuthorQueryVariables = Exact<{
-  limit: Scalars['Int'];
-  offset: Scalars['Int'];
-  email: Scalars['String'];
-}>;
-
-
-export type GetPlansByAuthorQuery = { __typename?: 'Query', member?: { __typename?: 'Member', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location: any, likes?: any | null, images: Array<{ __typename?: 'Asset', id: string }> }> } | null };
-
-export type GetPlansQueryVariables = Exact<{
-  limit: Scalars['Int'];
-  offset: Scalars['Int'];
-  search?: InputMaybe<Scalars['String']>;
-  orderBy?: InputMaybe<PlanOrderByInput>;
-}>;
-
-
-export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location: any, likes?: any | null, likesCount?: number | null, images: Array<{ __typename?: 'Asset', id: string }> }> };
-
-export type GetSavedPlansQueryVariables = Exact<{
-  email: Scalars['String'];
-  limit: Scalars['Int'];
-  offset: Scalars['Int'];
-}>;
-
-
-export type GetSavedPlansQuery = { __typename?: 'Query', member?: { __typename?: 'Member', savedPlans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location: any, likes?: any | null, images: Array<{ __typename?: 'Asset', id: string }> }> } | null };
-
 export type UserAlreadyExistsQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -4390,70 +4361,6 @@ export type UserAlreadyExistsQueryVariables = Exact<{
 export type UserAlreadyExistsQuery = { __typename?: 'Query', members: Array<{ __typename?: 'Member', id: string }> };
 
 
-export const GetPlansByAuthorDocument = gql`
-    query GetPlansByAuthor($limit: Int!, $offset: Int!, $email: String!) {
-  member(where: {email: $email}) {
-    plans(first: $limit, skip: $offset) {
-      days
-      expenses
-      transportation
-      location
-      likes
-      images {
-        id
-      }
-    }
-  }
-}
-    `;
-
-export function useGetPlansByAuthorQuery(options: Omit<Urql.UseQueryArgs<GetPlansByAuthorQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetPlansByAuthorQuery, GetPlansByAuthorQueryVariables>({ query: GetPlansByAuthorDocument, ...options });
-};
-export const GetPlansDocument = gql`
-    query GetPlans($limit: Int!, $offset: Int!, $search: String, $orderBy: PlanOrderByInput) {
-  plans(
-    first: $limit
-    skip: $offset
-    where: {_search: $search}
-    orderBy: $orderBy
-  ) {
-    days
-    expenses
-    transportation
-    location
-    likes
-    likesCount
-    images {
-      id
-    }
-  }
-}
-    `;
-
-export function useGetPlansQuery(options: Omit<Urql.UseQueryArgs<GetPlansQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetPlansQuery, GetPlansQueryVariables>({ query: GetPlansDocument, ...options });
-};
-export const GetSavedPlansDocument = gql`
-    query GetSavedPlans($email: String!, $limit: Int!, $offset: Int!) {
-  member(where: {email: $email}) {
-    savedPlans(first: $limit, skip: $offset) {
-      days
-      expenses
-      transportation
-      location
-      likes
-      images {
-        id
-      }
-    }
-  }
-}
-    `;
-
-export function useGetSavedPlansQuery(options: Omit<Urql.UseQueryArgs<GetSavedPlansQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetSavedPlansQuery, GetSavedPlansQueryVariables>({ query: GetSavedPlansDocument, ...options });
-};
 export const UserAlreadyExistsDocument = gql`
     query UserAlreadyExists($email: String!) {
   members(where: {email: $email}) {

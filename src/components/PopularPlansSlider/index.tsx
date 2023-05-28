@@ -97,3 +97,15 @@ export function PopularPlansSlide() {
     </section>
   );
 }
+
+// export const getStaticProps: GetStaticProps = async () => {
+//   await client
+//     .query(GetPopularPlans, { limit: 8, offset: 0, search: "" })
+//     .toPromise();
+
+//   return {
+//     props: {
+//       urqlState: ssrCache.extractData(),
+//     },
+//   };
+// };
