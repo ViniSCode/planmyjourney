@@ -1,7 +1,7 @@
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { Plan } from "@/components/Plans/Plan";
-import { SearchBar } from "@/components/Plans/Searchbar";
+import { SearchBar } from "@/components/Plans/SearchBar";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 
