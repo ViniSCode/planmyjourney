@@ -1,0 +1,21 @@
+query GetPlans(
+  $limit: Int!
+  $offset: Int!
+  $search: String
+  $orderBy: PlanOrderByInput
+) {
+  plans(
+    first: $limit
+    skip: $offset
+    where: { _search: $search }
+    orderBy: $orderBy
+  ) {
+    days
+    expenses
+    transportation
+    location
+    likes
+    likesCount
+    images
+  }
+}

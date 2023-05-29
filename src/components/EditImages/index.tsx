@@ -31,7 +31,6 @@ export function EditImages({ images, setImages }: EditImagesProp) {
       return;
     }
 
-    console.log(imagesURL);
     setImagesURL(imagesURL);
 
     setIsUploading(false);

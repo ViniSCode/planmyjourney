@@ -77,12 +77,10 @@ async function sharePlan(
 
   const locationArray = planData.location.map(
     (obj) =>
-      `{ lat: ${obj.lat}, lng: ${obj.lng}, formatted: "${obj.formatted}" }`
+      `{ lat: ${obj.lat}, lng: ${obj.lng}, formatted: "${obj.formatted}", country: "${obj.country}", countryCode: "${obj.country_code}", state: "${obj.state}", stateCode: "${obj.state_code}"}`
   );
   const locationString = `[${locationArray.join(", ")}]`;
-
   const urls = images;
-
   const jsonFormat = urls.map((url, index) => {
     return { [`url${index + 1}`]: url };
   });

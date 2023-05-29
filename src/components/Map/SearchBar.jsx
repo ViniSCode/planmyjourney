@@ -33,12 +33,18 @@ export function SearchBar({
           .then((response) => response.json())
           .then((data) => {
             if (data.results[0]) {
+              data.results[0].components.country;
               setMarkers([
                 ...markers,
                 {
                   lat: e.latlng.lat,
                   lng: e.latlng.lng,
                   formatted: data.results[0].formatted,
+                  country: data.results[0].components.country,
+                  country_code:
+                    data.results[0].components["ISO_3166-1_alpha-2"],
+                  state: data.results[0].components.state,
+                  state_code: data.results[0].components.state_code,
                 },
               ]);
             }
@@ -61,6 +67,10 @@ export function SearchBar({
         lat: coordinates.lat,
         lng: coordinates.lng,
         formatted: result.formatted,
+        country: result.components.country,
+        country_code: result.components["ISO_3166-1_alpha-2"],
+        state: result.components.state,
+        state_code: result.components.state_code,
       },
     ]);
   };

@@ -4353,6 +4353,16 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type GetPlansQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  offset: Scalars['Int'];
+  search?: InputMaybe<Scalars['String']>;
+  orderBy?: InputMaybe<PlanOrderByInput>;
+}>;
+
+
+export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, images?: any | null }> };
+
 export type UserAlreadyExistsQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -4361,6 +4371,28 @@ export type UserAlreadyExistsQueryVariables = Exact<{
 export type UserAlreadyExistsQuery = { __typename?: 'Query', members: Array<{ __typename?: 'Member', id: string }> };
 
 
+export const GetPlansDocument = gql`
+    query GetPlans($limit: Int!, $offset: Int!, $search: String, $orderBy: PlanOrderByInput) {
+  plans(
+    first: $limit
+    skip: $offset
+    where: {_search: $search}
+    orderBy: $orderBy
+  ) {
+    days
+    expenses
+    transportation
+    location
+    likes
+    likesCount
+    images
+  }
+}
+    `;
+
+export function useGetPlansQuery(options: Omit<Urql.UseQueryArgs<GetPlansQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetPlansQuery, GetPlansQueryVariables>({ query: GetPlansDocument, ...options });
+};
 export const UserAlreadyExistsDocument = gql`
     query UserAlreadyExists($email: String!) {
   members(where: {email: $email}) {
