@@ -7,6 +7,9 @@ export function PlansHeader() {
       <nav className="select-none max-w-[1120px] lg:pt-0 pt-2 mx-auto fixed inset-0 z-50 px-9 lg:px-10 w-full h-[5rem] bg-gray-900 shadow-lg md:bg-transparent md:shadow-none md:relative">
         <div className="text-center pt-4 flex justify-center gap-8 md:gap-0 lg:gap-8 lg:justify-between items-center w-full mx-auto relative">
           <span className="lg:hidden"></span>
+          <span className="hidden md:hidden lg:block">
+            <Logo dark={true} />
+          </span>
           <span className="block md:hidden lg:hidden">
             <Logo />
           </span>
