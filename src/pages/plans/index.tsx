@@ -54,7 +54,12 @@ export default function Plans() {
 
 export const getStaticProps: GetStaticProps = async () => {
   await client
-    .query(GetPlansDocument, { limit: 8, offset: 0, search: "" })
+    .query(GetPlansDocument, {
+      limit: 8,
+      offset: 0,
+      search: "",
+      orderBy: PlanOrderByInput.LikesCountDesc,
+    })
     .toPromise();
 
   return {

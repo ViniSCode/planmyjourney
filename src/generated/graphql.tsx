@@ -4353,6 +4353,13 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type GetPlanQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, images?: any | null } | null };
+
 export type GetPlansQueryVariables = Exact<{
   limit: Scalars['Int'];
   offset: Scalars['Int'];
@@ -4361,7 +4368,7 @@ export type GetPlansQueryVariables = Exact<{
 }>;
 
 
-export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, images?: any | null }> };
+export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, images?: any | null, id: string }> };
 
 export type UserAlreadyExistsQueryVariables = Exact<{
   email: Scalars['String'];
@@ -4371,6 +4378,23 @@ export type UserAlreadyExistsQueryVariables = Exact<{
 export type UserAlreadyExistsQuery = { __typename?: 'Query', members: Array<{ __typename?: 'Member', id: string }> };
 
 
+export const GetPlanDocument = gql`
+    query GetPlan($id: ID!) {
+  plan(where: {id: $id}) {
+    expenses
+    days
+    transportation
+    location
+    likes
+    likesCount
+    images
+  }
+}
+    `;
+
+export function useGetPlanQuery(options: Omit<Urql.UseQueryArgs<GetPlanQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetPlanQuery, GetPlanQueryVariables>({ query: GetPlanDocument, ...options });
+};
 export const GetPlansDocument = gql`
     query GetPlans($limit: Int!, $offset: Int!, $search: String, $orderBy: PlanOrderByInput) {
   plans(
@@ -4386,6 +4410,7 @@ export const GetPlansDocument = gql`
     likes
     likesCount
     images
+    id
   }
 }
     `;

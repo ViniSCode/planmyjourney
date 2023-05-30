@@ -1,6 +1,7 @@
 import { GetPlansQuery } from "@/generated/graphql";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useRef } from "react";
 import { FiHeart } from "react-icons/fi";
 import { RiStarFill } from "react-icons/ri";
@@ -10,6 +11,7 @@ interface ListPlansProps {
 }
 
 export function ListPlans({ data }: ListPlansProps) {
+  const router = useRouter();
   const popularTripPlan = [
     {
       url: "https://images.pexels.com/photos/4825701/pexels-photo-4825701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -117,6 +119,7 @@ export function ListPlans({ data }: ListPlansProps) {
             <motion.div
               className="cursor-pointer w-full ssm:max-w-[46%] md:max-w-[30%] lg:max-w-[30%] h-full relative planCard"
               key={index}
+              onClick={() => router.push(`/plans/${plan.id}`)}
             >
               <div className="w-full h-full">
                 {plan.images && (

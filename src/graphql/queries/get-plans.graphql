@@ -17,5 +17,6 @@ query GetPlans(
     likes
     likesCount
     images
+    id
   }
 }

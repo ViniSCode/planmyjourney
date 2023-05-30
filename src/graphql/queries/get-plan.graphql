@@ -1,0 +1,11 @@
+query GetPlan($id: ID!) {
+  plan(where: { id: $id }) {
+    expenses
+    days
+    transportation
+    location
+    likes
+    likesCount
+    images
+  }
+}
