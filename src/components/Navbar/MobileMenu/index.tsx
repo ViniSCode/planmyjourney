@@ -50,7 +50,7 @@ export function MobileMenu() {
     { icon: <AiOutlineGlobal size={22} />, href: "/", name: "Services" },
     {
       icon: <AiOutlineEnvironment size={23} />,
-      href: "/",
+      href: "/plans",
       name: "All Plans",
     },
     {
@@ -60,13 +60,13 @@ export function MobileMenu() {
     },
     {
       icon: <RiMapPinAddLine size={22} />,
-      href: "/",
-      name: "Create Plan",
+      href: "/share",
+      name: "Share Plan",
     },
     { icon: <AiOutlinePhone size={22} />, href: "/", name: "Contact" },
     {
       icon: <AiOutlineLogin size={22} />,
-      href: "/",
+      href: "/login",
       name: "Login",
       isLoggedIn: session,
     },
