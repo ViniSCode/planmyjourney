@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { BsFillHeartFill } from "react-icons/bs";
 import { FiBookmark, FiHeart } from "react-icons/fi";
 
-export default function planId() {
+export default function PlanId() {
   const router = useRouter();
   const planId: any = router.query.planId;
 
