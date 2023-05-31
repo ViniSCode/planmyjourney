@@ -6,7 +6,6 @@ import { client, ssrCache } from "@/lib/urql";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { BsFillHeartFill } from "react-icons/bs";
 import { FiBookmark, FiHeart } from "react-icons/fi";
 
 export default function PlanId() {
@@ -34,10 +33,13 @@ export default function PlanId() {
                   {data.plan?.location[0].country}, Trip Plan
                 </h2>
 
-                <div className="mt-2 flex items-center gap-1 text-gray-900 font-medium">
-                  <BsFillHeartFill size={12} />
+                <div className="text-gray-900 font-semibold">
                   <span className="text-xs">
-                    {data.plan?.likesCount ? data.plan?.likesCount : 0} likes
+                    {Intl.DateTimeFormat("en-US", {
+                      month: "short",
+                      day: "2-digit",
+                      year: "numeric",
+                    }).format(new Date(data.plan?.createdAt))}
                   </span>
                 </div>
               </div>

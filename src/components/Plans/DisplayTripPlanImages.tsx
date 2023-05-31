@@ -20,6 +20,8 @@ export function DisplayTripPlanImages({ images }: any) {
                 alt="location name"
                 width={500}
                 height={500}
+                placeholder="blur"
+                blurDataURL={selectedImage}
                 // loading="lazy"
                 draggable={false}
                 priority
