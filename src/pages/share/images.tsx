@@ -1,5 +1,4 @@
 import { EditImages } from "@/components/EditImages";
-import { Modal } from "@/components/Modal";
 import { Marker } from "@/context/MapContext";
 import { Expenses, Transportation } from "@/context/SharePlanContext";
 import useMap from "@/hooks/useMap";
@@ -116,59 +115,6 @@ export default function Images({ apiKey, session }: any) {
           </div>
         </div>
       </div>
-
-      {isModalOpen && (
-        <Modal>
-          <div className="flex gap-2 flex-col lg:flex-row w-full h-[300px] sm:h-[400px] md:h-[400px] justify-between overflow-hidden lg:pl-4">
-            <div className="relative bg-gray-200 w-full h-full rounded-2xl flex items-center justify-center">
-              {lastImage && (
-                <Image
-                  src={URL.createObjectURL(lastImage)}
-                  fill
-                  alt="trip image"
-                  className="z-0 absolute object-cover brightness-75"
-                />
-              )}
-              <label
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                htmlFor="file_input"
-              />
-              <input
-                className="relative z-20 block w-full max-w-[60%] text-sm text-gray-900 border border-gray-300 rounded-full cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                id="file_input"
-                type="file"
-                onChange={handleImageUpload}
-                ref={fileInputRef}
-                multiple
-              />
-            </div>
-            <div className="lg:px-4 w-full h-20 sm:h-28 lg:max-w-[140px] lg:h-full flex flex-row justify-between gap-2 md:gap-4 lg:flex-col overflow-y-scroll scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-900">
-              {selectedImages.length > 0 &&
-                selectedImages.map((image: any, index: any) => (
-                  <div
-                    key={index}
-                    className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"
-                    style={{
-                      backgroundImage: `url(${URL.createObjectURL(image)})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  />
-                ))}
-              {selectedImages.length < 4 &&
-                Array(4 - selectedImages.length)
-                  .fill(null)
-                  .map((_, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-200 w-full h-[60px] sm:h-[80px] rounded-2xl"
-                    />
-                  ))}
-            </div>
-          </div>
-        </Modal>
-      )}
-
       <EditImages setImages={setSelectedImages} images={selectedImages} />
     </main>
   );
