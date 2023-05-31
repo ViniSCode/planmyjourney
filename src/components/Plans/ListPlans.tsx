@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useRef } from "react";
-import { FiHeart } from "react-icons/fi";
-import { RiStarFill } from "react-icons/ri";
+import { FiBookmark, FiHeart } from "react-icons/fi";
 
 interface ListPlansProps {
   data: GetPlansQuery | undefined;
@@ -149,13 +148,13 @@ export function ListPlans({ data }: ListPlansProps) {
                 </div>
                 <div className="flex gap-1 items-baseline">
                   <div className="flex items-center gap-1">
-                    <RiStarFill size={15} />
-                    <span className="text-sm">{4.99}</span>
+                    <FiHeart size={15} />
+                    <span className="text-sm">{187}</span>
                   </div>
                 </div>
               </div>
               <div className="w-full max-w-fit rounded-xl absolute top-[10px] right-[10px]">
-                <FiHeart size={25} className="text-white" />
+                <FiBookmark size={25} className="text-white" />
               </div>
             </motion.div>
           ))
