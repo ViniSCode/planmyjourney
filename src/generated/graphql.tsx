@@ -845,6 +845,8 @@ export type Member = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
+  image: Scalars['String'];
+  name: Scalars['String'];
   plans: Array<Plan>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -950,6 +952,8 @@ export type MemberConnection = {
 export type MemberCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
+  image: Scalars['String'];
+  name: Scalars['String'];
   plans?: InputMaybe<PlanCreateManyInlineInput>;
   savedPlans?: InputMaybe<PlanCreateManyInlineInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -1045,6 +1049,44 @@ export type MemberManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
+  image?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  image_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  image_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  image_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  image_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  image_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  image_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  image_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  image_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  image_starts_with?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
   plans_every?: InputMaybe<PlanWhereInput>;
   plans_none?: InputMaybe<PlanWhereInput>;
   plans_some?: InputMaybe<PlanWhereInput>;
@@ -1095,6 +1137,10 @@ export enum MemberOrderByInput {
   EmailDesc = 'email_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  ImageAsc = 'image_ASC',
+  ImageDesc = 'image_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
@@ -1103,6 +1149,8 @@ export enum MemberOrderByInput {
 
 export type MemberUpdateInput = {
   email?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
   plans?: InputMaybe<PlanUpdateManyInlineInput>;
   savedPlans?: InputMaybe<PlanUpdateManyInlineInput>;
 };
@@ -1125,8 +1173,8 @@ export type MemberUpdateManyInlineInput = {
 };
 
 export type MemberUpdateManyInput = {
-  /** No fields in updateMany data input */
-  _?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type MemberUpdateManyWithNestedWhereInput = {
@@ -1245,6 +1293,44 @@ export type MemberWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
+  image?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  image_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  image_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  image_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  image_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  image_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  image_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  image_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  image_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  image_starts_with?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
   plans_every?: InputMaybe<PlanWhereInput>;
   plans_none?: InputMaybe<PlanWhereInput>;
   plans_some?: InputMaybe<PlanWhereInput>;
@@ -4358,7 +4444,7 @@ export type GetPlanQueryVariables = Exact<{
 }>;
 
 
-export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, images?: any | null } | null };
+export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, images?: any | null, member?: { __typename?: 'Member', name: string, image: string } | null } | null };
 
 export type GetPlansQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -4388,6 +4474,10 @@ export const GetPlanDocument = gql`
     likes
     likesCount
     images
+    member {
+      name
+      image
+    }
   }
 }
     `;

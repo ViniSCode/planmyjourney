@@ -7,5 +7,9 @@ query GetPlan($id: ID!) {
     likes
     likesCount
     images
+    member {
+      name
+      image
+    }
   }
 }

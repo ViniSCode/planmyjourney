@@ -32,15 +32,24 @@ export default function PlanId() {
                 <h2 className="text-2xl truncate">
                   {data.plan?.location[0].country}, Trip Plan
                 </h2>
+
                 <div className="mt-2 flex items-center gap-1 text-gray-900 font-medium">
                   <BsFillHeartFill size={12} />
-                  <span className="text-xs">{187} likes</span>
+                  <span className="text-xs">
+                    {data.plan?.likesCount ? data.plan?.likesCount : 0} likes
+                  </span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-1 text-gray-900 font-medium cursor-pointer">
-                <FiHeart size={18} />
-                <FiBookmark size={18} />
+              <div className="hidden md:flex items-center gap-4 text-gray-900 font-medium cursor-pointer">
+                <div className="mt-2 flex items-center gap-1 font-medium text-gray-700">
+                  <FiBookmark size={18} />
+                  <span className="text-sm underline">Save</span>
+                </div>
+                <div className="mt-2 flex items-center gap-1 font-medium text-gray-700">
+                  <FiHeart size={18} />
+                  <span className="text-sm underline">Like</span>
+                </div>
                 {/* <span>Save</span> */}
               </div>
             </div>
