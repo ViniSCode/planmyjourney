@@ -13,7 +13,9 @@ export default NextAuth({
 
   callbacks: {
     async signIn({ user, account, profile }) {
-      const email = user.email;
+      const email = user.email!;
+      const avatar = user.image!;
+      const name = user.name!;
 
       const {
         data: { members },
@@ -21,7 +23,7 @@ export default NextAuth({
 
       if (members.length === 0) {
         // customer doesn't exists
-        await createMember(email!);
+        await createMember(email!, avatar, name);
       } else {
         // if customer exists
       }
@@ -34,7 +36,7 @@ export default NextAuth({
   },
 });
 
-async function createMember(email: string) {
+async function createMember(email: string, avatar: string, name: string) {
   try {
     const data = await fetch(
       `https://api-sa-east-1.hygraph.com/v2/clh4y479g5mig01taa2s5djfl/master`,
@@ -47,7 +49,7 @@ async function createMember(email: string) {
         body: JSON.stringify({
           query: `
           mutation CrateMember {
-            createMember(data: {email: "${email}"}) { id },
+            createMember(data: {email: "${email}", name: "${name}", image: "${avatar}"}) { id },
             publishMember (where: {email: "${email}"}) { id }
           }`,
         }),
