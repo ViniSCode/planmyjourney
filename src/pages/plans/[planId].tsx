@@ -4,6 +4,7 @@ import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages"
 import { GetPlanDocument, useGetPlanQuery } from "@/generated/graphql";
 import { client, ssrCache } from "@/lib/urql";
 import { GetServerSideProps } from "next";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { BsFillHeartFill } from "react-icons/bs";
 import { FiBookmark, FiHeart } from "react-icons/fi";
@@ -41,7 +42,7 @@ export default function PlanId() {
                 </div>
               </div>
 
-              <div className="hidden md:flex items-center gap-4 text-gray-900 font-medium cursor-pointer">
+              <div className="hidden ssm:flex items-center gap-4 text-gray-900 font-medium cursor-pointer">
                 <div className="mt-2 flex items-center gap-1 font-medium text-gray-700">
                   <FiBookmark size={18} />
                   <span className="text-sm underline">Save</span>
@@ -50,11 +51,37 @@ export default function PlanId() {
                   <FiHeart size={18} />
                   <span className="text-sm underline">Like</span>
                 </div>
-                {/* <span>Save</span> */}
               </div>
             </div>
 
             <DisplayTripPlanImages images={data.plan?.images} />
+
+            <div className="mt-6 flex ssm:hidden items-center gap-4 text-gray-900 font-medium cursor-pointer justify-between">
+              <div className="flex items-center gap-1 font-medium text-gray-900">
+                <FiHeart size={18} />
+                <span className="text-xs">
+                  {data.plan?.likesCount ? data.plan?.likesCount : 0} likes
+                </span>
+              </div>
+              <div className="flex items-center gap-1 font-medium text-gray-900">
+                <FiBookmark size={18} />
+              </div>
+            </div>
+
+            <div className="mt-8 flex items-center gap-2 font-medium">
+              <Image
+                width={50}
+                height={50}
+                loading="lazy"
+                src={data.plan!.member!.image}
+                alt={data.plan!.member!.name}
+                className="rounded-full w-10"
+              />
+              <div>
+                <span className="block">{data.plan!.member!.name}</span>
+                <small className="block text-gray-700">Author</small>
+              </div>
+            </div>
           </div>
         )}
       </main>

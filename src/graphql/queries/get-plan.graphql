@@ -6,6 +6,7 @@ query GetPlan($id: ID!) {
     location
     likes
     likesCount
+    createdAt
     images
     member {
       name
