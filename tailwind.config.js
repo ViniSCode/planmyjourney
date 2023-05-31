@@ -9,6 +9,8 @@ module.exports = {
     screens: {
       xxs: "280px",
 
+      carousel: "360px",
+
       xs: "420px",
 
       ssm: "550px",

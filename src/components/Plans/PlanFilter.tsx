@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import {
   FiCalendar,
   FiDollarSign,
@@ -7,8 +9,25 @@ import {
 } from "react-icons/fi";
 
 export function PlanFilter() {
+  const [carouselWidth, setCarouselWidth] = useState(0);
+
+  const slideRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (slideRef.current) {
+      setCarouselWidth(
+        slideRef.current.scrollWidth - slideRef.current.offsetWidth
+      );
+    }
+  }, []);
+
   return (
-    <div className="mt-10 flex gap-12 items-center justify-center border-b pb-8">
+    <motion.div
+      drag="x"
+      dragConstraints={{ right: 0, left: -carouselWidth }}
+      className="mt-10 flex gap-8 carousel:justify-center md:gap-12 items-center md:justify-center select-none"
+      ref={slideRef}
+    >
       <div className="flex flex-col items-center gap-2 cursor-pointer text-pink-500">
         <FiMap />
         <span className="text-xs font-medium">All</span>
@@ -33,6 +52,6 @@ export function PlanFilter() {
         <FiCalendar />
         <span className="text-xs font-medium">Days</span>
       </div>
-    </div>
+    </motion.div>
   );
 }

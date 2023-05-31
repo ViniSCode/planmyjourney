@@ -6,7 +6,7 @@ import { client, ssrCache } from "@/lib/urql";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { BsFillHeartFill } from "react-icons/bs";
-import { FiBookmark } from "react-icons/fi";
+import { FiBookmark, FiHeart } from "react-icons/fi";
 
 export default function planId() {
   const router = useRouter();
@@ -32,15 +32,16 @@ export default function planId() {
                 <h2 className="text-2xl truncate">
                   {data.plan?.location[0].country}, Trip Plan
                 </h2>
-                <div className="mt-1 flex items-center gap-1 text-gray-900 font-medium">
-                  <BsFillHeartFill size={13} />
-                  <span className="text-sm">187</span>
+                <div className="mt-2 flex items-center gap-1 text-gray-900 font-medium">
+                  <BsFillHeartFill size={12} />
+                  <span className="text-xs">{187} likes</span>
                 </div>
               </div>
 
-              <div className="mt-1 flex items-center gap-1 text-gray-900 font-medium">
+              <div className="flex items-center gap-1 text-gray-900 font-medium cursor-pointer">
+                <FiHeart size={18} />
                 <FiBookmark size={18} />
-                <span>Save</span>
+                {/* <span>Save</span> */}
               </div>
             </div>
 
