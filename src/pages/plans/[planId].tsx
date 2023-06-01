@@ -1,14 +1,27 @@
+import { Loading } from "@/components/Loading";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages";
 import { GetPlanDocument, useGetPlanQuery } from "@/generated/graphql";
 import { client, ssrCache } from "@/lib/urql";
 import { GetServerSideProps } from "next";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { FiBookmark, FiHeart } from "react-icons/fi";
+import { TbMapPinFilled } from "react-icons/tb";
+
+const DynamicMap = dynamic(
+  () => import("../../components/Plans/Map/LocationMap"),
+  {
+    ssr: false,
+    loading: () => <Loading />,
+  }
+);
 
 export default function PlanId() {
+  const [goToLocation, setGoToLocation] = useState({});
   const router = useRouter();
   const planId: any = router.query.planId;
 
@@ -70,7 +83,7 @@ export default function PlanId() {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center gap-2 font-medium">
+            <div className="border-b pb-4 mt-8 flex items-center gap-2 font-medium">
               <Image
                 width={50}
                 height={50}
@@ -82,6 +95,28 @@ export default function PlanId() {
               <div>
                 <span className="block">{data.plan!.member!.name}</span>
                 <small className="block text-gray-700">Author</small>
+              </div>
+            </div>
+            <div className="mt-10">
+              <div className="flex items-center gap-2 flex-wrap justify-start xs:justify-between">
+                {data.plan?.location &&
+                  data.plan.location.map((loc: any, index: any) => (
+                    <div
+                      key={index}
+                      onClick={() => setGoToLocation({ ...loc })}
+                      className="p-2 bg-white shadow-lg rounded-lg flex items-center gap-2 cursor-pointer w-fit max-w-full xs:max-w-[48%] md:max-w-[48%] lg:max-w-[32%]"
+                      title={loc.formatted}
+                    >
+                      <TbMapPinFilled size={20} className="text-red-500" />
+                      <span className="block truncate">{loc.formatted}</span>
+                    </div>
+                  ))}
+              </div>
+              <div className="mt-10">
+                <DynamicMap
+                  markers={data.plan!.location}
+                  goToLocation={goToLocation}
+                />
               </div>
             </div>
           </div>

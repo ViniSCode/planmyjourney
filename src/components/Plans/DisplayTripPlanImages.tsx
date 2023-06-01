@@ -24,7 +24,7 @@ export function DisplayTripPlanImages({ images }: any) {
                 blurDataURL={selectedImage}
                 // loading="lazy"
                 draggable={false}
-                priority
+                // priority
                 className="w-full h-full max-w-full min-h-[40vh] max-h-[40vh]  md:min-h-[60vh] md:max-h-[60vh] object-cover rounded-xl brightness-95"
               />
             )}
@@ -40,7 +40,6 @@ export function DisplayTripPlanImages({ images }: any) {
                   width={300}
                   height={300}
                   draggable={false}
-                  priority
                   className="cursor-pointer w-full h-full object-cover rounded-xl brightness-95 max-w-[23%] min-h-[60px] max-h-[60px] xs:min-h-[80px] xs:max-h-[80px]  ssm:min-h-[100px] ssm:max-h-[100px] md:w-full md:max-w-full md:min-h-[115px]"
                 />
               ))}
