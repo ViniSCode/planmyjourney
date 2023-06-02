@@ -25,7 +25,7 @@ export function ImportantInfo({ plan }: any) {
             type="number"
             className="numberOfDays text-xl font-medium bg-gray-200 rounded-lg w-12 h-12 flex items-center text-center text-gray-900 justify-center placeholder:text-center placeholder:text-gray-500 pointer-events-none focus:outline-none border-none"
             placeholder="0"
-            onChange={() => ""}
+            onChange={() => {}}
             value={plan!.days}
           />
           <span className="font-medium">Days</span>
@@ -82,14 +82,14 @@ export function ImportantInfo({ plan }: any) {
             name="number"
             className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500 border-none pointer-events-none"
             placeholder="$800"
-            onChange={() => ""}
+            onChange={() => {}}
             value={plan.expenses.min}
           />
           <span className="text-lg block text-gray-700 font-medium">to</span>
           <input
             type="number"
             className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500 border-none pointer-events-none"
-            onChange={() => ""}
+            onChange={() => {}}
             value={plan.expenses.max}
           />
         </div>
