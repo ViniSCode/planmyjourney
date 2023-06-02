@@ -2,6 +2,7 @@ import { Loading } from "@/components/Loading";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages";
+import { ImportantInfo } from "@/components/Plans/ImportantInfo";
 import { GetPlanDocument, useGetPlanQuery } from "@/generated/graphql";
 import { client, ssrCache } from "@/lib/urql";
 import { GetServerSideProps } from "next";
@@ -119,6 +120,8 @@ export default function PlanId() {
                 />
               </div>
             </div>
+
+            <ImportantInfo plan={data.plan} />
           </div>
         )}
       </main>

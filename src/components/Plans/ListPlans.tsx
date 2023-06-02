@@ -149,7 +149,9 @@ export function ListPlans({ data }: ListPlansProps) {
                 <div className="flex gap-1 items-baseline">
                   <div className="flex items-center gap-1">
                     <FiHeart size={15} />
-                    <span className="text-sm">{187}</span>
+                    <span className="text-sm">
+                      {plan?.likesCount ? plan?.likesCount : 0} likes
+                    </span>
                   </div>
                 </div>
               </div>

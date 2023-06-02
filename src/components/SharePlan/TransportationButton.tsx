@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  transportation: boolean;
+  transportation?: boolean;
 }
 
 export function TransportationButton({
