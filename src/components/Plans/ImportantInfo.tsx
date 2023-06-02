@@ -114,18 +114,19 @@ export function ImportantInfo({ plan }: any) {
             <li>
               <p>
                 <span className="font-semibold">Language: </span>The local
-                language might be different from the user's native language. We
-                recommend that users learn a few key phrases in the local
-                language, or carry a phrasebook or translation app with them.
+                language might be different from the user&apos;s native
+                language. We recommend that users learn a few key phrases in the
+                local language, or carry a phrasebook or translation app with
+                them.
               </p>
             </li>
             <li>
               <p>
                 <span className="font-semibold">Currency: </span>The local
-                currency might be different from the user's home currency. We
-                recommend that users exchange their money or withdraw cash from
-                an ATM before the trip, or use a credit card that doesn't charge
-                foreign transaction fees.
+                currency might be different from the user&apos;s home currency.
+                We recommend that users exchange their money or withdraw cash
+                from an ATM before the trip, or use a credit card that
+                doesn&apos;t charge foreign transaction fees.
               </p>
             </li>
             <li>
