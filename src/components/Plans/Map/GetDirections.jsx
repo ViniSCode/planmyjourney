@@ -55,7 +55,10 @@ export function GetDirections({ coords, location }) {
       >
         <div className="flex items-center gap-2">
           <FcGoogle size={20} />
-          <span className="text-white font-medium text-xs ssm:text-base">
+          <span className="hidden ssm:block text-white font-medium text-xs ssm:text-base">
+            Get Directions on Google Maps
+          </span>
+          <span className="block ssm:hidden text-white font-medium text-xs ssm:text-base">
             Directions on Google Maps
           </span>
         </div>
