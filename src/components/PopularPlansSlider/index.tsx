@@ -1,49 +1,17 @@
+import { GetPlansQuery } from "@/generated/graphql";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { FiMapPin } from "react-icons/fi";
+import { FiHeart, FiMapPin } from "react-icons/fi";
 
-export function PopularPlansSlide() {
+interface PopularPlansSlideProps {
+  data: GetPlansQuery | undefined;
+}
+
+export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
   const [carouselWidth, setCarouselWidth] = useState(0);
-
-  const popularTripPlan = [
-    {
-      url: "https://images.pexels.com/photos/4825701/pexels-photo-4825701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      name: "Indonesia",
-      description:
-        "Planning your trip is crucial for a stress-free and enjoyable experience. It saves time and money by finding the best deals and creating.",
-      location: "5 Stars Hotel",
-    },
-    {
-      url: "https://images.pexels.com/photos/4825701/pexels-photo-4825701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      name: "Indonesia",
-      description:
-        "Planning your trip is crucial for a stress-free and enjoyable experience. It saves time and money by finding the best deals and creating.",
-      location: "5 Stars Hotel",
-    },
-    {
-      url: "https://images.pexels.com/photos/4825701/pexels-photo-4825701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      name: "Indonesia",
-      description:
-        "Planning your trip is crucial for a stress-free and enjoyable experience. It saves time and money by finding the best deals and creating.",
-      location: "5 Stars Hotel",
-    },
-    {
-      url: "https://images.pexels.com/photos/4825701/pexels-photo-4825701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      name: "Indonesia",
-      description:
-        "Planning your trip is crucial for a stress-free and enjoyable experience. It saves time and money by finding the best deals and creating.",
-      location: "5 Stars Hotel",
-    },
-    {
-      url: "https://images.pexels.com/photos/4825701/pexels-photo-4825701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      name: "Indonesia",
-      description:
-        "Planning your trip is crucial for a stress-free and enjoyable experience. It saves time and money by finding the best deals and creating.",
-      location: "5 Stars Hotel",
-    },
-  ];
-
+  const router = useRouter();
   const slideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,7 +23,11 @@ export function PopularPlansSlide() {
   }, []);
 
   return (
-    <section className="w-full h-full">
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="w-full h-full"
+    >
       <h2 className="text-3xl font-bold text-center">Popular Trip Plans</h2>
       <div
         className="mt-20 carousel w-full max-w-[370px] md:max-w-[660px] lg:max-w-full mx-auto overflow-x-hidden flex h-full relative"
@@ -66,46 +38,38 @@ export function PopularPlansSlide() {
           dragConstraints={{ right: 0, left: -carouselWidth }}
           className="rounded-2xl flex gap-10 justify-start h-full"
         >
-          {popularTripPlan.map((plan, index) => (
-            <div className="w-56 h-fit relative" key={index}>
+          {data?.plans.map((plan, index) => (
+            <div
+              className="w-56 h-fit relative cursor-pointer"
+              key={index}
+              onClick={() => router.push(`/plans/${plan.id}`)}
+            >
               <div className="w-full h-[300px]">
                 <Image
-                  src={plan.url}
+                  src={plan.images[0]}
                   alt="location name"
                   width={600}
                   height={900}
                   draggable={false}
-                  className="w-full h-full max-w-[300px] max-h-[300px] object-cover rounded-2xl"
+                  className="w-full h-full max-w-[300px] max-h-[300px] object-cover rounded-2xl brightness-[0.8]"
                 />
-              </div>
-              <div className="mt-6 w-full">
-                <span className="block font-bold text-xl">{plan.name}</span>
-                <span className="mt-2 block text-xs text-gray-500 font-semibold">
-                  {plan.description}
-                </span>
               </div>
               <div className="w-full max-w-[150px] flex items-center justify-center gap-2 shadow-lg bg-white rounded-xl absolute top-0 right-[-25px] px-4 py-2">
                 <FiMapPin size={16} />
                 <span className="block text-gray-900 font-bold truncate">
-                  {plan.location}
+                  {plan.location[0].country}
+                </span>
+              </div>
+              <div className="flex items-center text-shadow-like gap-1 font-medium text-white absolute bottom-3 left-3">
+                <FiHeart size={18} />
+                <span className="text-xs">
+                  {plan?.likesCount ? plan?.likesCount : 0}
                 </span>
               </div>
             </div>
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   await client
-//     .query(GetPopularPlans, { limit: 8, offset: 0, search: "" })
-//     .toPromise();
-
-//   return {
-//     props: {
-//       urqlState: ssrCache.extractData(),
-//     },
-//   };
-// };
