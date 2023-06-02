@@ -25,7 +25,9 @@ export function ImportantInfo({ plan }: any) {
             type="number"
             className="numberOfDays text-xl font-medium bg-gray-200 rounded-lg w-12 h-12 flex items-center text-center text-gray-900 justify-center placeholder:text-center placeholder:text-gray-500 pointer-events-none focus:outline-none border-none"
             placeholder="0"
-            onChange={() => {}}
+            onChange={() => {
+              console.log("");
+            }}
             value={plan!.days}
           />
           <span className="font-medium">Days</span>
@@ -70,8 +72,8 @@ export function ImportantInfo({ plan }: any) {
       <div>
         <h4 className="mt-16 font-medium text-xl">Estimate Expenses</h4>
         <p className="mt-4 text-sm">
-          Based on user input, the trip is estimated to cost around
-          {` ${estimate_expenses}`}, including transportation, accommodations,
+          Based on user input, the trip is estimated to cost around{" "}
+          {estimate_expenses}, including transportation, accommodations,
           activities, and other miscellaneous expenses. However, please note
           that this is only an estimate and actual costs may vary.
         </p>
@@ -82,14 +84,18 @@ export function ImportantInfo({ plan }: any) {
             name="number"
             className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500 border-none pointer-events-none"
             placeholder="$800"
-            onChange={() => {}}
+            onChange={() => {
+              console.log("");
+            }}
             value={plan.expenses.min}
           />
           <span className="text-lg block text-gray-700 font-medium">to</span>
           <input
             type="number"
             className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500 border-none pointer-events-none"
-            onChange={() => {}}
+            onChange={() => {
+              console.log("");
+            }}
             value={plan.expenses.max}
           />
         </div>
