@@ -46,6 +46,7 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
             >
               <div className="w-full h-[300px]">
                 <Image
+                  priority={true}
                   src={plan.images[0]}
                   alt="location name"
                   width={600}

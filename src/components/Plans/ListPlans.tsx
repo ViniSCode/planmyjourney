@@ -116,11 +116,13 @@ export function ListPlans({ data }: ListPlansProps) {
         {data!.plans.length > 0 ? (
           data!.plans.map((plan, index) => (
             <motion.div
-              className="cursor-pointer w-full ssm:max-w-[46%] md:max-w-[30%] lg:max-w-[30%] h-full relative planCard"
+              className="w-full ssm:max-w-[46%] md:max-w-[30%] lg:max-w-[30%] h-full relative planCard"
               key={index}
-              onClick={() => router.push(`/plans/${plan.id}`)}
             >
-              <div className="w-full h-full">
+              <div
+                className="w-full h-full cursor-pointer"
+                onClick={() => router.push(`/plans/${plan.id}`)}
+              >
                 {plan.images && (
                   <Image
                     src={plan.images[0]}
@@ -129,7 +131,7 @@ export function ListPlans({ data }: ListPlansProps) {
                     height={300}
                     // loading="lazy"
                     draggable={false}
-                    priority
+                    priority={true}
                     className="w-full h-full max-w-[600px] min-h-[260px] max-h-[260px] object-cover rounded-2xl brightness-95"
                   />
                 )}
@@ -147,7 +149,7 @@ export function ListPlans({ data }: ListPlansProps) {
                   </span>
                 </div>
                 <div className="flex gap-1 items-baseline">
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 cursor-pointer">
                     <FiHeart size={15} />
                     <span className="text-sm">
                       {plan?.likesCount ? plan?.likesCount : 0} likes
@@ -155,7 +157,7 @@ export function ListPlans({ data }: ListPlansProps) {
                   </div>
                 </div>
               </div>
-              <div className="w-full max-w-fit rounded-xl absolute top-[10px] right-[10px]">
+              <div className="w-full max-w-fit rounded-xl absolute top-[10px] right-[10px] cursor-pointer">
                 <FiBookmark size={25} className="text-white" />
               </div>
             </motion.div>

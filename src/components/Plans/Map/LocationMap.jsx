@@ -19,7 +19,7 @@ export default function LocationMap({ markers, goToLocation }) {
     <div className="w-full h-full">
       <MapContainer
         center={[markers[0].lat, markers[0].lng]}
-        zoom={10}
+        zoom={5}
         scrollWheelZoom={true}
         minZoom={2}
         maxBounds={maxBounds}
