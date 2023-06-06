@@ -19,4 +19,18 @@ query GetPlans(
     images
     id
   }
+  plansConnection(
+    first: $limit
+    skip: $offset
+    where: { _search: $search }
+    orderBy: $orderBy
+  ) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      endCursor
+      pageSize
+      startCursor
+    }
+  }
 }

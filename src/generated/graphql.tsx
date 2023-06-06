@@ -4454,7 +4454,7 @@ export type GetPlansQueryVariables = Exact<{
 }>;
 
 
-export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, images?: any | null, id: string }> };
+export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, images?: any | null, id: string }>, plansConnection: { __typename?: 'PlanConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, pageSize?: number | null, startCursor?: string | null } } };
 
 export type UserAlreadyExistsQueryVariables = Exact<{
   email: Scalars['String'];
@@ -4502,6 +4502,20 @@ export const GetPlansDocument = gql`
     likesCount
     images
     id
+  }
+  plansConnection(
+    first: $limit
+    skip: $offset
+    where: {_search: $search}
+    orderBy: $orderBy
+  ) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      endCursor
+      pageSize
+      startCursor
+    }
   }
 }
     `;

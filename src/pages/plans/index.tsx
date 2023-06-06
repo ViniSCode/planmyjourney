@@ -12,22 +12,66 @@ import {
 import { client, ssrCache } from "@/lib/urql";
 import { motion } from "framer-motion";
 import type { GetStaticProps } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+
+export interface Plan {
+  __typename?: "Plan";
+  days: number;
+  expenses: any;
+  transportation: any;
+  location?: any | null;
+  likes?: any | null;
+  likesCount?: number | null;
+  images?: any | null;
+  id: string;
+}
 
 export default function Plans() {
-  const productsPerPage = 8;
+  const plansPerPage = 5;
   const [offset, setOffset] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [plans, setPlans] = useState<Plan[]>([]);
   const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.LikesCountDesc);
+  const { ref: endRef, inView: endView } = useInView();
 
-  const [{ data }] = useGetPlansQuery({
+  const [{ data: getPlansData, fetching, error }] = useGetPlansQuery({
     variables: {
-      limit: productsPerPage,
+      limit: plansPerPage,
       offset: offset,
       search: search,
       orderBy: orderBy,
     },
   });
+
+  useEffect(() => {
+    if (!plans.length || plans.length === 0) {
+      if (getPlansData) {
+        //set plans
+        setPlans(getPlansData.plans);
+      }
+    }
+
+    //create the infinite scroll logic
+    if (endView) {
+      if (getPlansData?.plansConnection.pageInfo.hasNextPage) {
+        setIsLoading(true);
+        const newOffset = offset + plansPerPage;
+        setOffset(newOffset);
+      }
+    }
+  }, [endRef, endView, getPlansData, plans]);
+
+  useEffect(() => {
+    if (offset > 0 && !fetching) {
+      if (getPlansData) {
+        const newPlans = getPlansData?.plans || [];
+        setPlans((prevPlans) => [...prevPlans, ...newPlans]);
+        setIsLoading(false);
+      }
+    }
+  }, [offset, getPlansData, fetching]);
 
   return (
     <>
@@ -39,14 +83,15 @@ export default function Plans() {
         <SearchBar />
         <PlanFilter />
         <motion.div>
-          {data ? (
-            <ListPlans data={data} />
+          {plans.length > 0 && !isLoading ? (
+            <ListPlans plans={plans} />
           ) : (
             <div className="flex justify-center mt-24">
               <Spinner />
             </div>
           )}
         </motion.div>
+        <div className="mt-24" ref={endRef}></div>
       </main>
     </>
   );

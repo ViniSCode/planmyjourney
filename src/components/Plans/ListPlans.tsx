@@ -1,4 +1,4 @@
-import { GetPlansQuery } from "@/generated/graphql";
+import { Plan } from "@/pages/plans";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -6,10 +6,11 @@ import { useRef } from "react";
 import { FiBookmark, FiHeart } from "react-icons/fi";
 
 interface ListPlansProps {
-  data: GetPlansQuery | undefined;
+  plans: Plan[];
 }
 
-export function ListPlans({ data }: ListPlansProps) {
+export function ListPlans({ plans }: ListPlansProps) {
+  const itemsPerPage = plans.length % 3 !== 0;
   const router = useRouter();
   const popularTripPlan = [
     {
@@ -113,8 +114,8 @@ export function ListPlans({ data }: ListPlansProps) {
         animate={{ opacity: 1 }}
         className="mt-12 flex gap-10 ssm:gap-7 md:gap-7 lg:gap-7 flex-col flex-nowrap ssm:flex-row ssm:flex-wrap justify-between"
       >
-        {data!.plans.length > 0 ? (
-          data!.plans.map((plan, index) => (
+        {plans.length > 0 ? (
+          plans.map((plan, index) => (
             <motion.div
               className="w-full ssm:max-w-[46%] md:max-w-[30%] lg:max-w-[30%] h-full relative planCard"
               key={index}
@@ -152,7 +153,7 @@ export function ListPlans({ data }: ListPlansProps) {
                   <div className="flex items-center gap-1 cursor-pointer">
                     <FiHeart size={15} />
                     <span className="text-sm">
-                      {plan?.likesCount ? plan?.likesCount : 0} likes
+                      {plan?.likesCount ? plan?.likesCount : 0}
                     </span>
                   </div>
                 </div>
@@ -167,7 +168,7 @@ export function ListPlans({ data }: ListPlansProps) {
             <p className="text-center">No plans found yet.</p>
           </div>
         )}
-        <div className="flex-grow"></div>
+        {itemsPerPage && <div className="flex-grow"></div>}
       </motion.div>
     </section>
   );
