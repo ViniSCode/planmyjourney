@@ -28,7 +28,7 @@ export interface Plan {
 }
 
 export default function Plans() {
-  const plansPerPage = 5;
+  const plansPerPage = 9;
   const [offset, setOffset] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
