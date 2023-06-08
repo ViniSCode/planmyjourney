@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { FiBookmark, FiHeart } from "react-icons/fi";
+import { FiArrowLeft, FiBookmark, FiHeart } from "react-icons/fi";
 import { TbMapPinFilled } from "react-icons/tb";
 
 const DynamicMap = dynamic(
@@ -39,6 +39,12 @@ export default function PlanId() {
         <MobileMenu />
       </header>
       <main className="px-6 mt-32 max-w-[1120px] md:mt-16 mx-auto pb-20">
+        <div
+          onClick={() => router.back()}
+          className="cursor-pointer font-medium text-gray-700 bg-gray-200 w-fit p-2 rounded-lg mb-20 hover:bg-gray-250 transition-colors"
+        >
+          <FiArrowLeft size={20} />
+        </div>
         {data && (
           <div>
             <div className="flex justify-between place-items-baseline">
@@ -101,14 +107,16 @@ export default function PlanId() {
             <div className="mt-10">
               <div className="flex items-center gap-2 flex-wrap justify-start xs:justify-between">
                 {data.plan?.location &&
-                  data.plan.location.map((loc: any, index: any) => (
+                  data.plan!.location.map((loc: any, index: any) => (
                     <div
                       key={index}
                       onClick={() => setGoToLocation({ ...loc })}
-                      className="p-2 bg-white shadow-lg rounded-lg flex items-center gap-2 cursor-pointer w-fit max-w-full xs:max-w-[48%] md:max-w-[48%] lg:max-w-[32%]"
+                      className="p-2 bg-white shadow-lg rounded-lg flex items-center gap-2 cursor-pointer w-fit max-w-full xs:max-w-[48%] md:max-w-[48%] lg:max-w-[48%]"
                       title={loc.formatted}
                     >
-                      <TbMapPinFilled size={20} className="text-red-500" />
+                      <div className="w-fit h-fit">
+                        <TbMapPinFilled size={20} className="text-red-500" />
+                      </div>
                       <span className="block truncate">{loc.formatted}</span>
                     </div>
                   ))}
