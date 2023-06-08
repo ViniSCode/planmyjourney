@@ -33,7 +33,7 @@ export default function Plans() {
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [plans, setPlans] = useState<Plan[]>([]);
-  const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.LikesCountDesc);
+  const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.CreatedAtDesc);
   const { ref: endRef, inView: endView } = useInView();
 
   const [{ data: getPlansData, fetching, error }] = useGetPlansQuery({
@@ -103,7 +103,7 @@ export const getStaticProps: GetStaticProps = async () => {
       limit: 8,
       offset: 0,
       search: "",
-      orderBy: PlanOrderByInput.LikesCountDesc,
+      orderBy: PlanOrderByInput.CreatedAtDesc,
     })
     .toPromise();
 

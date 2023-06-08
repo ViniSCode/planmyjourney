@@ -82,7 +82,7 @@ export default function PlanId() {
               <div className="flex items-center gap-1 font-medium text-gray-900">
                 <FiHeart size={18} />
                 <span className="text-xs">
-                  {data.plan?.likesCount ? data.plan?.likesCount : 0} likes
+                  {data.plan!.likes.length > 0 ? data.plan?.likes.length : 0}
                 </span>
               </div>
               <div className="flex items-center gap-1 font-medium text-gray-900">

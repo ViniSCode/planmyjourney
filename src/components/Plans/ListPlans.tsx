@@ -1,15 +1,19 @@
 import { Plan } from "@/pages/plans";
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useRef } from "react";
-import { FiBookmark, FiHeart } from "react-icons/fi";
+import { useRef, useState } from "react";
+import { FiBookmark } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 interface ListPlansProps {
   plans: Plan[];
 }
 
 export function ListPlans({ plans }: ListPlansProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { data: session } = useSession();
   const itemsPerPage = plans.length % 3 !== 0;
   const router = useRouter();
   const popularTripPlan = [
@@ -107,6 +111,43 @@ export function ListPlans({ plans }: ListPlansProps) {
 
   const slideRef = useRef<HTMLDivElement>(null);
 
+  async function handleLike(planId: string) {
+    if (!session) {
+      return;
+    }
+    if (!planId) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const reqData = await fetch("/api/like", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          session,
+          planId,
+        }),
+      }).then((res) => res.json());
+
+      if (reqData?.success) {
+        toast.success(reqData.message);
+        setIsLoading(false);
+        // router.push("/");
+      } else {
+        toast.error(reqData?.message);
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setIsLoading(false);
+      toast.error("An error occurred while sharing the plan");
+      console.log(err);
+    }
+  }
+
   return (
     <section className="mt-3 w-full h-full">
       <motion.div
@@ -149,12 +190,17 @@ export function ListPlans({ plans }: ListPlansProps) {
                     {plan.days} days trip plan
                   </span>
                 </div>
-                <div className="flex gap-1 items-baseline">
+                <div
+                  className="flex gap-1 items-baseline"
+                  onClick={() => {
+                    if (!isLoading) {
+                      handleLike(plan.id);
+                    }
+                  }}
+                >
                   <div className="flex items-center gap-1 cursor-pointer">
-                    <FiHeart size={15} />
-                    <span className="text-sm">
-                      {plan?.likesCount ? plan?.likesCount : 0}
-                    </span>
+                    {/* <FiHeart size={15} /> */}
+                    {/* <span className="text-sm"></span> */}
                   </div>
                 </div>
               </div>

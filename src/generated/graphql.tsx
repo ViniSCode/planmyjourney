@@ -716,6 +716,13 @@ export type ConnectPositionInput = {
   start?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** This enumeration allow you to list of values that you can use when you add a Dropdown field. */
+export enum DemoEnumeration {
+  Large = 'Large',
+  Medium = 'Medium',
+  Small = 'Small'
+}
+
 export enum DocumentFileTypes {
   Doc = 'doc',
   Docx = 'docx',
@@ -804,6 +811,407 @@ export type ImageResizeInput = {
 export type ImageTransformationInput = {
   /** Resizes the image */
   resize?: InputMaybe<ImageResizeInput>;
+};
+
+export type Like = Node & {
+  __typename?: 'Like';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Like>;
+  /** List of Like versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  member?: Maybe<Member>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type LikeCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type LikeDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type LikeHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type LikeMemberArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type LikePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type LikeScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type LikeUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type LikeConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: LikeWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type LikeConnection = {
+  __typename?: 'LikeConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<LikeEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type LikeCreateInput = {
+  clin7mu7405g301rs51pchjmn?: InputMaybe<PlanCreateManyInlineInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  member?: InputMaybe<MemberCreateOneInlineInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type LikeCreateManyInlineInput = {
+  /** Connect multiple existing Like documents */
+  connect?: InputMaybe<Array<LikeWhereUniqueInput>>;
+  /** Create and connect multiple existing Like documents */
+  create?: InputMaybe<Array<LikeCreateInput>>;
+};
+
+export type LikeCreateOneInlineInput = {
+  /** Connect one existing Like document */
+  connect?: InputMaybe<LikeWhereUniqueInput>;
+  /** Create and connect one Like document */
+  create?: InputMaybe<LikeCreateInput>;
+};
+
+/** An edge in a connection. */
+export type LikeEdge = {
+  __typename?: 'LikeEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Like;
+};
+
+/** Identifies documents */
+export type LikeManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<LikeWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<LikeWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<LikeWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<LikeWhereStageInput>;
+  documentInStages_none?: InputMaybe<LikeWhereStageInput>;
+  documentInStages_some?: InputMaybe<LikeWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  member?: InputMaybe<MemberWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum LikeOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type LikeUpdateInput = {
+  clin7mu7405g301rs51pchjmn?: InputMaybe<PlanUpdateManyInlineInput>;
+  member?: InputMaybe<MemberUpdateOneInlineInput>;
+};
+
+export type LikeUpdateManyInlineInput = {
+  /** Connect multiple existing Like documents */
+  connect?: InputMaybe<Array<LikeConnectInput>>;
+  /** Create and connect multiple Like documents */
+  create?: InputMaybe<Array<LikeCreateInput>>;
+  /** Delete multiple Like documents */
+  delete?: InputMaybe<Array<LikeWhereUniqueInput>>;
+  /** Disconnect multiple Like documents */
+  disconnect?: InputMaybe<Array<LikeWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Like documents */
+  set?: InputMaybe<Array<LikeWhereUniqueInput>>;
+  /** Update multiple Like documents */
+  update?: InputMaybe<Array<LikeUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Like documents */
+  upsert?: InputMaybe<Array<LikeUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type LikeUpdateManyInput = {
+  /** No fields in updateMany data input */
+  _?: InputMaybe<Scalars['String']>;
+};
+
+export type LikeUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: LikeUpdateManyInput;
+  /** Document search */
+  where: LikeWhereInput;
+};
+
+export type LikeUpdateOneInlineInput = {
+  /** Connect existing Like document */
+  connect?: InputMaybe<LikeWhereUniqueInput>;
+  /** Create and connect one Like document */
+  create?: InputMaybe<LikeCreateInput>;
+  /** Delete currently connected Like document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Like document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Like document */
+  update?: InputMaybe<LikeUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Like document */
+  upsert?: InputMaybe<LikeUpsertWithNestedWhereUniqueInput>;
+};
+
+export type LikeUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: LikeUpdateInput;
+  /** Unique document search */
+  where: LikeWhereUniqueInput;
+};
+
+export type LikeUpsertInput = {
+  /** Create document if it didn't exist */
+  create: LikeCreateInput;
+  /** Update document if it exists */
+  update: LikeUpdateInput;
+};
+
+export type LikeUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: LikeUpsertInput;
+  /** Unique document search */
+  where: LikeWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type LikeWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Identifies documents */
+export type LikeWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<LikeWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<LikeWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<LikeWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<LikeWhereStageInput>;
+  documentInStages_none?: InputMaybe<LikeWhereStageInput>;
+  documentInStages_some?: InputMaybe<LikeWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  member?: InputMaybe<MemberWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type LikeWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<LikeWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<LikeWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<LikeWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<LikeWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References Like record uniquely */
+export type LikeWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 /** Locale system enumeration */
@@ -950,6 +1358,7 @@ export type MemberConnection = {
 };
 
 export type MemberCreateInput = {
+  clin7ly4a05f201ui0c2x7oml?: InputMaybe<LikeCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   image: Scalars['String'];
@@ -1148,6 +1557,7 @@ export enum MemberOrderByInput {
 }
 
 export type MemberUpdateInput = {
+  clin7ly4a05f201ui0c2x7oml?: InputMaybe<LikeUpdateManyInlineInput>;
   email?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
@@ -1401,6 +1811,8 @@ export type Mutation = {
    * @deprecated Asset mutations will be overhauled soon
    */
   createAsset?: Maybe<Asset>;
+  /** Create one like */
+  createLike?: Maybe<Like>;
   /** Create one member */
   createMember?: Maybe<Member>;
   /** Create one plan */
@@ -1409,6 +1821,8 @@ export type Mutation = {
   createScheduledRelease?: Maybe<ScheduledRelease>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
   deleteAsset?: Maybe<Asset>;
+  /** Delete one like from _all_ existing stages. Returns deleted document. */
+  deleteLike?: Maybe<Like>;
   /**
    * Delete many Asset documents
    * @deprecated Please use the new paginated many mutation (deleteManyAssetsConnection)
@@ -1416,6 +1830,13 @@ export type Mutation = {
   deleteManyAssets: BatchPayload;
   /** Delete many Asset documents, return deleted documents */
   deleteManyAssetsConnection: AssetConnection;
+  /**
+   * Delete many Like documents
+   * @deprecated Please use the new paginated many mutation (deleteManyLikesConnection)
+   */
+  deleteManyLikes: BatchPayload;
+  /** Delete many Like documents, return deleted documents */
+  deleteManyLikesConnection: LikeConnection;
   /**
    * Delete many Member documents
    * @deprecated Please use the new paginated many mutation (deleteManyMembersConnection)
@@ -1440,6 +1861,8 @@ export type Mutation = {
   deleteScheduledRelease?: Maybe<ScheduledRelease>;
   /** Publish one asset */
   publishAsset?: Maybe<Asset>;
+  /** Publish one like */
+  publishLike?: Maybe<Like>;
   /**
    * Publish many Asset documents
    * @deprecated Please use the new paginated many mutation (publishManyAssetsConnection)
@@ -1447,6 +1870,13 @@ export type Mutation = {
   publishManyAssets: BatchPayload;
   /** Publish many Asset documents */
   publishManyAssetsConnection: AssetConnection;
+  /**
+   * Publish many Like documents
+   * @deprecated Please use the new paginated many mutation (publishManyLikesConnection)
+   */
+  publishManyLikes: BatchPayload;
+  /** Publish many Like documents */
+  publishManyLikesConnection: LikeConnection;
   /**
    * Publish many Member documents
    * @deprecated Please use the new paginated many mutation (publishManyMembersConnection)
@@ -1467,18 +1897,24 @@ export type Mutation = {
   publishPlan?: Maybe<Plan>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
+  /** Schedule to publish one like */
+  schedulePublishLike?: Maybe<Like>;
   /** Schedule to publish one member */
   schedulePublishMember?: Maybe<Member>;
   /** Schedule to publish one plan */
   schedulePublishPlan?: Maybe<Plan>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
+  /** Unpublish one like from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishLike?: Maybe<Like>;
   /** Unpublish one member from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishMember?: Maybe<Member>;
   /** Unpublish one plan from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishPlan?: Maybe<Plan>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
+  /** Unpublish one like from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishLike?: Maybe<Like>;
   /**
    * Unpublish many Asset documents
    * @deprecated Please use the new paginated many mutation (unpublishManyAssetsConnection)
@@ -1486,6 +1922,13 @@ export type Mutation = {
   unpublishManyAssets: BatchPayload;
   /** Find many Asset documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyAssetsConnection: AssetConnection;
+  /**
+   * Unpublish many Like documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyLikesConnection)
+   */
+  unpublishManyLikes: BatchPayload;
+  /** Find many Like documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyLikesConnection: LikeConnection;
   /**
    * Unpublish many Member documents
    * @deprecated Please use the new paginated many mutation (unpublishManyMembersConnection)
@@ -1506,6 +1949,8 @@ export type Mutation = {
   unpublishPlan?: Maybe<Plan>;
   /** Update one asset */
   updateAsset?: Maybe<Asset>;
+  /** Update one like */
+  updateLike?: Maybe<Like>;
   /**
    * Update many assets
    * @deprecated Please use the new paginated many mutation (updateManyAssetsConnection)
@@ -1513,6 +1958,13 @@ export type Mutation = {
   updateManyAssets: BatchPayload;
   /** Update many Asset documents */
   updateManyAssetsConnection: AssetConnection;
+  /**
+   * Update many likes
+   * @deprecated Please use the new paginated many mutation (updateManyLikesConnection)
+   */
+  updateManyLikes: BatchPayload;
+  /** Update many Like documents */
+  updateManyLikesConnection: LikeConnection;
   /**
    * Update many members
    * @deprecated Please use the new paginated many mutation (updateManyMembersConnection)
@@ -1535,6 +1987,8 @@ export type Mutation = {
   updateScheduledRelease?: Maybe<ScheduledRelease>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
+  /** Upsert one like */
+  upsertLike?: Maybe<Like>;
   /** Upsert one member */
   upsertMember?: Maybe<Member>;
   /** Upsert one plan */
@@ -1544,6 +1998,11 @@ export type Mutation = {
 
 export type MutationCreateAssetArgs = {
   data: AssetCreateInput;
+};
+
+
+export type MutationCreateLikeArgs = {
+  data: LikeCreateInput;
 };
 
 
@@ -1567,6 +2026,11 @@ export type MutationDeleteAssetArgs = {
 };
 
 
+export type MutationDeleteLikeArgs = {
+  where: LikeWhereUniqueInput;
+};
+
+
 export type MutationDeleteManyAssetsArgs = {
   where?: InputMaybe<AssetManyWhereInput>;
 };
@@ -1579,6 +2043,21 @@ export type MutationDeleteManyAssetsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AssetManyWhereInput>;
+};
+
+
+export type MutationDeleteManyLikesArgs = {
+  where?: InputMaybe<LikeManyWhereInput>;
+};
+
+
+export type MutationDeleteManyLikesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<LikeManyWhereInput>;
 };
 
 
@@ -1641,6 +2120,12 @@ export type MutationPublishAssetArgs = {
 };
 
 
+export type MutationPublishLikeArgs = {
+  to?: Array<Stage>;
+  where: LikeWhereUniqueInput;
+};
+
+
 export type MutationPublishManyAssetsArgs = {
   locales?: InputMaybe<Array<Locale>>;
   publishBase?: InputMaybe<Scalars['Boolean']>;
@@ -1662,6 +2147,24 @@ export type MutationPublishManyAssetsConnectionArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<AssetManyWhereInput>;
   withDefaultLocale?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type MutationPublishManyLikesArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<LikeManyWhereInput>;
+};
+
+
+export type MutationPublishManyLikesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<LikeManyWhereInput>;
 };
 
 
@@ -1724,6 +2227,14 @@ export type MutationSchedulePublishAssetArgs = {
 };
 
 
+export type MutationSchedulePublishLikeArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: LikeWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishMemberArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
@@ -1747,6 +2258,14 @@ export type MutationScheduleUnpublishAssetArgs = {
   releaseId?: InputMaybe<Scalars['String']>;
   unpublishBase?: InputMaybe<Scalars['Boolean']>;
   where: AssetWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishLikeArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: LikeWhereUniqueInput;
 };
 
 
@@ -1774,6 +2293,12 @@ export type MutationUnpublishAssetArgs = {
 };
 
 
+export type MutationUnpublishLikeArgs = {
+  from?: Array<Stage>;
+  where: LikeWhereUniqueInput;
+};
+
+
 export type MutationUnpublishManyAssetsArgs = {
   from?: Array<Stage>;
   locales?: InputMaybe<Array<Locale>>;
@@ -1793,6 +2318,24 @@ export type MutationUnpublishManyAssetsConnectionArgs = {
   stage?: InputMaybe<Stage>;
   unpublishBase?: InputMaybe<Scalars['Boolean']>;
   where?: InputMaybe<AssetManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyLikesArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<LikeManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyLikesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<LikeManyWhereInput>;
 };
 
 
@@ -1850,6 +2393,12 @@ export type MutationUpdateAssetArgs = {
 };
 
 
+export type MutationUpdateLikeArgs = {
+  data: LikeUpdateInput;
+  where: LikeWhereUniqueInput;
+};
+
+
 export type MutationUpdateManyAssetsArgs = {
   data: AssetUpdateManyInput;
   where?: InputMaybe<AssetManyWhereInput>;
@@ -1864,6 +2413,23 @@ export type MutationUpdateManyAssetsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AssetManyWhereInput>;
+};
+
+
+export type MutationUpdateManyLikesArgs = {
+  data: LikeUpdateManyInput;
+  where?: InputMaybe<LikeManyWhereInput>;
+};
+
+
+export type MutationUpdateManyLikesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: LikeUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<LikeManyWhereInput>;
 };
 
 
@@ -1925,6 +2491,12 @@ export type MutationUpsertAssetArgs = {
 };
 
 
+export type MutationUpsertLikeArgs = {
+  upsert: LikeUpsertInput;
+  where: LikeWhereUniqueInput;
+};
+
+
 export type MutationUpsertMemberArgs = {
   upsert: MemberUpsertInput;
   where: MemberWhereUniqueInput;
@@ -1974,8 +2546,7 @@ export type Plan = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   images?: Maybe<Scalars['Json']>;
-  likes?: Maybe<Scalars['Json']>;
-  likesCount?: Maybe<Scalars['Int']>;
+  likes: Array<Like>;
   location?: Maybe<Scalars['Json']>;
   location2: Array<Scalars['Json']>;
   member?: Maybe<Member>;
@@ -2012,6 +2583,19 @@ export type PlanHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
   stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type PlanLikesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<LikeOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<LikeWhereInput>;
 };
 
 
@@ -2067,8 +2651,7 @@ export type PlanCreateInput = {
   days: Scalars['Int'];
   expenses: Scalars['Json'];
   images?: InputMaybe<Scalars['Json']>;
-  likes?: InputMaybe<Scalars['Json']>;
-  likesCount?: InputMaybe<Scalars['Int']>;
+  likes?: InputMaybe<LikeCreateManyInlineInput>;
   location?: InputMaybe<Scalars['Json']>;
   location2?: InputMaybe<Array<Scalars['Json']>>;
   member?: InputMaybe<MemberCreateOneInlineInput>;
@@ -2181,30 +2764,9 @@ export type PlanManyWhereInput = {
    * Note: This filter fails if you try to look for a non scalar JSON value!
    */
   images_value_recursive?: InputMaybe<Scalars['Json']>;
-  likesCount?: InputMaybe<Scalars['Int']>;
-  /** All values greater than the given value. */
-  likesCount_gt?: InputMaybe<Scalars['Int']>;
-  /** All values greater than or equal the given value. */
-  likesCount_gte?: InputMaybe<Scalars['Int']>;
-  /** All values that are contained in given list. */
-  likesCount_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  /** All values less than the given value. */
-  likesCount_lt?: InputMaybe<Scalars['Int']>;
-  /** All values less than or equal the given value. */
-  likesCount_lte?: InputMaybe<Scalars['Int']>;
-  /** Any other value that exists and is not equal to the given value. */
-  likesCount_not?: InputMaybe<Scalars['Int']>;
-  /** All values that are not contained in given list. */
-  likesCount_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  /** All values containing the given json path. */
-  likes_json_path_exists?: InputMaybe<Scalars['String']>;
-  /**
-   * Recursively tries to find the provided JSON scalar value inside the field.
-   * It does use an exact match when comparing values.
-   * If you pass `null` as value the filter will be ignored.
-   * Note: This filter fails if you try to look for a non scalar JSON value!
-   */
-  likes_value_recursive?: InputMaybe<Scalars['Json']>;
+  likes_every?: InputMaybe<LikeWhereInput>;
+  likes_none?: InputMaybe<LikeWhereInput>;
+  likes_some?: InputMaybe<LikeWhereInput>;
   /** All values containing the given json path. */
   location2_json_path_exists?: InputMaybe<Scalars['String']>;
   /**
@@ -2296,8 +2858,6 @@ export enum PlanOrderByInput {
   DaysDesc = 'days_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
-  LikesCountAsc = 'likesCount_ASC',
-  LikesCountDesc = 'likesCount_DESC',
   PlanIdAsc = 'planId_ASC',
   PlanIdDesc = 'planId_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -2311,8 +2871,7 @@ export type PlanUpdateInput = {
   days?: InputMaybe<Scalars['Int']>;
   expenses?: InputMaybe<Scalars['Json']>;
   images?: InputMaybe<Scalars['Json']>;
-  likes?: InputMaybe<Scalars['Json']>;
-  likesCount?: InputMaybe<Scalars['Int']>;
+  likes?: InputMaybe<LikeUpdateManyInlineInput>;
   location?: InputMaybe<Scalars['Json']>;
   location2?: InputMaybe<Array<Scalars['Json']>>;
   member?: InputMaybe<MemberUpdateOneInlineInput>;
@@ -2341,8 +2900,6 @@ export type PlanUpdateManyInput = {
   days?: InputMaybe<Scalars['Int']>;
   expenses?: InputMaybe<Scalars['Json']>;
   images?: InputMaybe<Scalars['Json']>;
-  likes?: InputMaybe<Scalars['Json']>;
-  likesCount?: InputMaybe<Scalars['Int']>;
   location?: InputMaybe<Scalars['Json']>;
   location2?: InputMaybe<Array<Scalars['Json']>>;
   transportation?: InputMaybe<Scalars['Json']>;
@@ -2478,30 +3035,9 @@ export type PlanWhereInput = {
    * Note: This filter fails if you try to look for a non scalar JSON value!
    */
   images_value_recursive?: InputMaybe<Scalars['Json']>;
-  likesCount?: InputMaybe<Scalars['Int']>;
-  /** All values greater than the given value. */
-  likesCount_gt?: InputMaybe<Scalars['Int']>;
-  /** All values greater than or equal the given value. */
-  likesCount_gte?: InputMaybe<Scalars['Int']>;
-  /** All values that are contained in given list. */
-  likesCount_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  /** All values less than the given value. */
-  likesCount_lt?: InputMaybe<Scalars['Int']>;
-  /** All values less than or equal the given value. */
-  likesCount_lte?: InputMaybe<Scalars['Int']>;
-  /** Any other value that exists and is not equal to the given value. */
-  likesCount_not?: InputMaybe<Scalars['Int']>;
-  /** All values that are not contained in given list. */
-  likesCount_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  /** All values containing the given json path. */
-  likes_json_path_exists?: InputMaybe<Scalars['String']>;
-  /**
-   * Recursively tries to find the provided JSON scalar value inside the field.
-   * It does use an exact match when comparing values.
-   * If you pass `null` as value the filter will be ignored.
-   * Note: This filter fails if you try to look for a non scalar JSON value!
-   */
-  likes_value_recursive?: InputMaybe<Scalars['Json']>;
+  likes_every?: InputMaybe<LikeWhereInput>;
+  likes_none?: InputMaybe<LikeWhereInput>;
+  likes_some?: InputMaybe<LikeWhereInput>;
   /** All values containing the given json path. */
   location2_json_path_exists?: InputMaybe<Scalars['String']>;
   /**
@@ -2623,6 +3159,14 @@ export type Query = {
   assets: Array<Asset>;
   /** Retrieve multiple assets using the Relay connection interface */
   assetsConnection: AssetConnection;
+  /** Retrieve a single like */
+  like?: Maybe<Like>;
+  /** Retrieve document version */
+  likeVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple likes */
+  likes: Array<Like>;
+  /** Retrieve multiple likes using the Relay connection interface */
+  likesConnection: LikeConnection;
   /** Retrieve a single member */
   member?: Maybe<Member>;
   /** Retrieve document version */
@@ -2697,6 +3241,44 @@ export type QueryAssetsConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   stage?: Stage;
   where?: InputMaybe<AssetWhereInput>;
+};
+
+
+export type QueryLikeArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: LikeWhereUniqueInput;
+};
+
+
+export type QueryLikeVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryLikesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<LikeOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<LikeWhereInput>;
+};
+
+
+export type QueryLikesConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<LikeOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<LikeWhereInput>;
 };
 
 
@@ -2993,7 +3575,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Member | Plan;
+export type ScheduledOperationAffectedDocument = Asset | Like | Member | Plan;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -4444,7 +5026,7 @@ export type GetPlanQueryVariables = Exact<{
 }>;
 
 
-export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, createdAt: any, images?: any | null, member?: { __typename?: 'Member', name: string, image: string } | null } | null };
+export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, likes: Array<{ __typename?: 'Like', id: string }>, member?: { __typename?: 'Member', name: string, image: string } | null } | null };
 
 export type GetPlansQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -4454,7 +5036,15 @@ export type GetPlansQueryVariables = Exact<{
 }>;
 
 
-export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, likes?: any | null, likesCount?: number | null, images?: any | null, id: string }>, plansConnection: { __typename?: 'PlanConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, pageSize?: number | null, startCursor?: string | null } } };
+export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, images?: any | null, id: string, likes: Array<{ __typename?: 'Like', id: string }> }>, plansConnection: { __typename?: 'PlanConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, pageSize?: number | null, startCursor?: string | null } } };
+
+export type LikeAlreadyExistsQueryVariables = Exact<{
+  planId: Scalars['ID'];
+  email: Scalars['String'];
+}>;
+
+
+export type LikeAlreadyExistsQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', likes: Array<{ __typename?: 'Like', id: string }> } | null };
 
 export type UserAlreadyExistsQueryVariables = Exact<{
   email: Scalars['String'];
@@ -4471,8 +5061,9 @@ export const GetPlanDocument = gql`
     days
     transportation
     location
-    likes
-    likesCount
+    likes {
+      id
+    }
     createdAt
     images
     member {
@@ -4498,8 +5089,9 @@ export const GetPlansDocument = gql`
     expenses
     transportation
     location
-    likes
-    likesCount
+    likes {
+      id
+    }
     images
     id
   }
@@ -4522,6 +5114,19 @@ export const GetPlansDocument = gql`
 
 export function useGetPlansQuery(options: Omit<Urql.UseQueryArgs<GetPlansQueryVariables>, 'query'>) {
   return Urql.useQuery<GetPlansQuery, GetPlansQueryVariables>({ query: GetPlansDocument, ...options });
+};
+export const LikeAlreadyExistsDocument = gql`
+    query LikeAlreadyExists($planId: ID!, $email: String!) {
+  plan(where: {id: $planId}) {
+    likes(where: {member: {email: $email}}) {
+      id
+    }
+  }
+}
+    `;
+
+export function useLikeAlreadyExistsQuery(options: Omit<Urql.UseQueryArgs<LikeAlreadyExistsQueryVariables>, 'query'>) {
+  return Urql.useQuery<LikeAlreadyExistsQuery, LikeAlreadyExistsQueryVariables>({ query: LikeAlreadyExistsDocument, ...options });
 };
 export const UserAlreadyExistsDocument = gql`
     query UserAlreadyExists($email: String!) {

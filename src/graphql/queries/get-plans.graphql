@@ -14,8 +14,6 @@ query GetPlans(
     expenses
     transportation
     location
-    likes
-    likesCount
     images
     id
   }

@@ -4,8 +4,6 @@ query GetPlan($id: ID!) {
     days
     transportation
     location
-    likes
-    likesCount
     createdAt
     images
     member {
