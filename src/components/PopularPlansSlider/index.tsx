@@ -64,7 +64,7 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
               <div className="flex items-center text-shadow-like gap-1 font-medium text-white absolute bottom-3 left-3">
                 <FiHeart size={18} />
                 <span className="text-xs">
-                  {plan?.likesCount ? plan?.likesCount : 0}
+                  {plan?.likes.length > 0 ? plan?.likes.length : 0}
                 </span>
               </div>
             </div>
