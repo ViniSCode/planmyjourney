@@ -20,7 +20,7 @@ export default function Home({ session }: any) {
   const productsPerPage = 8;
   const [offset, setOffset] = useState(0);
   const [search, setSearch] = useState("");
-  const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.LikesCountDesc);
+  const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.CreatedAtDesc);
 
   const [{ data }] = useGetPlansQuery({
     variables: {
@@ -64,7 +64,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       limit: 8,
       offset: 0,
       search: "",
-      orderBy: PlanOrderByInput.LikesCountDesc,
+      orderBy: PlanOrderByInput.CreatedAtDesc,
     })
     .toPromise();
 
