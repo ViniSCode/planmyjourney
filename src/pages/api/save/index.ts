@@ -76,6 +76,7 @@ async function savePlan(email: string, planId: string) {
     );
 
     const response = await data.json();
+    console.log(response);
     return response;
   } catch (err) {
     console.log(err);

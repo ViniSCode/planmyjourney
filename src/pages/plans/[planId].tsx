@@ -83,6 +83,8 @@ export default function PlanId({ session }: any) {
     }
   }
 
+  console.log(data?.member);
+
   return (
     <>
       <header>
