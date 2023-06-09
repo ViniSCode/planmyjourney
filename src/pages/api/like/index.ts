@@ -1,4 +1,7 @@
-import { LikeAlreadyExistsDocument } from "@/generated/graphql";
+import {
+  GetPlanDocument,
+  LikeAlreadyExistsDocument,
+} from "@/generated/graphql";
 import { client } from "@/lib/urql";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -53,40 +56,51 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 // like
 async function likePlan(email: string, planId: string) {
-  try {
-    const data = await fetch(
-      `https://api-sa-east-1.hygraph.com/v2/clh4y479g5mig01taa2s5djfl/master`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
-        },
-        body: JSON.stringify({
-          query: `
-            mutation LikePlan {
-              updatePlan(
-                where: {id: "${planId}"}
-                data: {likes: {create: {member: {connect: {email: "${email}"}}}}}
-              ) {
-                id
-                likes (where: {member: {email: "${email}"}}) {
+  const {
+    data: { plan },
+  } = await client.query(GetPlanDocument, { id: planId }).toPromise();
+
+  console.log(plan);
+
+  if (plan) {
+    console.log(plan.likesCount);
+    try {
+      const data = await fetch(
+        `https://api-sa-east-1.hygraph.com/v2/clh4y479g5mig01taa2s5djfl/master`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
+          },
+          body: JSON.stringify({
+            query: `
+              mutation LikePlan {
+                updatePlan(
+                  where: {id: "${planId}"}
+                  data: {likes: {create: {member: {connect: {email: "${email}"}}}}, likesCount: ${
+              plan.likesCount ? Number(plan.likesCount) + 1 : 1
+            }}
+                ) {
+                  id
+                  likes (where: {member: {email: "${email}"}}) {
+                    id
+                  }
+                }
+                publishPlan(where: {id: "${planId}"}) {
                   id
                 }
               }
-              publishPlan(where: {id: "${planId}"}) {
-                id
-              }
-            }
-          `,
-        }),
-      }
-    );
+            `,
+          }),
+        }
+      );
 
-    const response = await data.json();
-    return response;
-  } catch (err) {
-    console.log(err);
+      const response = await data.json();
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

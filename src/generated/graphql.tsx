@@ -2547,6 +2547,7 @@ export type Plan = Node & {
   id: Scalars['ID'];
   images?: Maybe<Scalars['Json']>;
   likes: Array<Like>;
+  likesCount?: Maybe<Scalars['Int']>;
   location?: Maybe<Scalars['Json']>;
   location2: Array<Scalars['Json']>;
   member?: Maybe<Member>;
@@ -2652,6 +2653,7 @@ export type PlanCreateInput = {
   expenses: Scalars['Json'];
   images?: InputMaybe<Scalars['Json']>;
   likes?: InputMaybe<LikeCreateManyInlineInput>;
+  likesCount?: InputMaybe<Scalars['Int']>;
   location?: InputMaybe<Scalars['Json']>;
   location2?: InputMaybe<Array<Scalars['Json']>>;
   member?: InputMaybe<MemberCreateOneInlineInput>;
@@ -2764,6 +2766,21 @@ export type PlanManyWhereInput = {
    * Note: This filter fails if you try to look for a non scalar JSON value!
    */
   images_value_recursive?: InputMaybe<Scalars['Json']>;
+  likesCount?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  likesCount_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  likesCount_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  likesCount_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  /** All values less than the given value. */
+  likesCount_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  likesCount_lte?: InputMaybe<Scalars['Int']>;
+  /** Any other value that exists and is not equal to the given value. */
+  likesCount_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  likesCount_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   likes_every?: InputMaybe<LikeWhereInput>;
   likes_none?: InputMaybe<LikeWhereInput>;
   likes_some?: InputMaybe<LikeWhereInput>;
@@ -2858,6 +2875,8 @@ export enum PlanOrderByInput {
   DaysDesc = 'days_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  LikesCountAsc = 'likesCount_ASC',
+  LikesCountDesc = 'likesCount_DESC',
   PlanIdAsc = 'planId_ASC',
   PlanIdDesc = 'planId_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -2872,6 +2891,7 @@ export type PlanUpdateInput = {
   expenses?: InputMaybe<Scalars['Json']>;
   images?: InputMaybe<Scalars['Json']>;
   likes?: InputMaybe<LikeUpdateManyInlineInput>;
+  likesCount?: InputMaybe<Scalars['Int']>;
   location?: InputMaybe<Scalars['Json']>;
   location2?: InputMaybe<Array<Scalars['Json']>>;
   member?: InputMaybe<MemberUpdateOneInlineInput>;
@@ -2900,6 +2920,7 @@ export type PlanUpdateManyInput = {
   days?: InputMaybe<Scalars['Int']>;
   expenses?: InputMaybe<Scalars['Json']>;
   images?: InputMaybe<Scalars['Json']>;
+  likesCount?: InputMaybe<Scalars['Int']>;
   location?: InputMaybe<Scalars['Json']>;
   location2?: InputMaybe<Array<Scalars['Json']>>;
   transportation?: InputMaybe<Scalars['Json']>;
@@ -3035,6 +3056,21 @@ export type PlanWhereInput = {
    * Note: This filter fails if you try to look for a non scalar JSON value!
    */
   images_value_recursive?: InputMaybe<Scalars['Json']>;
+  likesCount?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  likesCount_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  likesCount_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  likesCount_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  /** All values less than the given value. */
+  likesCount_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  likesCount_lte?: InputMaybe<Scalars['Int']>;
+  /** Any other value that exists and is not equal to the given value. */
+  likesCount_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  likesCount_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   likes_every?: InputMaybe<LikeWhereInput>;
   likes_none?: InputMaybe<LikeWhereInput>;
   likes_some?: InputMaybe<LikeWhereInput>;
@@ -5026,7 +5062,7 @@ export type GetPlanQueryVariables = Exact<{
 }>;
 
 
-export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, likes: Array<{ __typename?: 'Like', id: string }>, member?: { __typename?: 'Member', name: string, image: string } | null } | null };
+export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, member?: { __typename?: 'Member', name: string, image: string } | null } | null };
 
 export type GetPlansQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -5036,15 +5072,7 @@ export type GetPlansQueryVariables = Exact<{
 }>;
 
 
-export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, images?: any | null, id: string, likes: Array<{ __typename?: 'Like', id: string }> }>, plansConnection: { __typename?: 'PlanConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, pageSize?: number | null, startCursor?: string | null } } };
-
-export type LikeAlreadyExistsQueryVariables = Exact<{
-  planId: Scalars['ID'];
-  email: Scalars['String'];
-}>;
-
-
-export type LikeAlreadyExistsQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', likes: Array<{ __typename?: 'Like', id: string }> } | null };
+export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, images?: any | null, id: string }>, plansConnection: { __typename?: 'PlanConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, pageSize?: number | null, startCursor?: string | null } } };
 
 export type UserAlreadyExistsQueryVariables = Exact<{
   email: Scalars['String'];
@@ -5061,9 +5089,6 @@ export const GetPlanDocument = gql`
     days
     transportation
     location
-    likes {
-      id
-    }
     createdAt
     images
     member {
@@ -5089,9 +5114,6 @@ export const GetPlansDocument = gql`
     expenses
     transportation
     location
-    likes {
-      id
-    }
     images
     id
   }
@@ -5114,19 +5136,6 @@ export const GetPlansDocument = gql`
 
 export function useGetPlansQuery(options: Omit<Urql.UseQueryArgs<GetPlansQueryVariables>, 'query'>) {
   return Urql.useQuery<GetPlansQuery, GetPlansQueryVariables>({ query: GetPlansDocument, ...options });
-};
-export const LikeAlreadyExistsDocument = gql`
-    query LikeAlreadyExists($planId: ID!, $email: String!) {
-  plan(where: {id: $planId}) {
-    likes(where: {member: {email: $email}}) {
-      id
-    }
-  }
-}
-    `;
-
-export function useLikeAlreadyExistsQuery(options: Omit<Urql.UseQueryArgs<LikeAlreadyExistsQueryVariables>, 'query'>) {
-  return Urql.useQuery<LikeAlreadyExistsQuery, LikeAlreadyExistsQueryVariables>({ query: LikeAlreadyExistsDocument, ...options });
 };
 export const UserAlreadyExistsDocument = gql`
     query UserAlreadyExists($email: String!) {

@@ -20,7 +20,7 @@ export default function LocationMap({ markers, goToLocation }) {
       <MapContainer
         center={[markers[0].lat, markers[0].lng]}
         zoom={5}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         minZoom={2}
         maxBounds={maxBounds}
         className="map-container"

@@ -1,7 +1,0 @@
-query LikeAlreadyExists($planId: ID!, $email: String!) {
-  plan(where: { id: $planId }) {
-    likes(where: { member: { email: $email } }) {
-      id
-    }
-  }
-}

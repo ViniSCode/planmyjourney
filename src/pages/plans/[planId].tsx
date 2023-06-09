@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { FiArrowLeft, FiBookmark, FiHeart } from "react-icons/fi";
+import { FiArrowLeft, FiBookmark } from "react-icons/fi";
 import { TbMapPinFilled } from "react-icons/tb";
 
 const DynamicMap = dynamic(
@@ -69,22 +69,12 @@ export default function PlanId() {
                   <FiBookmark size={18} />
                   <span className="text-sm underline">Save</span>
                 </div>
-                <div className="mt-2 flex items-center gap-1 font-medium text-gray-700">
-                  <FiHeart size={18} />
-                  <span className="text-sm underline">Like</span>
-                </div>
               </div>
             </div>
 
             <DisplayTripPlanImages images={data.plan?.images} />
 
             <div className="mt-6 flex ssm:hidden items-center gap-4 text-gray-900 font-medium cursor-pointer justify-between">
-              <div className="flex items-center gap-1 font-medium text-gray-900">
-                <FiHeart size={18} />
-                <span className="text-xs">
-                  {data.plan!.likes.length > 0 ? data.plan?.likes.length : 0}
-                </span>
-              </div>
               <div className="flex items-center gap-1 font-medium text-gray-900">
                 <FiBookmark size={18} />
               </div>
