@@ -48,7 +48,7 @@ export default function PlanId() {
         {data && (
           <div>
             <div className="flex justify-between place-items-baseline">
-              <div className="full">
+              <div className="full w-full truncate">
                 <h2 className="text-2xl truncate">
                   {data.plan?.location[0].country}, Trip Plan
                 </h2>
@@ -64,7 +64,7 @@ export default function PlanId() {
                 </div>
               </div>
 
-              <div className="hidden ssm:flex items-center gap-4 text-gray-900 font-medium cursor-pointer">
+              <div className="flex items-center gap-4 text-gray-900 font-medium cursor-pointer">
                 <div className="mt-2 flex items-center gap-1 font-medium text-gray-700">
                   <FiBookmark size={18} />
                   <span className="text-sm underline">Save</span>
@@ -73,12 +73,6 @@ export default function PlanId() {
             </div>
 
             <DisplayTripPlanImages images={data.plan?.images} />
-
-            <div className="mt-6 flex ssm:hidden items-center gap-4 text-gray-900 font-medium cursor-pointer justify-between">
-              <div className="flex items-center gap-1 font-medium text-gray-900">
-                <FiBookmark size={18} />
-              </div>
-            </div>
 
             <div className="border-b pb-4 mt-8 flex items-center gap-2 font-medium">
               <Image

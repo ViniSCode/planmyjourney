@@ -78,7 +78,7 @@ export function ImportantInfo({ plan }: any) {
           that this is only an estimate and actual costs may vary.
         </p>
 
-        <div className="flex items-center gap-4 mt-6">
+        <div className="hidden xs:flex items-center gap-2 md:gap-4 mt-6">
           <input
             type="number"
             name="number"
