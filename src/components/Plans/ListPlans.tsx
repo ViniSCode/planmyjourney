@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
-import { FiBookmark } from "react-icons/fi";
 
 interface ListPlansProps {
   plans: Plan[];
@@ -152,9 +151,6 @@ export function ListPlans({ plans }: ListPlansProps) {
                     {plan.days} days trip plan
                   </span>
                 </div>
-              </div>
-              <div className="w-full max-w-fit rounded-xl absolute top-[10px] right-[10px] cursor-pointer">
-                <FiBookmark size={25} className="text-white" />
               </div>
             </motion.div>
           ))

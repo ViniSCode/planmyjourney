@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { FiHeart, FiMapPin } from "react-icons/fi";
+import { FiMapPin } from "react-icons/fi";
 
 interface PopularPlansSlideProps {
   data: GetPlansQuery | undefined;
@@ -59,12 +59,6 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
                 <FiMapPin size={16} />
                 <span className="block text-gray-900 font-bold truncate">
                   {plan.location[0].country}
-                </span>
-              </div>
-              <div className="flex items-center text-shadow-like gap-1 font-medium text-white absolute bottom-3 left-3">
-                <FiHeart size={18} />
-                <span className="text-xs">
-                  {plan?.likes.length > 0 ? plan?.likes.length : 0}
                 </span>
               </div>
             </div>

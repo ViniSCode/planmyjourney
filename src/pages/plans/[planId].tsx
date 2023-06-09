@@ -1,4 +1,4 @@
-import { Loading } from "@/components/Loading";
+import { Spinner } from "@/components/Loading/Spinner";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages";
@@ -17,7 +17,7 @@ const DynamicMap = dynamic(
   () => import("../../components/Plans/Map/LocationMap"),
   {
     ssr: false,
-    loading: () => <Loading />,
+    loading: () => <Spinner />,
   }
 );
 
