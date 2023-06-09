@@ -6,12 +6,15 @@ import { ImportantInfo } from "@/components/Plans/ImportantInfo";
 import { GetPlanDocument, useGetPlanQuery } from "@/generated/graphql";
 import { client, ssrCache } from "@/lib/urql";
 import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { FiArrowLeft, FiBookmark } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { FiArrowLeft } from "react-icons/fi";
 import { TbMapPinFilled } from "react-icons/tb";
+import { toast } from "react-toastify";
 
 const DynamicMap = dynamic(
   () => import("../../components/Plans/Map/LocationMap"),
@@ -21,16 +24,64 @@ const DynamicMap = dynamic(
   }
 );
 
-export default function PlanId() {
+export default function PlanId({ session }: any) {
   const [goToLocation, setGoToLocation] = useState({});
   const router = useRouter();
   const planId: any = router.query.planId;
+  const [isSaved, setIsSaved] = useState(false);
 
   const [{ data }] = useGetPlanQuery({
     variables: {
       id: planId,
+      email: session?.user?.email ?? "",
     },
   });
+
+  useEffect(() => {
+    if (data?.member?.savedPlans && data?.member?.savedPlans.length > 0) {
+      setIsSaved(true);
+    }
+  }, [data]);
+
+  async function handleSave() {
+    if (isSaved) {
+      setIsSaved(false);
+    }
+
+    if (!isSaved) {
+      setIsSaved(true);
+    }
+
+    if (!planId) {
+      return;
+    }
+
+    if (!session) {
+      return;
+    }
+    try {
+      const reqData = await fetch("/api/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          session,
+          planId,
+        }),
+      }).then((res) => res.json());
+
+      if (reqData?.success) {
+        toast.success(reqData.message);
+        // router.push("/");
+      } else {
+        toast.error(reqData?.message);
+      }
+    } catch (err) {
+      toast.error("An error occurred while saving the plan");
+      console.log(err);
+    }
+  }
 
   return (
     <>
@@ -45,7 +96,7 @@ export default function PlanId() {
         >
           <FiArrowLeft size={20} />
         </div>
-        {data && (
+        {data?.plan && (
           <div>
             <div className="flex justify-between place-items-baseline">
               <div className="full w-full truncate">
@@ -65,10 +116,23 @@ export default function PlanId() {
               </div>
 
               <div className="flex items-center gap-4 text-gray-900 font-medium cursor-pointer">
-                <div className="mt-2 flex items-center gap-1 font-medium text-gray-700">
-                  <FiBookmark size={18} />
-                  <span className="text-sm underline">Save</span>
-                </div>
+                {isSaved ? (
+                  <div
+                    className="mt-2 flex items-center gap-1 font-medium text-gray-700"
+                    onClick={handleSave}
+                  >
+                    <BsBookmarkFill size={16} />
+                    <span className="text-sm underline">Saved</span>
+                  </div>
+                ) : (
+                  <div
+                    className="mt-2 flex items-center gap-1 font-medium text-gray-700"
+                    onClick={handleSave}
+                  >
+                    <BsBookmark size={16} />
+                    <span className="text-sm underline">Save</span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -123,12 +187,16 @@ export default function PlanId() {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.planId;
+  const session = await getSession(context);
 
-  await client.query(GetPlanDocument, { id: id || "" }).toPromise();
+  await client
+    .query(GetPlanDocument, { id: id || "", email: session?.user?.email ?? "" })
+    .toPromise();
 
   return {
     props: {
       urqlState: ssrCache.extractData(),
+      session,
     },
   };
 };

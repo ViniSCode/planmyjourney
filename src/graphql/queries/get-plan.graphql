@@ -1,4 +1,4 @@
-query GetPlan($id: ID!) {
+query GetPlan($id: ID!, $email: String) {
   plan(where: { id: $id }) {
     expenses
     days
@@ -6,9 +6,15 @@ query GetPlan($id: ID!) {
     location
     createdAt
     images
+    id
     member {
       name
       image
+    }
+  }
+  member(where: { email: $email }) {
+    savedPlans(where: { id: $id }) {
+      id
     }
   }
 }

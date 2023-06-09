@@ -5059,10 +5059,11 @@ export enum _SystemDateTimeFieldVariation {
 
 export type GetPlanQueryVariables = Exact<{
   id: Scalars['ID'];
+  email?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, member?: { __typename?: 'Member', name: string, image: string } | null } | null };
+export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, id: string, member?: { __typename?: 'Member', name: string, image: string } | null } | null, member?: { __typename?: 'Member', savedPlans: Array<{ __typename?: 'Plan', id: string }> } | null };
 
 export type GetPlansQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -5083,7 +5084,7 @@ export type UserAlreadyExistsQuery = { __typename?: 'Query', members: Array<{ __
 
 
 export const GetPlanDocument = gql`
-    query GetPlan($id: ID!) {
+    query GetPlan($id: ID!, $email: String) {
   plan(where: {id: $id}) {
     expenses
     days
@@ -5091,9 +5092,15 @@ export const GetPlanDocument = gql`
     location
     createdAt
     images
+    id
     member {
       name
       image
+    }
+  }
+  member(where: {email: $email}) {
+    savedPlans(where: {id: $id}) {
+      id
     }
   }
 }
