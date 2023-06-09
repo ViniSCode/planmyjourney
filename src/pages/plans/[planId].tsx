@@ -95,7 +95,7 @@ export default function PlanId() {
               </div>
             </div>
             <div className="mt-10">
-              <div className="flex items-center gap-2 flex-wrap justify-start xs:justify-between">
+              <div className="flex items-center gap-2 flex-wrap justify-start xs:justify-between lg:justify-start">
                 {data.plan?.location &&
                   data.plan!.location.map((loc: any, index: any) => (
                     <div
