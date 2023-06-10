@@ -4,13 +4,16 @@ mutation SaveTripPlan($email: String!, $planId: ID!) {
     where: { email: $email }
   ) {
     id
+    __typename
   }
 
   publishMember(where: { email: $email }) {
     id
+    __typename
   }
 
   publishPlan(where: { id: $planId }) {
     id
+    __typename
   }
 }

@@ -3,12 +3,15 @@ mutation RemoveSavedTripPlan($email: String, $planId: ID!) {
     data: { savedPlans: { disconnect: { id: $planId } } }
     where: { email: $email }
   ) {
+    __typename
     id
   }
   publishMember(where: { email: $email }) {
     id
+    __typename
   }
   publishPlan(where: { id: $planId }) {
     id
+    __typename
   }
 }

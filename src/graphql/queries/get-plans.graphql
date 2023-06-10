@@ -11,6 +11,7 @@ query GetPlans(
     orderBy: $orderBy
   ) {
     days
+    __typename
     expenses
     transportation
     location
@@ -29,6 +30,7 @@ query GetPlans(
       endCursor
       pageSize
       startCursor
+      __typename
     }
   }
 }

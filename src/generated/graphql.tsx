@@ -5063,7 +5063,7 @@ export type RemoveSavedTripPlanMutationVariables = Exact<{
 }>;
 
 
-export type RemoveSavedTripPlanMutation = { __typename?: 'Mutation', updateMember?: { __typename?: 'Member', id: string } | null, publishMember?: { __typename?: 'Member', id: string } | null, publishPlan?: { __typename?: 'Plan', id: string } | null };
+export type RemoveSavedTripPlanMutation = { __typename?: 'Mutation', updateMember?: { __typename: 'Member', id: string } | null, publishMember?: { __typename: 'Member', id: string } | null, publishPlan?: { __typename: 'Plan', id: string } | null };
 
 export type SaveTripPlanMutationVariables = Exact<{
   email: Scalars['String'];
@@ -5071,7 +5071,7 @@ export type SaveTripPlanMutationVariables = Exact<{
 }>;
 
 
-export type SaveTripPlanMutation = { __typename?: 'Mutation', updateMember?: { __typename?: 'Member', id: string } | null, publishMember?: { __typename?: 'Member', id: string } | null, publishPlan?: { __typename?: 'Plan', id: string } | null };
+export type SaveTripPlanMutation = { __typename?: 'Mutation', updateMember?: { __typename: 'Member', id: string } | null, publishMember?: { __typename: 'Member', id: string } | null, publishPlan?: { __typename: 'Plan', id: string } | null };
 
 export type GetPlanQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5079,7 +5079,7 @@ export type GetPlanQueryVariables = Exact<{
 }>;
 
 
-export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename?: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, id: string, member?: { __typename?: 'Member', name: string, image: string } | null } | null, member?: { __typename?: 'Member', savedPlans: Array<{ __typename?: 'Plan', id: string }> } | null };
+export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, id: string, member?: { __typename?: 'Member', name: string, image: string } | null } | null, member?: { __typename?: 'Member', savedPlans: Array<{ __typename: 'Plan', id: string }> } | null };
 
 export type GetPlansQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -5089,14 +5089,14 @@ export type GetPlansQueryVariables = Exact<{
 }>;
 
 
-export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename?: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, images?: any | null, id: string }>, plansConnection: { __typename?: 'PlanConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, pageSize?: number | null, startCursor?: string | null } } };
+export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, images?: any | null, id: string }>, plansConnection: { __typename?: 'PlanConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, pageSize?: number | null, startCursor?: string | null } } };
 
 export type UserAlreadyExistsQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type UserAlreadyExistsQuery = { __typename?: 'Query', members: Array<{ __typename?: 'Member', id: string }> };
+export type UserAlreadyExistsQuery = { __typename?: 'Query', members: Array<{ __typename: 'Member', id: string }> };
 
 
 export const RemoveSavedTripPlanDocument = gql`
@@ -5105,13 +5105,16 @@ export const RemoveSavedTripPlanDocument = gql`
     data: {savedPlans: {disconnect: {id: $planId}}}
     where: {email: $email}
   ) {
+    __typename
     id
   }
   publishMember(where: {email: $email}) {
     id
+    __typename
   }
   publishPlan(where: {id: $planId}) {
     id
+    __typename
   }
 }
     `;
@@ -5126,12 +5129,15 @@ export const SaveTripPlanDocument = gql`
     where: {email: $email}
   ) {
     id
+    __typename
   }
   publishMember(where: {email: $email}) {
     id
+    __typename
   }
   publishPlan(where: {id: $planId}) {
     id
+    __typename
   }
 }
     `;
@@ -5142,6 +5148,7 @@ export function useSaveTripPlanMutation() {
 export const GetPlanDocument = gql`
     query GetPlan($id: ID!, $email: String) {
   plan(where: {id: $id}) {
+    __typename
     expenses
     days
     transportation
@@ -5156,6 +5163,7 @@ export const GetPlanDocument = gql`
   }
   member(where: {email: $email}) {
     savedPlans(where: {id: $id}) {
+      __typename
       id
     }
   }
@@ -5174,6 +5182,7 @@ export const GetPlansDocument = gql`
     orderBy: $orderBy
   ) {
     days
+    __typename
     expenses
     transportation
     location
@@ -5192,6 +5201,7 @@ export const GetPlansDocument = gql`
       endCursor
       pageSize
       startCursor
+      __typename
     }
   }
 }
@@ -5204,6 +5214,7 @@ export const UserAlreadyExistsDocument = gql`
     query UserAlreadyExists($email: String!) {
   members(where: {email: $email}) {
     id
+    __typename
   }
 }
     `;
