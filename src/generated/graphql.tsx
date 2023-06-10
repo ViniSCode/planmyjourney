@@ -5057,6 +5057,22 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type RemoveSavedTripPlanMutationVariables = Exact<{
+  email?: InputMaybe<Scalars['String']>;
+  planId: Scalars['ID'];
+}>;
+
+
+export type RemoveSavedTripPlanMutation = { __typename?: 'Mutation', updateMember?: { __typename?: 'Member', id: string } | null, publishMember?: { __typename?: 'Member', id: string } | null, publishPlan?: { __typename?: 'Plan', id: string } | null };
+
+export type SaveTripPlanMutationVariables = Exact<{
+  email: Scalars['String'];
+  planId: Scalars['ID'];
+}>;
+
+
+export type SaveTripPlanMutation = { __typename?: 'Mutation', updateMember?: { __typename?: 'Member', id: string } | null, publishMember?: { __typename?: 'Member', id: string } | null, publishPlan?: { __typename?: 'Plan', id: string } | null };
+
 export type GetPlanQueryVariables = Exact<{
   id: Scalars['ID'];
   email?: InputMaybe<Scalars['String']>;
@@ -5083,6 +5099,46 @@ export type UserAlreadyExistsQueryVariables = Exact<{
 export type UserAlreadyExistsQuery = { __typename?: 'Query', members: Array<{ __typename?: 'Member', id: string }> };
 
 
+export const RemoveSavedTripPlanDocument = gql`
+    mutation RemoveSavedTripPlan($email: String, $planId: ID!) {
+  updateMember(
+    data: {savedPlans: {disconnect: {id: $planId}}}
+    where: {email: $email}
+  ) {
+    id
+  }
+  publishMember(where: {email: $email}) {
+    id
+  }
+  publishPlan(where: {id: $planId}) {
+    id
+  }
+}
+    `;
+
+export function useRemoveSavedTripPlanMutation() {
+  return Urql.useMutation<RemoveSavedTripPlanMutation, RemoveSavedTripPlanMutationVariables>(RemoveSavedTripPlanDocument);
+};
+export const SaveTripPlanDocument = gql`
+    mutation SaveTripPlan($email: String!, $planId: ID!) {
+  updateMember(
+    data: {savedPlans: {connect: {where: {id: $planId}}}}
+    where: {email: $email}
+  ) {
+    id
+  }
+  publishMember(where: {email: $email}) {
+    id
+  }
+  publishPlan(where: {id: $planId}) {
+    id
+  }
+}
+    `;
+
+export function useSaveTripPlanMutation() {
+  return Urql.useMutation<SaveTripPlanMutation, SaveTripPlanMutationVariables>(SaveTripPlanDocument);
+};
 export const GetPlanDocument = gql`
     query GetPlan($id: ID!, $email: String) {
   plan(where: {id: $id}) {

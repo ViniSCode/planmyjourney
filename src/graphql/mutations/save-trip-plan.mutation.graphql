@@ -1,0 +1,16 @@
+mutation SaveTripPlan($email: String!, $planId: ID!) {
+  updateMember(
+    data: { savedPlans: { connect: { where: { id: $planId } } } }
+    where: { email: $email }
+  ) {
+    id
+  }
+
+  publishMember(where: { email: $email }) {
+    id
+  }
+
+  publishPlan(where: { id: $planId }) {
+    id
+  }
+}

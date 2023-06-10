@@ -38,7 +38,7 @@ export default function PlanId({ session }: any) {
   });
 
   useEffect(() => {
-    if (data?.member?.savedPlans && data?.member?.savedPlans.length > 0) {
+    if (data?.member?.savedPlans && data.member.savedPlans.length > 0) {
       setIsSaved(true);
     }
   }, [data]);
@@ -83,8 +83,6 @@ export default function PlanId({ session }: any) {
     }
   }
 
-  console.log(data?.member);
-
   return (
     <>
       <header>
@@ -98,7 +96,7 @@ export default function PlanId({ session }: any) {
         >
           <FiArrowLeft size={20} />
         </div>
-        {data?.plan && (
+        {data?.plan && data?.member && (
           <div>
             <div className="flex justify-between place-items-baseline">
               <div className="full w-full truncate">
@@ -192,7 +190,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
   await client
-    .query(GetPlanDocument, { id: id || "", email: session?.user?.email ?? "" })
+    .query(GetPlanDocument, { id: id, email: session?.user?.email })
     .toPromise();
 
   return {

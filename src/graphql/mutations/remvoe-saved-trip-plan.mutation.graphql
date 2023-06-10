@@ -1,0 +1,14 @@
+mutation RemoveSavedTripPlan($email: String, $planId: ID!) {
+  updateMember(
+    data: { savedPlans: { disconnect: { id: $planId } } }
+    where: { email: $email }
+  ) {
+    id
+  }
+  publishMember(where: { email: $email }) {
+    id
+  }
+  publishPlan(where: { id: $planId }) {
+    id
+  }
+}
