@@ -10,8 +10,8 @@ query GetPlans(
     where: { _search: $search }
     orderBy: $orderBy
   ) {
-    days
     __typename
+    days
     expenses
     transportation
     location
@@ -25,12 +25,12 @@ query GetPlans(
     orderBy: $orderBy
   ) {
     pageInfo {
+      __typename
       hasNextPage
       hasPreviousPage
       endCursor
       pageSize
       startCursor
-      __typename
     }
   }
 }

@@ -9,12 +9,15 @@ query GetPlan($id: ID!, $email: String) {
     images
     id
     member {
-      name
-      image
       __typename
+      name
+      id
+      image
     }
   }
   member(where: { email: $email }) {
+    __typename
+    id
     savedPlans(where: { id: $id }) {
       __typename
       id

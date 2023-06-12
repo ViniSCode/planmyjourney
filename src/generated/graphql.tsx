@@ -5079,7 +5079,7 @@ export type GetPlanQueryVariables = Exact<{
 }>;
 
 
-export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, id: string, member?: { __typename: 'Member', name: string, image: string } | null } | null, member?: { __typename?: 'Member', savedPlans: Array<{ __typename: 'Plan', id: string }> } | null };
+export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, id: string, member?: { __typename: 'Member', name: string, id: string, image: string } | null } | null, member?: { __typename: 'Member', id: string, savedPlans: Array<{ __typename: 'Plan', id: string }> } | null };
 
 export type GetPlansQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -5157,12 +5157,15 @@ export const GetPlanDocument = gql`
     images
     id
     member {
-      name
-      image
       __typename
+      name
+      id
+      image
     }
   }
   member(where: {email: $email}) {
+    __typename
+    id
     savedPlans(where: {id: $id}) {
       __typename
       id
@@ -5182,8 +5185,8 @@ export const GetPlansDocument = gql`
     where: {_search: $search}
     orderBy: $orderBy
   ) {
-    days
     __typename
+    days
     expenses
     transportation
     location
@@ -5197,12 +5200,12 @@ export const GetPlansDocument = gql`
     orderBy: $orderBy
   ) {
     pageInfo {
+      __typename
       hasNextPage
       hasPreviousPage
       endCursor
       pageSize
       startCursor
-      __typename
     }
   }
 }
