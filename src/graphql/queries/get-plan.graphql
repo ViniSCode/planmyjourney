@@ -11,6 +11,7 @@ query GetPlan($id: ID!, $email: String) {
     member {
       name
       image
+      __typename
     }
   }
   member(where: { email: $email }) {

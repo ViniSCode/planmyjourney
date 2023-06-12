@@ -5079,7 +5079,7 @@ export type GetPlanQueryVariables = Exact<{
 }>;
 
 
-export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, id: string, member?: { __typename?: 'Member', name: string, image: string } | null } | null, member?: { __typename?: 'Member', savedPlans: Array<{ __typename: 'Plan', id: string }> } | null };
+export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, id: string, member?: { __typename: 'Member', name: string, image: string } | null } | null, member?: { __typename?: 'Member', savedPlans: Array<{ __typename: 'Plan', id: string }> } | null };
 
 export type GetPlansQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -5159,6 +5159,7 @@ export const GetPlanDocument = gql`
     member {
       name
       image
+      __typename
     }
   }
   member(where: {email: $email}) {

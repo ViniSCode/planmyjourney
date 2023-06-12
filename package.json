@@ -10,6 +10,7 @@
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@urql/exchange-graphcache": "^6.1.1",
     "firebase": "^9.22.0",
     "flowbite": "^1.6.5",
     "framer-motion": "^10.12.10",
@@ -26,7 +27,7 @@
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.0.8",
     "sharp": "^0.32.1",
-    "urql": "^3.0.1",
+    "urql": "^4.0.3",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

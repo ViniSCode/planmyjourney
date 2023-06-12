@@ -42,7 +42,7 @@ export default function PlanId({ session }: any) {
       setIsSaved(true);
     }
 
-    console.log(data?.member);
+    console.log(data);
   }, [data]);
 
   async function handleSave() {
