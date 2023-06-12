@@ -1,7 +1,7 @@
 import { Loading } from "@/components/Loading";
 import { MapContextProvider } from "@/context/MapContext";
 import { SharePlanContextProvider } from "@/context/SharePlanContext";
-import { client, ssrCache } from "@/lib/urql";
+import { client } from "@/lib/urql";
 import "@/styles/globals.css";
 import { GetServerSideProps } from "next";
 import { SessionProvider } from "next-auth/react";
@@ -24,9 +24,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
     });
   }, []);
 
-  if (pageProps.urqlState) {
-    ssrCache.restoreData(pageProps.urqlState);
-  }
+  // if (pageProps.urqlState) {
+  //   ssrCache.restoreData(pageProps.urqlState);
+  // }
 
   return (
     <SessionProvider session={pageProps.session}>

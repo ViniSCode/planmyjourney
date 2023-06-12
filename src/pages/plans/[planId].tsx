@@ -3,8 +3,7 @@ import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages";
 import { ImportantInfo } from "@/components/Plans/ImportantInfo";
-import { GetPlanDocument, useGetPlanQuery } from "@/generated/graphql";
-import { client, ssrCache } from "@/lib/urql";
+import { useGetPlanQuery } from "@/generated/graphql";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
@@ -192,13 +191,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.planId;
   const session = await getSession(context);
 
-  await client
-    .query(GetPlanDocument, { id: id, email: session?.user?.email })
-    .toPromise();
+  // await client
+  //   .query(GetPlanDocument, { id: id, email: session?.user?.email })
+  //   .toPromise();
 
   return {
     props: {
-      urqlState: ssrCache.extractData(),
+      // urqlState: ssrCache.extractData(),
       session,
     },
   };

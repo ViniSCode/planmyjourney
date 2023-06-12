@@ -5,12 +5,7 @@ import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { OurServices } from "@/components/OurServices";
 import { PopularPlansSlide } from "@/components/PopularPlansSlider";
 import { TripPlanSelect } from "@/components/TripPlanSelect";
-import {
-  GetPlansDocument,
-  PlanOrderByInput,
-  useGetPlansQuery,
-} from "@/generated/graphql";
-import { client, ssrCache } from "@/lib/urql";
+import { PlanOrderByInput, useGetPlansQuery } from "@/generated/graphql";
 import type { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Image from "next/image";
@@ -59,19 +54,19 @@ export default function Home({ session }: any) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  await client
-    .query(GetPlansDocument, {
-      limit: 8,
-      offset: 0,
-      search: "",
-      orderBy: PlanOrderByInput.CreatedAtDesc,
-    })
-    .toPromise();
+  // await client
+  //   .query(GetPlansDocument, {
+  //     limit: 8,
+  //     offset: 0,
+  //     search: "",
+  //     orderBy: PlanOrderByInput.CreatedAtDesc,
+  //   })
+  //   .toPromise();
 
   return {
     props: {
       session,
-      urqlState: ssrCache.extractData(),
+      // urqlState: ssrCache.extractData(),
     },
   };
 };
