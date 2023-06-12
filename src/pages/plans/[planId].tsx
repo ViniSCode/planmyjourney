@@ -41,6 +41,8 @@ export default function PlanId({ session }: any) {
     if (data?.member?.savedPlans && data.member.savedPlans.length > 0) {
       setIsSaved(true);
     }
+
+    console.log(data?.member);
   }, [data]);
 
   async function handleSave() {
@@ -68,6 +70,7 @@ export default function PlanId({ session }: any) {
         body: JSON.stringify({
           session,
           planId,
+          data: data,
         }),
       }).then((res) => res.json());
 

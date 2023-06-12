@@ -1,5 +1,4 @@
 import {
-  GetPlanDocument,
   RemoveSavedTripPlanDocument,
   SaveTripPlanDocument,
 } from "@/generated/graphql";
@@ -7,7 +6,7 @@ import { client } from "@/lib/urql";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { session, planId } = req.body;
+  const { session, planId, data } = req.body;
   const email = session.user.email;
 
   if (req.method === "POST") {
@@ -19,12 +18,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(400).json({ error: true, message: "Something went wrong" });
     }
 
-    const { data } = await client
-      .query(GetPlanDocument, {
-        id: planId,
-        email: email,
-      })
-      .toPromise();
+    if (!data) {
+      res.status(400).json({ error: true, message: "Something went wrong" });
+    }
 
     try {
       console.log(data?.member?.savedPlans);
