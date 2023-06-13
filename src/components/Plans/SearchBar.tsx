@@ -1,6 +1,20 @@
 import { FiSearch } from "react-icons/fi";
 
-export function SearchBar() {
+interface SearchBarProps {
+  search: string;
+  setSearch: any;
+}
+
+const container = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  duration: {},
+};
+export function SearchBar({ search, setSearch }: SearchBarProps) {
   return (
     <div className="flex justify-center mx-auto w-full">
       <label htmlFor="search" className="w-full max-w-[408px] relative">
@@ -13,6 +27,10 @@ export function SearchBar() {
           name="search"
           placeholder="Country, City, Place..."
           className="rounded-full w-full mx-auto pr-4 pl-11 py-2 text-base"
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          value={search}
         />
       </label>
     </div>

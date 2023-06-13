@@ -4,9 +4,14 @@ import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { ListPlans } from "@/components/Plans/ListPlans";
 import { PlanFilter } from "@/components/Plans/PlanFilter";
 import { SearchBar } from "@/components/Plans/SearchBar";
-import { PlanOrderByInput, useGetPlansQuery } from "@/generated/graphql";
+import {
+  GetPlansDocument,
+  PlanOrderByInput,
+  useGetPlansQuery,
+} from "@/generated/graphql";
+import { client, ssrCache } from "@/lib/urql";
 import { motion } from "framer-motion";
-import type { GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -27,18 +32,28 @@ export default function Plans() {
   const [offset, setOffset] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [querySearch, setQuerySearch] = useState("");
   const [plans, setPlans] = useState<Plan[]>([]);
   const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.CreatedAtDesc);
   const { ref: endRef, inView: endView } = useInView();
 
-  const [{ data: getPlansData, fetching, error }] = useGetPlansQuery({
-    variables: {
-      limit: plansPerPage,
-      offset: offset,
-      search: search,
-      orderBy: orderBy,
-    },
-  });
+  const [{ data: getPlansData, fetching, error }, reexecuteQuery] =
+    useGetPlansQuery({
+      variables: {
+        limit: plansPerPage,
+        offset: offset,
+        search: querySearch,
+        orderBy: orderBy,
+      },
+      requestPolicy: "cache-and-network",
+    });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setQuerySearch(search);
+      reexecuteQuery();
+    }, 2000);
+  }, [search]);
 
   useEffect(() => {
     if (!plans.length || plans.length === 0) {
@@ -75,7 +90,7 @@ export default function Plans() {
         <MobileMenu />
       </header>
       <main className="px-6 mt-32 max-w-[1120px] md:mt-16 mx-auto pb-20">
-        <SearchBar />
+        <SearchBar search={search} setSearch={setSearch} />
         <PlanFilter />
         <motion.div>
           {plans.length > 0 && !isLoading ? (
@@ -93,20 +108,18 @@ export default function Plans() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // await client
-  //   .query(GetPlansDocument, {
-  //     limit: 8,
-  //     offset: 0,
-  //     search: "",
-  //     orderBy: PlanOrderByInput.CreatedAtDesc,
-  //   })
-  //   .toPromise();
+  await client
+    .query(GetPlansDocument, {
+      limit: 8,
+      offset: 0,
+      search: "",
+      orderBy: PlanOrderByInput.CreatedAtDesc,
+    })
+    .toPromise();
 
   return {
     props: {
-      // urqlState: ssrCache.extractData(),
-      test: "test",
+      urqlState: ssrCache.extractData(),
     },
-    // revalidate: 60,
   };
 };

@@ -3,7 +3,12 @@ import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages";
 import { ImportantInfo } from "@/components/Plans/ImportantInfo";
-import { GetPlanDocument, GetPlanQuery } from "@/generated/graphql";
+import {
+  GetPlanDocument,
+  GetPlanQuery,
+  useGetPlanQuery,
+} from "@/generated/graphql";
+import { client, ssrCache } from "@/lib/urql";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
@@ -14,7 +19,6 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { FiArrowLeft } from "react-icons/fi";
 import { TbMapPinFilled } from "react-icons/tb";
 import { toast } from "react-toastify";
-import { useQuery } from "urql";
 
 const DynamicMap = dynamic(
   () => import("../../components/Plans/Map/LocationMap"),
@@ -31,8 +35,7 @@ export default function PlanId({ session }: any) {
   const [isSaved, setIsSaved] = useState(false);
   const [data, setData] = useState<GetPlanQuery | undefined>({});
 
-  const [{ data: queryData }, reexecuteQuery] = useQuery({
-    query: GetPlanDocument,
+  const [{ data: queryData }, reexecuteQuery] = useGetPlanQuery({
     variables: { id: planId, email: session?.user?.email },
     requestPolicy: "cache-and-network",
   });
@@ -48,12 +51,6 @@ export default function PlanId({ session }: any) {
       setIsSaved(true);
     }
   }, [queryData]);
-
-  useEffect(() => {
-    setTimeout(async () => {
-      reexecuteQuery();
-    }, 3000);
-  }, [isSaved]);
 
   async function handleSave() {
     if (isSaved) {
@@ -85,6 +82,7 @@ export default function PlanId({ session }: any) {
       }).then((res) => res.json());
 
       if (reqData?.success) {
+        reexecuteQuery();
         toast.success(reqData.message);
         // router.push("/");
       } else {
@@ -202,13 +200,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.planId;
   const session = await getSession(context);
 
-  // await client
-  //   .query(GetPlanDocument, { id: id, email: session?.user?.email })
-  //   .toPromise();
+  await client
+    .query(GetPlanDocument, { id: id, email: session?.user?.email })
+    .toPromise();
 
   return {
     props: {
-      // urqlState: ssrCache.extractData(),
+      urqlState: ssrCache.extractData(),
       session,
     },
   };
