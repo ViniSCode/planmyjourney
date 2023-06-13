@@ -3,7 +3,7 @@ import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages";
 import { ImportantInfo } from "@/components/Plans/ImportantInfo";
-import { useGetPlanQuery } from "@/generated/graphql";
+import { GetPlanDocument, GetPlanQuery } from "@/generated/graphql";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
@@ -14,6 +14,7 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { FiArrowLeft } from "react-icons/fi";
 import { TbMapPinFilled } from "react-icons/tb";
 import { toast } from "react-toastify";
+import { useQuery } from "urql";
 
 const DynamicMap = dynamic(
   () => import("../../components/Plans/Map/LocationMap"),
@@ -28,21 +29,31 @@ export default function PlanId({ session }: any) {
   const router = useRouter();
   const planId: any = router.query.planId;
   const [isSaved, setIsSaved] = useState(false);
+  const [data, setData] = useState<GetPlanQuery | undefined>({});
 
-  const [{ data }] = useGetPlanQuery({
-    variables: {
-      id: planId,
-      email: session?.user?.email ?? "",
-    },
+  const [{ data: queryData }, reexecuteQuery] = useQuery({
+    query: GetPlanDocument,
+    variables: { id: planId, email: session?.user?.email },
+    requestPolicy: "cache-and-network",
   });
 
   useEffect(() => {
-    if (data?.member?.savedPlans && data.member.savedPlans.length > 0) {
+    if (queryData) {
+      setData(queryData);
+    }
+    if (
+      queryData?.member?.savedPlans &&
+      queryData.member.savedPlans.length > 0
+    ) {
       setIsSaved(true);
     }
+  }, [queryData]);
 
-    console.log(data);
-  }, [data]);
+  useEffect(() => {
+    setTimeout(async () => {
+      reexecuteQuery();
+    }, 3000);
+  }, [isSaved]);
 
   async function handleSave() {
     if (isSaved) {
