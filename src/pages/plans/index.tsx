@@ -4,14 +4,8 @@ import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { ListPlans } from "@/components/Plans/ListPlans";
 import { PlanFilter } from "@/components/Plans/PlanFilter";
 import { SearchBar } from "@/components/Plans/SearchBar";
-import {
-  GetPlansDocument,
-  PlanOrderByInput,
-  useGetPlansQuery,
-} from "@/generated/graphql";
-import { client, ssrCache } from "@/lib/urql";
+import { PlanOrderByInput, useGetPlansQuery } from "@/generated/graphql";
 import { motion } from "framer-motion";
-import { GetStaticProps } from "next";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -107,19 +101,19 @@ export default function Plans() {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  await client
-    .query(GetPlansDocument, {
-      limit: 8,
-      offset: 0,
-      search: "",
-      orderBy: PlanOrderByInput.CreatedAtDesc,
-    })
-    .toPromise();
+// export const getStaticProps: GetStaticProps = async () => {
+//   await client
+//     .query(GetPlansDocument, {
+//       limit: 8,
+//       offset: 0,
+//       search: "",
+//       orderBy: PlanOrderByInput.CreatedAtDesc,
+//     })
+//     .toPromise();
 
-  return {
-    props: {
-      urqlState: ssrCache.extractData(),
-    },
-  };
-};
+//   return {
+//     props: {
+//       urqlState: ssrCache.extractData(),
+//     },
+//   };
+// };

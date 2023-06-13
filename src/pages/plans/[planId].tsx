@@ -3,14 +3,7 @@ import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages";
 import { ImportantInfo } from "@/components/Plans/ImportantInfo";
-import {
-  GetPlanDocument,
-  GetPlanQuery,
-  useGetPlanQuery,
-} from "@/generated/graphql";
-import { client, ssrCache } from "@/lib/urql";
-import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
+import { GetPlanQuery, useGetPlanQuery } from "@/generated/graphql";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -196,18 +189,18 @@ export default function PlanId({ session }: any) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params?.planId;
-  const session = await getSession(context);
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const id = context.params?.planId;
+//   const session = await getSession(context);
 
-  await client
-    .query(GetPlanDocument, { id: id, email: session?.user?.email })
-    .toPromise();
+//   await client
+//     .query(GetPlanDocument, { id: id, email: session?.user?.email })
+//     .toPromise();
 
-  return {
-    props: {
-      urqlState: ssrCache.extractData(),
-      session,
-    },
-  };
-};
+//   return {
+//     props: {
+//       urqlState: ssrCache.extractData(),
+//       session,
+//     },
+//   };
+// };
