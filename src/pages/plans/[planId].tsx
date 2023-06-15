@@ -1,4 +1,5 @@
 import { Spinner } from "@/components/Loading/Spinner";
+import { SpinnerSm } from "@/components/Loading/SpinnerSm";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages";
@@ -29,6 +30,7 @@ export default function PlanId({ session }: any) {
   const router = useRouter();
   const planId: any = router.query.planId;
   const [isSaved, setIsSaved] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [{ data, fetching, error }, reexecuteQuery] = useQuery({
     query: GetPlanDocument,
@@ -46,6 +48,8 @@ export default function PlanId({ session }: any) {
   }, [data]);
 
   async function handleSave() {
+    setIsLoading(true);
+
     if (!session) {
       toast.info("You must be logged in to save a trip plan.");
       return;
@@ -78,10 +82,10 @@ export default function PlanId({ session }: any) {
 
       if (reqData?.success) {
         reexecuteQuery();
-        toast.success(reqData.message);
-        // router.push("/");
+        setIsLoading(false);
       } else {
         toast.error(reqData?.message);
+        setIsLoading(false);
       }
     } catch (err) {
       toast.error("An error occurred while saving the plan");
@@ -122,22 +126,22 @@ export default function PlanId({ session }: any) {
               </div>
 
               <div className="flex items-center gap-4 text-gray-900 font-medium cursor-pointer">
-                {isSaved ? (
+                {!isLoading ? (
                   <div
                     className="mt-2 flex items-center gap-1 font-medium text-gray-700"
                     onClick={handleSave}
                   >
-                    <BsBookmarkFill size={16} />
-                    <span className="text-sm underline">Saved</span>
+                    {isSaved ? (
+                      <BsBookmarkFill size={16} />
+                    ) : (
+                      <BsBookmark size={16} />
+                    )}
+                    <span className="text-sm underline">
+                      {isSaved ? "Saved" : "Save"}
+                    </span>
                   </div>
                 ) : (
-                  <div
-                    className="mt-2 flex items-center gap-1 font-medium text-gray-700"
-                    onClick={handleSave}
-                  >
-                    <BsBookmark size={16} />
-                    <span className="text-sm underline">Save</span>
-                  </div>
+                  <SpinnerSm />
                 )}
               </div>
             </div>
