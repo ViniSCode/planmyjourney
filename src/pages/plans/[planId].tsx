@@ -34,7 +34,7 @@ export default function PlanId({ session }: any) {
     query: GetPlanDocument,
     variables: {
       id: planId,
-      email: session?.user?.email,
+      email: session?.user?.email ?? "",
     },
     requestPolicy: "cache-and-network",
   });
@@ -46,6 +46,11 @@ export default function PlanId({ session }: any) {
   }, [data]);
 
   async function handleSave() {
+    if (!session) {
+      toast.info("You must be logged in to save a trip plan.");
+      return;
+    }
+
     if (isSaved) {
       setIsSaved(false);
     }
@@ -58,9 +63,6 @@ export default function PlanId({ session }: any) {
       return;
     }
 
-    if (!session) {
-      return;
-    }
     try {
       const reqData = await fetch("/api/save", {
         method: "POST",
@@ -100,7 +102,7 @@ export default function PlanId({ session }: any) {
         >
           <FiArrowLeft size={20} />
         </div>
-        {data?.plan && data?.member && (
+        {data?.plan && (
           <div>
             <div className="flex justify-between place-items-baseline">
               <div className="full w-full truncate">
