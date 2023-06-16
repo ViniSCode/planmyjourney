@@ -18,7 +18,7 @@ export interface Plan {
   likesCount?: number | null;
   images?: any | null;
   id: string;
-  // name?: string;
+  name?: string | null;
 }
 
 export default function Plans() {
