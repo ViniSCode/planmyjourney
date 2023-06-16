@@ -74,6 +74,9 @@ async function sharePlan(
   let expenses = planData.expenses;
   let transportation = planData.transportation;
   let images = planData.images;
+  let name = planData.name;
+
+  console.log(name);
 
   const locationArray = planData.location.map(
     (obj) =>
@@ -98,6 +101,7 @@ async function sharePlan(
           query: `
             mutation CreateAndPublishPlan {
               createPlan(data: {
+                name: "${name}",
                 days: ${days},
                 planId: "${planId}",
                 expenses: {min: ${expenses.min}, max: ${expenses.max}},

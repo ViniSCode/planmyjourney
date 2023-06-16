@@ -8,6 +8,7 @@ query GetPlan($id: ID!, $email: String) {
     createdAt
     images
     id
+    name
     member {
       __typename
       name

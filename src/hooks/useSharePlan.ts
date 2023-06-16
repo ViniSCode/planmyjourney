@@ -18,6 +18,8 @@ export function useSharePlan() {
     setSelectedImages,
     setImagesURL,
     imagesURL,
+    name,
+    setName,
   } = useContext(SharePlanContext);
 
   return {
@@ -26,6 +28,8 @@ export function useSharePlan() {
     handleSetWalking,
     handleSetCar,
     days,
+    name,
+    setName,
     handleIncreaseDays,
     handleDecreaseDays,
     expenses,

@@ -32,6 +32,8 @@ interface SharePlanContextData {
   setSelectedImages: any;
   setImagesURL: any;
   imagesURL: any;
+  name: string;
+  setName: any;
 }
 
 export const SharePlanContext = createContext<SharePlanContextData>(
@@ -44,6 +46,7 @@ export function SharePlanContextProvider({
   const [imagesURL, setImagesURL] = useState<string[]>();
   const [days, setDays] = useState(0);
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const [name, setName] = useState("");
   const [transportation, setTransportation] = useState({
     car: false,
     bus: false,
@@ -104,6 +107,8 @@ export function SharePlanContextProvider({
     <SharePlanContext.Provider
       value={{
         handleSetBus,
+        name,
+        setName,
         handleSetSubway,
         handleSetWalking,
         handleSetCar,

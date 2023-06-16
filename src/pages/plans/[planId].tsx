@@ -1,20 +1,18 @@
 import { Spinner } from "@/components/Loading/Spinner";
-import { SpinnerSm } from "@/components/Loading/SpinnerSm";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { DisplayTripPlanImages } from "@/components/Plans/DisplayTripPlanImages";
 import { ImportantInfo } from "@/components/Plans/ImportantInfo";
 import { GetPlanDocument } from "@/generated/graphql";
+import { client, ssrCache } from "@/lib/urql";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import { TbMapPinFilled } from "react-icons/tb";
-import { toast } from "react-toastify";
 import { useQuery } from "urql";
 
 const DynamicMap = dynamic(
@@ -41,58 +39,6 @@ export default function PlanId({ session }: any) {
     requestPolicy: "cache-and-network",
   });
 
-  useEffect(() => {
-    if (data?.member?.savedPlans && data.member.savedPlans.length > 0) {
-      setIsSaved(true);
-    }
-  }, [data]);
-
-  async function handleSave() {
-    setIsLoading(true);
-
-    if (!session) {
-      toast.info("You must be logged in to save a trip plan.");
-      return;
-    }
-
-    if (isSaved) {
-      setIsSaved(false);
-    }
-
-    if (!isSaved) {
-      setIsSaved(true);
-    }
-
-    if (!planId) {
-      return;
-    }
-
-    try {
-      const reqData = await fetch("/api/save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          session,
-          planId,
-          data: data,
-        }),
-      }).then((res) => res.json());
-
-      if (reqData?.success) {
-        reexecuteQuery();
-        setIsLoading(false);
-      } else {
-        toast.error(reqData?.message);
-        setIsLoading(false);
-      }
-    } catch (err) {
-      toast.error("An error occurred while saving the plan");
-      console.log(err);
-    }
-  }
-
   return (
     <>
       <header>
@@ -111,7 +57,9 @@ export default function PlanId({ session }: any) {
             <div className="flex justify-between place-items-baseline">
               <div className="full w-full truncate">
                 <h2 className="text-2xl truncate">
-                  {data.plan?.location[0].country}, Trip Plan
+                  {data?.plan.name
+                    ? data?.plan.name
+                    : data.plan?.location[0].country + " Trip Plan"}
                 </h2>
 
                 <div className="text-gray-900 font-semibold">
@@ -123,26 +71,6 @@ export default function PlanId({ session }: any) {
                     }).format(new Date(data.plan?.createdAt))}
                   </span>
                 </div>
-              </div>
-
-              <div className="flex items-center gap-4 text-gray-900 font-medium cursor-pointer">
-                {!isLoading ? (
-                  <div
-                    className="mt-2 flex items-center gap-1 font-medium text-gray-700"
-                    onClick={handleSave}
-                  >
-                    {isSaved ? (
-                      <BsBookmarkFill size={16} />
-                    ) : (
-                      <BsBookmark size={16} />
-                    )}
-                    <span className="text-sm underline">
-                      {isSaved ? "Saved" : "Save"}
-                    </span>
-                  </div>
-                ) : (
-                  <SpinnerSm />
-                )}
               </div>
             </div>
 
@@ -199,13 +127,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.planId;
   const session = await getSession(context);
 
-  // await client
-  //   .query(GetPlanDocument, { id: id, email: session?.user?.email })
-  //   .toPromise();
+  await client
+    .query(GetPlanDocument, { id: id, email: session?.user?.email })
+    .toPromise();
 
   return {
     props: {
-      // urqlState: ssrCache.extractData(),
+      urqlState: ssrCache.extractData(),
       session,
     },
   };

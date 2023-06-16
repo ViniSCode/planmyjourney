@@ -1,26 +1,12 @@
-import { TransportationButton } from "@/components/SharePlan/TransportationButton";
 import { ValidateShareButtons } from "@/components/SharePlan/ValidateShareButtons";
 import { useSharePlan } from "@/hooks/useSharePlan";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Image from "next/image";
-import { BiBus } from "react-icons/bi";
-import { BsCarFrontFill } from "react-icons/bs";
-import { FaSubway, FaWalking } from "react-icons/fa";
 import { SharePageActions } from "../../components/SharePlan/SharePageActions";
 
 export default function Share({ session }: any) {
-  const {
-    handleDecreaseDays,
-    handleIncreaseDays,
-    days,
-    setDays,
-    handleSetBus,
-    handleSetSubway,
-    handleSetWalking,
-    handleSetCar,
-    transportation,
-  } = useSharePlan();
+  const { name, setName } = useSharePlan();
 
   return (
     <div className="grid lg:grid-cols-share-plan select-none">
@@ -39,81 +25,23 @@ export default function Share({ session }: any) {
           <h2 className="text-3xl font-medium text-center text-gray-900">
             Share your Plan
           </h2>
-          <h3 className="mt-24 font-medium text-2xl text-gray-900">Duration</h3>
+          <h3 className="mt-24 font-medium text-2xl text-gray-900">Name</h3>
           <span className="mt-2 block text-gray-700 text-sm">
-            Inform the duration of your trip plan
+            Inform the name of your trip plan:
           </span>
-          <div className="flex items-center gap-2 mt-4">
-            <span
-              className="cursor-pointer w-12 h-12 flex items-center justify-center text-xl font-medium bg-gray-200 rounded-lg"
-              onClick={handleDecreaseDays}
-            >
-              {" "}
-              -{" "}
-            </span>
+          <div className="flex items-center mt-6">
             <input
-              type="number"
-              name="number"
-              maxLength={3}
-              min={1}
-              id="number"
-              className="numberOfDays text-xl font-medium bg-gray-200 rounded-lg w-12 h-12 flex items-center text-center text-gray-900 justify-center placeholder:text-center placeholder:text-gray-500"
-              placeholder="0"
-              value={days}
-              onChange={(e) => setDays(e.target.value)}
+              type="text"
+              className="pl-0 pb-2 text-xl font-medium bg-transparent border-0 border-b border-b-gray-700 w-full h-full text-gray-900 placeholder:text-gray-500 focus:ring-0 focus:outline-none"
+              placeholder="Name your trip plan"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-            <span
-              className="cursor-pointer w-12 h-12 flex items-center justify-center text-xl font-medium bg-gray-200 rounded-lg"
-              onClick={handleIncreaseDays}
-            >
-              +
-            </span>
-            <span className="ml-2 text-lg block text-gray-700 font-medium">
-              days
-            </span>
           </div>
-          <div className="mt-6 border-b-2 bg-gray-500"></div>
-          <h3 className="mt-6 font-medium text-2xl text-gray-900">
-            Transportation
-          </h3>
-          <span className="mt-2 block text-gray-700 text-sm">
-            Specify the type of transportation used for your travel plan
-          </span>
-          <div className="mt-4 flex items-center gap-2">
-            <TransportationButton
-              onClick={handleSetBus}
-              transportation={transportation.bus}
-            >
-              <BiBus size={25} />
-            </TransportationButton>
-
-            <TransportationButton
-              onClick={handleSetCar}
-              transportation={transportation.car}
-            >
-              <BsCarFrontFill size={25} />
-            </TransportationButton>
-
-            <TransportationButton
-              onClick={handleSetSubway}
-              transportation={transportation.subway}
-            >
-              <FaSubway size={24} />
-            </TransportationButton>
-
-            <TransportationButton
-              onClick={handleSetWalking}
-              transportation={transportation.walking}
-            >
-              <FaWalking size={24} />
-            </TransportationButton>
-          </div>
-
-          {days &&
-          Object.values(transportation).some((value) => value === true) ? (
-            <SharePageActions href={"/share/expenses"} />
+          {name.trim() === "" ? (
+            <SharePageActions href={"/share/details"} />
           ) : (
-            <ValidateShareButtons alert="Please select at least one mode of transportation. Also, enter the number of days for your trip plan." />
+            <ValidateShareButtons alert="Please provide a trip plan name" />
           )}
         </div>
       </div>

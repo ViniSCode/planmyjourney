@@ -142,7 +142,9 @@ export function ListPlans({ plans }: ListPlansProps) {
               <div className="mt-4 w-full flex flex-row justify-between gap-2">
                 <div className="w-full max-w-[70%] flex flex-col gap-[2px]">
                   <span className="block font-semibold text-gray-900 text-sm truncate">
-                    {plan.location[0].country} | Trip Plan
+                    {plan.name
+                      ? plan.name
+                      : plan?.location[0].country + " | Trip Plan"}
                   </span>
                   <span className="block text-gray-900 font-semibold text-sm">
                     ${plan.expenses.min} to ${plan.expenses.max}

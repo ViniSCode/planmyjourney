@@ -2551,6 +2551,7 @@ export type Plan = Node & {
   location?: Maybe<Scalars['Json']>;
   location2: Array<Scalars['Json']>;
   member?: Maybe<Member>;
+  name?: Maybe<Scalars['String']>;
   planId: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -2657,6 +2658,7 @@ export type PlanCreateInput = {
   location?: InputMaybe<Scalars['Json']>;
   location2?: InputMaybe<Array<Scalars['Json']>>;
   member?: InputMaybe<MemberCreateOneInlineInput>;
+  name?: InputMaybe<Scalars['String']>;
   planId: Scalars['String'];
   transportation: Scalars['Json'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -2803,6 +2805,25 @@ export type PlanManyWhereInput = {
    */
   location_value_recursive?: InputMaybe<Scalars['Json']>;
   member?: InputMaybe<MemberWhereInput>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
   planId?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   planId_contains?: InputMaybe<Scalars['String']>;
@@ -2877,6 +2898,8 @@ export enum PlanOrderByInput {
   IdDesc = 'id_DESC',
   LikesCountAsc = 'likesCount_ASC',
   LikesCountDesc = 'likesCount_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
   PlanIdAsc = 'planId_ASC',
   PlanIdDesc = 'planId_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -2895,6 +2918,7 @@ export type PlanUpdateInput = {
   location?: InputMaybe<Scalars['Json']>;
   location2?: InputMaybe<Array<Scalars['Json']>>;
   member?: InputMaybe<MemberUpdateOneInlineInput>;
+  name?: InputMaybe<Scalars['String']>;
   planId?: InputMaybe<Scalars['String']>;
   transportation?: InputMaybe<Scalars['Json']>;
 };
@@ -2923,6 +2947,7 @@ export type PlanUpdateManyInput = {
   likesCount?: InputMaybe<Scalars['Int']>;
   location?: InputMaybe<Scalars['Json']>;
   location2?: InputMaybe<Array<Scalars['Json']>>;
+  name?: InputMaybe<Scalars['String']>;
   transportation?: InputMaybe<Scalars['Json']>;
 };
 
@@ -3093,6 +3118,25 @@ export type PlanWhereInput = {
    */
   location_value_recursive?: InputMaybe<Scalars['Json']>;
   member?: InputMaybe<MemberWhereInput>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
   planId?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   planId_contains?: InputMaybe<Scalars['String']>;
@@ -5079,7 +5123,7 @@ export type GetPlanQueryVariables = Exact<{
 }>;
 
 
-export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, id: string, member?: { __typename: 'Member', name: string, id: string, image: string } | null } | null, member?: { __typename: 'Member', id: string, savedPlans: Array<{ __typename: 'Plan', id: string }> } | null };
+export type GetPlanQuery = { __typename?: 'Query', plan?: { __typename: 'Plan', expenses: any, days: number, transportation: any, location?: any | null, createdAt: any, images?: any | null, id: string, name?: string | null, member?: { __typename: 'Member', name: string, id: string, image: string } | null } | null, member?: { __typename: 'Member', id: string, savedPlans: Array<{ __typename: 'Plan', id: string }> } | null };
 
 export type GetPlansQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -5089,7 +5133,7 @@ export type GetPlansQueryVariables = Exact<{
 }>;
 
 
-export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename: 'Plan', days: number, expenses: any, transportation: any, location?: any | null, images?: any | null, id: string }>, plansConnection: { __typename?: 'PlanConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, pageSize?: number | null, startCursor?: string | null } } };
+export type GetPlansQuery = { __typename?: 'Query', plans: Array<{ __typename: 'Plan', days: number, expenses: any, transportation: any, name?: string | null, location?: any | null, images?: any | null, id: string }>, plansConnection: { __typename?: 'PlanConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, pageSize?: number | null, startCursor?: string | null } } };
 
 export type UserAlreadyExistsQueryVariables = Exact<{
   email: Scalars['String'];
@@ -5156,6 +5200,7 @@ export const GetPlanDocument = gql`
     createdAt
     images
     id
+    name
     member {
       __typename
       name
@@ -5189,6 +5234,7 @@ export const GetPlansDocument = gql`
     days
     expenses
     transportation
+    name
     location
     images
     id

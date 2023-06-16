@@ -1,4 +1,3 @@
-import { Spinner } from "@/components/Loading/Spinner";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { PlansHeader } from "@/components/Navbar/PlansHeader";
 import { ListPlans } from "@/components/Plans/ListPlans";
@@ -19,6 +18,7 @@ export interface Plan {
   likesCount?: number | null;
   images?: any | null;
   id: string;
+  // name?: string;
 }
 
 export default function Plans() {
@@ -31,22 +31,26 @@ export default function Plans() {
   const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.CreatedAtDesc);
   const { ref: endRef, inView: endView } = useInView();
 
-  const [{ data: getPlansData, fetching, error }, reexecuteQuery] =
-    useGetPlansQuery({
-      variables: {
-        limit: plansPerPage,
-        offset: offset,
-        search: querySearch,
-        orderBy: orderBy,
-      },
-      requestPolicy: "cache-and-network",
-    });
+  const [{ data: getPlansData, fetching, error }] = useGetPlansQuery({
+    variables: {
+      limit: plansPerPage,
+      offset: offset,
+      search: querySearch,
+      orderBy: orderBy,
+    },
+    requestPolicy: "cache-and-network",
+  });
 
   useEffect(() => {
-    setTimeout(() => {
-      setQuerySearch(search);
-      reexecuteQuery();
-    }, 2000);
+    if (search) {
+      const typingTimeout = setTimeout(() => {
+        setQuerySearch(search);
+      }, 1000);
+
+      return () => {
+        clearTimeout(typingTimeout);
+      };
+    }
   }, [search]);
 
   useEffect(() => {
@@ -87,11 +91,11 @@ export default function Plans() {
         <SearchBar search={search} setSearch={setSearch} />
         <PlanFilter />
         <motion.div>
-          {plans.length > 0 && !isLoading ? (
+          {plans.length > 0 ? (
             <ListPlans plans={plans} />
           ) : (
             <div className="flex justify-center mt-24">
-              <Spinner />
+              <p>{search ? "No matching plans found" : "No plans available"}</p>
             </div>
           )}
         </motion.div>
@@ -100,20 +104,3 @@ export default function Plans() {
     </>
   );
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   await client
-//     .query(GetPlansDocument, {
-//       limit: 8,
-//       offset: 0,
-//       search: "",
-//       orderBy: PlanOrderByInput.CreatedAtDesc,
-//     })
-//     .toPromise();
-
-//   return {
-//     props: {
-//       urqlState: ssrCache.extractData(),
-//     },
-//   };
-// };

@@ -20,6 +20,7 @@ export interface TripPlanDataProps {
   expenses: Expenses;
   transportation: Transportation;
   images: string[];
+  name: string;
 }
 
 const DynamicMap = dynamic(() => import("../../components/Map/index"), {
@@ -31,7 +32,7 @@ export default function Location({ apiKey, session }: any) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const { markers, setMarkers, isModalOpen, setIsModalOpen } = useMap();
-  const { days, expenses, transportation, imagesURL } = useSharePlan();
+  const { days, expenses, transportation, imagesURL, name } = useSharePlan();
 
   function handleRemoveLocation(index: number) {
     const updatedMarkersLocation = [...markers];
@@ -77,6 +78,11 @@ export default function Location({ apiKey, session }: any) {
       return;
     }
 
+    if (name.trim() === "") {
+      toast.error("Please provide a name for your trip plan.");
+      return;
+    }
+
     if (markers.length < 2) {
       toast.error(
         "Please select at least two locations on the map to proceed."
@@ -98,6 +104,7 @@ export default function Location({ apiKey, session }: any) {
             transportation,
             location: markers,
             images: imagesURL,
+            name: name,
           },
         }),
       }).then((res) => res.json());
