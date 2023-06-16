@@ -31,7 +31,7 @@ export default function Plans() {
   const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.CreatedAtDesc);
   const { ref: endRef, inView: endView } = useInView();
 
-  const [{ data: getPlansData, fetching, error }] = useGetPlansQuery({
+  const [{ data, fetching, error }] = useGetPlansQuery({
     variables: {
       limit: plansPerPage,
       offset: offset,
@@ -50,36 +50,16 @@ export default function Plans() {
       return () => {
         clearTimeout(typingTimeout);
       };
+    } else {
+      setQuerySearch("");
     }
   }, [search]);
 
   useEffect(() => {
-    if (!plans.length || plans.length === 0) {
-      if (getPlansData) {
-        //set plans
-        setPlans(getPlansData.plans);
-      }
+    if (data) {
+      setPlans(data.plans);
     }
-
-    //create the infinite scroll logic
-    if (endView) {
-      if (getPlansData?.plansConnection.pageInfo.hasNextPage) {
-        setIsLoading(true);
-        const newOffset = offset + plansPerPage;
-        setOffset(newOffset);
-      }
-    }
-  }, [endRef, endView, getPlansData, plans]);
-
-  useEffect(() => {
-    if (offset > 0 && !fetching) {
-      if (getPlansData) {
-        const newPlans = getPlansData?.plans || [];
-        setPlans((prevPlans) => [...prevPlans, ...newPlans]);
-        setIsLoading(false);
-      }
-    }
-  }, [offset, getPlansData, fetching]);
+  }, [data]);
 
   return (
     <>
