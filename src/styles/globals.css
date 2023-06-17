@@ -13,6 +13,7 @@ body {
   height: 100vh;
   font-family: "Poppins, sans-serif";
   @apply font-poppins;
+  @apply text-gray-900;
 }
 
 .map-container {
