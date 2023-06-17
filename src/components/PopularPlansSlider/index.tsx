@@ -1,5 +1,5 @@
 import { GetPlansQuery } from "@/generated/graphql";
-import { motion } from "framer-motion";
+import { motion, useDragControls } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -11,6 +11,7 @@ interface PopularPlansSlideProps {
 
 export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
   const [carouselWidth, setCarouselWidth] = useState(0);
+  const [isGrabbing, setIsGrabbing] = useState(false);
   const router = useRouter();
   const slideRef = useRef<HTMLDivElement>(null);
 
@@ -21,6 +22,8 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
       );
     }
   }, []);
+
+  const controls = useDragControls();
 
   return (
     <motion.section
@@ -34,15 +37,20 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
         ref={slideRef}
       >
         <motion.div
+          dragControls={controls}
           drag="x"
           dragConstraints={{ right: 0, left: -carouselWidth }}
-          className="rounded-2xl flex gap-10 justify-start h-full"
+          className={`rounded-2xl flex gap-10 justify-start h-full ${
+            isGrabbing ? "cursor-grabbing" : "cursor-grab"
+          }`}
+          onMouseDown={() => setIsGrabbing(true)}
+          onMouseUp={() => setIsGrabbing(false)}
         >
           {data?.plans.map((plan, index) => (
             <div
-              className="w-56 h-fit relative cursor-pointer"
+              className="w-56 h-fit relative"
               key={index}
-              onClick={() => router.push(`/plans/${plan.id}`)}
+              // onClick={() => router.push(`/plans/${plan.id}`)}
             >
               <div className="w-full h-[300px]">
                 <Image
