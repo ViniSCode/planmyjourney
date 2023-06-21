@@ -4,6 +4,7 @@ import { Marker } from "@/context/MapContext";
 import { Expenses, Transportation } from "@/context/SharePlanContext";
 import useMap from "@/hooks/useMap";
 import { useSharePlan } from "@/hooks/useSharePlan";
+import { getDifferentLocationString } from "@/utils/getDifferentLocationString";
 import { motion } from "framer-motion";
 import type { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
@@ -21,6 +22,7 @@ export interface TripPlanDataProps {
   transportation: Transportation;
   images: string[];
   name: string;
+  tags: string;
 }
 
 const DynamicMap = dynamic(() => import("../../components/Map/index"), {
@@ -41,6 +43,8 @@ export default function Location({ apiKey, session }: any) {
   }
 
   async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
     if (isSubmitting) {
       toast.warning("submitting");
       return;
@@ -48,7 +52,6 @@ export default function Location({ apiKey, session }: any) {
       setIsSubmitting(true);
     }
 
-    e.preventDefault();
     const isTransportationDefined = Object.values(transportation).some(
       (value) => value === true
     );
@@ -90,6 +93,8 @@ export default function Location({ apiKey, session }: any) {
       return;
     }
 
+    const differentLocationsString = getDifferentLocationString(markers);
+
     try {
       const reqData = await fetch("/api/share", {
         method: "POST",
@@ -105,6 +110,7 @@ export default function Location({ apiKey, session }: any) {
             location: markers,
             images: imagesURL,
             name: name,
+            tags: differentLocationsString,
           },
         }),
       }).then((res) => res.json());

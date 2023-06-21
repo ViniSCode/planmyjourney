@@ -39,9 +39,9 @@ export default function Share({ session }: any) {
             />
           </div>
           {name.trim() === "" ? (
-            <SharePageActions href={"/share/details"} />
-          ) : (
             <ValidateShareButtons alert="Please provide a trip plan name" />
+          ) : (
+            <SharePageActions href={"/share/details"} />
           )}
         </div>
       </div>

@@ -13,6 +13,7 @@ export type tripPlanDataProps = {
   expenses: Expenses;
   transportation: Transportation;
   name: string;
+  tags: string;
 };
 
 export interface ValidateTripPlanBeforeSharingProps {
@@ -59,6 +60,11 @@ export function validateTripPlanBeforeSharing(
 
   if (tripPlanData.name.trim() === "") {
     message = "Please provide a name for your trip plan.";
+    error = true;
+  }
+
+  if (tripPlanData.tags.trim() === "") {
+    message = "Something went wrong";
     error = true;
   }
 

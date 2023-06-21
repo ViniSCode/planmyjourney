@@ -115,7 +115,7 @@ export function TripPlanSelectModal({ setIsModalOpen, selected }: ModalProps) {
             value={inputSearch}
             onChange={(e) => setInputSearch(e.target.value)}
             type="text"
-            placeholder="Enter your destination"
+            placeholder="Enter your destination (Country)"
             className="w-full h-full pt-4 pb-6 border-0 focus:ring-0 focus:outline-none font-medium text-lg placeholder:text-gray-300"
           />
         </div>

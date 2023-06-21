@@ -28,8 +28,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(400).json({ error: true, message });
     } else {
       try {
-        // continue with share
-        // 1 check if author already exists
         const {
           data: { members },
         } = await client
@@ -37,12 +35,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           .toPromise();
 
         if (members.length === 0) {
-          // customer doesn't exists
+          // member doesn't exists
           await createMember(email!);
           await sharePlan(email!, tripPlanData, uniqueId);
         } else {
           // if member exists
-          // create planId
           await sharePlan(email!, tripPlanData, uniqueId);
         }
       } catch (error) {
@@ -64,7 +61,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// remove author keep only members
 async function sharePlan(
   email: string,
   planData: TripPlanDataProps,
@@ -75,8 +71,9 @@ async function sharePlan(
   let transportation = planData.transportation;
   let images = planData.images;
   let name = planData.name;
+  let tags = planData.tags;
 
-  console.log(name);
+  console.log(tags);
 
   const locationArray = planData.location.map(
     (obj) =>
@@ -105,6 +102,7 @@ async function sharePlan(
                 days: ${days},
                 planId: "${planId}",
                 expenses: {min: ${expenses.min}, max: ${expenses.max}},
+                searchTags: "${tags}",
                 transportation: {car: ${transportation.car}, bus: ${
             transportation.bus
           }, subway: ${transportation.subway}, walking: ${
