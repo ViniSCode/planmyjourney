@@ -1,4 +1,5 @@
 import { Loading } from "@/components/Loading";
+import { AppContextProvider } from "@/context/AppContext";
 import { MapContextProvider } from "@/context/MapContext";
 import { SharePlanContextProvider } from "@/context/SharePlanContext";
 import { client, ssrCache } from "@/lib/urql";
@@ -31,24 +32,26 @@ export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
       <Provider value={client}>
-        <MapContextProvider apiKey={pageProps.apiKey}>
-          {isPageLoading && <Loading />}
-          <SharePlanContextProvider>
-            <ToastContainer
-              position="top-right"
-              autoClose={7000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
-            <Component {...pageProps} />
-          </SharePlanContextProvider>
-        </MapContextProvider>
+        <AppContextProvider>
+          <MapContextProvider apiKey={pageProps.apiKey}>
+            {isPageLoading && <Loading />}
+            <SharePlanContextProvider>
+              <ToastContainer
+                position="top-right"
+                autoClose={7000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+              <Component {...pageProps} />
+            </SharePlanContextProvider>
+          </MapContextProvider>
+        </AppContextProvider>
       </Provider>
     </SessionProvider>
   );

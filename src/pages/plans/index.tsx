@@ -4,6 +4,7 @@ import { ListPlans } from "@/components/Plans/ListPlans";
 import { PlanFilter } from "@/components/Plans/PlanFilter";
 import { SearchBar } from "@/components/Plans/SearchBar";
 import { PlanOrderByInput, useGetPlansQuery } from "@/generated/graphql";
+import useApp from "@/hooks/useApp";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -26,7 +27,7 @@ export default function Plans() {
   const [offset, setOffset] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [querySearch, setQuerySearch] = useState("");
+  const { querySearch, setQuerySearch } = useApp();
   const [plans, setPlans] = useState<Plan[]>([]);
   const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.CreatedAtDesc);
   const { ref: endRef, inView: endView } = useInView();

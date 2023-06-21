@@ -28,7 +28,7 @@ export default function Home({ session }: any) {
 
   return (
     <div className="pb-20">
-      <header className="h-[100vh] md:h-[90vh] w-full relative flex flex-col px-2">
+      <header className="h-[700px] md:h-[90vh] w-full relative flex flex-col px-2">
         <Image
           src="/assets/header-image-1.png"
           fill
@@ -54,19 +54,9 @@ export default function Home({ session }: any) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  // await client
-  //   .query(GetPlansDocument, {
-  //     limit: 8,
-  //     offset: 0,
-  //     search: "",
-  //     orderBy: PlanOrderByInput.CreatedAtDesc,
-  //   })
-  //   .toPromise();
-
   return {
     props: {
       session,
-      // urqlState: ssrCache.extractData(),
     },
   };
 };
