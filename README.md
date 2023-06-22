@@ -2,4 +2,4 @@
 
 # Layout (Figma)
 
-![enter image description here](https://github.com/ViniSCode/planmyjourney/blob/main/public/assets/layout-preview.png?raw=true)
+![enter image description here](https://github.com/ViniSCode/planmyjourney/blob/main/public/assets/layout.png?raw=true)
