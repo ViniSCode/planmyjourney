@@ -74,7 +74,7 @@ export function TripPlanSelectModal({ setIsModalOpen }: ModalProps) {
       const data = await response.json();
 
       setFetching(false);
-      return data.slice(0, 5);
+      return data.slice(0, 3);
     } catch (error) {
       console.log(error);
       setFetching(false);
@@ -106,7 +106,7 @@ export function TripPlanSelectModal({ setIsModalOpen }: ModalProps) {
         className="w-full h-screen fixed inset-0 bg-[#00000075] z-30 flex items-center justify-center"
         onClick={() => setIsModalOpen(false)}
       ></div>
-      <div className="fixed w-[95%] max-w-[290px] sm:max-w-[500px] xs:max-w-[380px] md:max-w-[600px] lg:max-w-[800px] bg-white px-4 py-4 md:px-10 md:py-10 rounded-xl z-40 top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4">
+      <div className="absolute w-[95%] max-w-[290px] sm:max-w-[500px] xs:max-w-[380px] md:max-w-[600px] lg:max-w-[800px] bg-white px-4 py-4 md:px-10 md:py-10 rounded-xl z-40 top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4">
         <FiX
           size={30}
           onClick={() => setIsModalOpen(false)}
