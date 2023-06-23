@@ -22,7 +22,11 @@ body {
 }
 
 .button-blue-bg {
-  @apply bg-gradient-to-r from-blue-500 via-blue-500 to-blue-900;
+  @apply bg-gradient-to-r from-blue-500 via-blue-500 to-[#083F92] hover:opacity-80 transition-opacity;
+}
+
+.underline-blue-bg {
+  @apply bg-gradient-to-r from-blue-500 via-blue-500 to-transparent;
 }
 
 .navbar-light-bg {

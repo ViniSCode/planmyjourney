@@ -26,7 +26,7 @@ module.exports = {
       lg: "1024px",
       // => @media (min-width: 1024px) { ... }
 
-      xl: "1400px",
+      xl: "1120px",
       // => @media (min-width: 1280px) { ... }
 
       "2xl": "1536px",
@@ -55,9 +55,10 @@ module.exports = {
         gray: {
           100: "#F7F7FF",
           250: "#F4F4F4",
-          260: "#F9F9F9",
+          260: "#F4F4F4",
           300: "#B6B6B6",
           400: "#B7B7B7",
+          450: "#B9B9B9",
           500: "#7D7D7D",
           700: "#595A5F",
           900: "#222222",
@@ -81,6 +82,9 @@ module.exports = {
         },
         green: {
           500: "#52BE8D",
+        },
+        slate: {
+          900: "#0B2330",
         },
       },
     },

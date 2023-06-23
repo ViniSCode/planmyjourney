@@ -44,7 +44,7 @@ export default function Home({ session }: any) {
         <HeaderText />
         {/* <TripPlanSelect /> */}
       </header>
-      <main className="px-6 mt-80 max-w-[1120px] mx-auto md:mt-48 flex flex-col items-center justify-center gap-20">
+      <main className="px-6 mt-[45rem] md:mt-80 lg:mt-20 max-w-[1120px] mx-auto flex flex-col items-center justify-center gap-20">
         {data && <PopularPlansSlide data={data} />}
         <OurServices />
         <Benefits />

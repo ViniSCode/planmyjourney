@@ -3,6 +3,7 @@ import { signIn, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { FiMoon, FiSun, FiX } from "react-icons/fi";
+import { Logo } from "./Logo";
 import { MobileLogo } from "./MobileLogo";
 
 interface HeaderProps {
@@ -18,8 +19,11 @@ export function Header({ session }: HeaderProps) {
       <nav className="select-none max-w-[1120px] lg:pt-0 pt-2 mx-auto fixed inset-0 z-50 px-9 lg:px-6 w-full h-[5rem] shadow-lg md:bg-none bg-navbar-blue-dark md:shadow-none md:relative">
         <div className="text-center pt-4 flex justify-center gap-8 md:gap-0 lg:gap-8 lg:justify-between items-center w-full mx-auto relative">
           <span className="lg:hidden"></span>
-          <span className="block md:hidden lg:block">
+          <span className="block md:hidden lg:hidden">
             <MobileLogo />
+          </span>
+          <span className="hidden md:hidden lg:block">
+            <Logo />
           </span>
           <ul className="flex gap-10 items-center text-sm">
             <li className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
@@ -38,7 +42,6 @@ export function Header({ session }: HeaderProps) {
               className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow"
               onClick={() => {
                 theme == "dark" ? setTheme("light") : setTheme("dark");
-                console.log(currentTheme);
               }}
             >
               <FiSun size={18} className="dark:block hidden text-white" />

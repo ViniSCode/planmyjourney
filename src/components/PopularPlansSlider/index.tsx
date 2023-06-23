@@ -3,7 +3,6 @@ import { motion, useDragControls } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { FiMapPin } from "react-icons/fi";
 
 interface PopularPlansSlideProps {
   data: GetPlansQuery | undefined;
@@ -31,11 +30,11 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
       animate={{ opacity: 1 }}
       className="w-full h-full"
     >
-      <h2 className="text-3xl text-white font-bold text-center">
+      <h2 className="text-3xl dark:text-white text-black font-bold text-center">
         Popular Trip Plans
       </h2>
       <div
-        className="mt-20 carousel w-full max-w-[370px] md:max-w-[660px] lg:max-w-full mx-auto overflow-x-hidden flex h-full relative"
+        className="mt-40 carousel w-full max-w-[370px] md:max-w-[660px] lg:max-w-full mx-auto overflow-x-hidden flex h-full relative"
         ref={slideRef}
       >
         <motion.div
@@ -50,11 +49,11 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
         >
           {data?.plans.map((plan, index) => (
             <div
-              className="w-56 h-fit relative"
+              className="w-72 h-fit relative border-2 border-transparent bg-gray-260 dark:bg-transparent dark:border-blue-500 rounded-3xl p-4"
               key={index}
               // onClick={() => router.push(`/plans/${plan.id}`)}
             >
-              <div className="w-full h-[300px]">
+              <div className="w-full h-[250px]">
                 <Image
                   priority={true}
                   src={plan.images[0]}
@@ -62,14 +61,26 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
                   width={600}
                   height={900}
                   draggable={false}
-                  className="w-full h-full max-w-[300px] max-h-[300px] object-cover rounded-2xl brightness-[0.8]"
+                  className="w-full h-full max-w-[300px] max-h-[250px] object-cover rounded-3xl brightness-[0.8]"
                 />
               </div>
-              <div className="w-full max-w-[150px] flex items-center justify-center gap-2 shadow-lg bg-white rounded-xl absolute top-0 right-[-25px] px-4 py-2">
-                <FiMapPin size={16} />
-                <span className="block text-gray-900 font-bold truncate">
-                  {plan.location[0].country}
+              <div className="mt-4 flex gap-2 flex-col">
+                <span className="dark:text-gray-450 text-gray-700 text-sm font-semibold">
+                  {plan.days} days
                 </span>
+                <strong className="dark:text-white text-black text-xl max-w-[190px] truncate">
+                  {plan.name ? plan.name : plan.location[0].country}
+                  sdfsdfsdfsdfsdfsdff
+                </strong>
+                <p className="max-w-[190px] dark:text-gray-450 text-gray-700 text-sm font-semibold">
+                  the trip plan is estimated to cost around{" "}
+                  {plan.expenses.max.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </p>
               </div>
             </div>
           ))}

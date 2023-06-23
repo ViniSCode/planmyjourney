@@ -6,7 +6,6 @@ import {
   AiOutlineLogin,
   AiOutlineStar,
 } from "react-icons/ai";
-import { FiSun } from "react-icons/fi";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { RiMapPinAddLine } from "react-icons/ri";
 import { SidebarItems } from "./SidebarItems";
@@ -47,11 +46,6 @@ export function MobileMenu() {
   const { data: session } = useSession();
 
   const menuItems = [
-    {
-      icon: <FiSun size={22} />,
-      href: "/",
-      name: "Theme",
-    },
     { icon: <AiOutlineGlobal size={22} />, href: "/", name: "Services" },
     {
       icon: <AiOutlineEnvironment size={23} />,

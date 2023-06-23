@@ -2,24 +2,32 @@ import Image from "next/image";
 
 export function OurServices() {
   return (
-    <section className="flex flex-col item-center justify-center gap-28 md:gap-60 mt-20 md">
+    <section className="mt-60 flex flex-col item-center justify-center gap-28 md:gap-60 md">
       <div>
         <div className="flex flex-col lg:flex-row lg:gap-20">
           <div>
             <Image
-              alt="woman traveling"
+              alt="man traveling"
               width={660}
               height={666}
               quality={100}
               src="/assets/avatar-blue-dark.png"
-              className="w-full h-full max-w-[370px] max-w-h-[373px] md:max-w-[660px] md:max-h-[666px] lg:w-[430px] lg:h-[436px]"
+              className="w-full h-full max-w-[370px] max-w-h-[373px] md:max-w-[660px] md:max-h-[666px] lg:w-[430px] lg:h-[436px] dark:block hidden"
+            />
+            <Image
+              alt="man traveling"
+              width={660}
+              height={666}
+              quality={100}
+              src="/assets/avatar-blue-light.png"
+              className="w-full h-full max-w-[370px] max-w-h-[373px] md:max-w-[660px] md:max-h-[666px] lg:w-[430px] lg:h-[436px] dark:hidden block"
             />
           </div>
           <div className="mt-12 max-w-[370px] md:max-w-[666px] lg:max-w-[548px] md:mt-16">
-            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px] text-white">
+            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px] dark:text-white text-black">
               Discover and Share Travel Plans
             </strong>
-            <p className="font-medium text-gray-400 mt-6 text-xs md:text-base">
+            <p className="font-medium dark:text-gray-400 text-gray-500 mt-6 text-xs md:text-base">
               Planning your trip is crucial for a stress-free and enjoyable
               experience. It saves time and money by finding the best deals and
               creating a realistic budget. Moreover, it helps you avoid
@@ -37,7 +45,15 @@ export function OurServices() {
                   width={275}
                   height={136}
                   quality={100}
-                  className="absolute top-[-30px] left-0 lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] lg:max-w-[270px] lg:scale-x-[-1] lg:scale-y-[1]"
+                  className="absolute top-[-30px] left-0 lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] lg:max-w-[270px] lg:scale-x-[-1] lg:scale-y-[1] dark:block hidden"
+                />
+                <Image
+                  alt="plane icon"
+                  src="/assets/plane-2.png"
+                  width={275}
+                  height={136}
+                  quality={100}
+                  className="absolute top-[-30px] left-0 lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] lg:max-w-[270px] lg:scale-x-[-1] lg:scale-y-[1] dark:hidden block"
                 />
               </div>
               <button className="min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
@@ -54,7 +70,15 @@ export function OurServices() {
               width={335}
               height={136}
               quality={100}
-              className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px]"
+              className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] dark:block hidden"
+            />
+            <Image
+              alt="plane icon"
+              src="/assets/plane-2.png"
+              width={335}
+              height={136}
+              quality={100}
+              className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] dark:hidden block"
             />
           </div>
           <button className="ml-4 min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
@@ -71,16 +95,24 @@ export function OurServices() {
               width={660}
               height={666}
               quality={100}
+              src="/assets/avatar-yellow-light.png"
+              className="w-full h-full max-w-[370px] max-w-h-[373px] md:max-w-[660px] md:max-h-[666px] lg:w-[430px] lg:h-[436px] dark:hidden block"
+            />
+            <Image
+              alt="woman traveling"
+              width={660}
+              height={666}
+              quality={100}
               src="/assets/avatar-yellow-dark.png"
-              className="w-full h-full max-w-[370px] max-w-h-[373px] md:max-w-[660px] md:max-h-[666px] lg:w-[430px] lg:h-[436px]"
+              className="w-full h-full max-w-[370px] max-w-h-[373px] md:max-w-[660px] md:max-h-[666px] lg:w-[430px] lg:h-[436px] dark:block hidden"
             />
           </div>
 
           <div className="mt-12 max-w-[370px] md:max-w-[666px] lg:max-w-[548px] md:mt-16 order-1">
-            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px] text-white">
+            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px] dark:text-white text-black">
               Find Your Dream Travel Plan
             </strong>
-            <p className="font-medium text-gray-400 mt-6 text-xs md:text-base">
+            <p className="font-medium dark:text-gray-400 text-gray-500 mt-6 text-xs md:text-base">
               Planning your trip is crucial for a stress-free and enjoyable
               experience. It saves time and money by finding the best deals and
               creating a realistic budget. Moreover, it helps you avoid
@@ -96,7 +128,15 @@ export function OurServices() {
                   width={275}
                   height={136}
                   quality={100}
-                  className="absolute top-[-30px] left-0  max-w-[200px] md:max-w-[335px] lg:max-w-[270px]"
+                  className="absolute top-[-30px] left-0  max-w-[200px] md:max-w-[335px] lg:max-w-[270px] dark:block hidden"
+                />
+                <Image
+                  alt="plane icon"
+                  src="/assets/plane-2.png"
+                  width={275}
+                  height={136}
+                  quality={100}
+                  className="absolute top-[-30px] left-0  max-w-[200px] md:max-w-[335px] lg:max-w-[270px] block dark:hidden"
                 />
               </div>
               <button className="min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base">
@@ -113,7 +153,15 @@ export function OurServices() {
               width={335}
               height={136}
               quality={100}
-              className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px]"
+              className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] dark:block hidden"
+            />
+            <Image
+              alt="plane icon"
+              src="/assets/plane-2.png"
+              width={335}
+              height={136}
+              quality={100}
+              className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] dark:hidden block"
             />
           </div>
           <button className="ml-4 min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base">
