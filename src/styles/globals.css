@@ -14,6 +14,27 @@ body {
   font-family: "Poppins, sans-serif";
   @apply font-poppins;
   @apply text-gray-900;
+  @apply dark:bg-gradient-to-r dark:from-black dark:via-slate-900 dark:to-black bg-white;
+}
+
+.homepage-dark-bg {
+  @apply bg-gradient-to-r from-black via-slate-900 to-black;
+}
+
+.button-blue-bg {
+  @apply bg-gradient-to-r from-blue-500 via-blue-500 to-blue-900;
+}
+
+.navbar-light-bg {
+  @apply bg-transparent;
+}
+
+.homepage-light-bg {
+  @apply bg-white;
+}
+
+.closeModalBackground {
+  background-color: rgb(0, 0, 0, 0.5);
 }
 
 .map-container {
@@ -43,4 +64,10 @@ body {
 
 .text-shadow-like {
   text-shadow: 1px 1px 2px black;
+}
+
+.text-blue-gradient {
+  background: linear-gradient(90deg, #1141bd 0%, #4aa6f7 65.47%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

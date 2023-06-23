@@ -8,10 +8,10 @@ import { TripPlanSelect } from "@/components/TripPlanSelect";
 import { PlanOrderByInput, useGetPlansQuery } from "@/generated/graphql";
 import type { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
-import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home({ session }: any) {
+  const [mounted, setMounted] = useState(false);
   const productsPerPage = 8;
   const [offset, setOffset] = useState(0);
   const [search, setSearch] = useState("");
@@ -26,17 +26,20 @@ export default function Home({ session }: any) {
     },
   });
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   return (
-    <div className="pb-20">
+    <div className={`pb-20`}>
       <header className="h-[700px] md:h-[100vh] w-full relative flex flex-col px-2">
-        <Image
+        {/* <Image
           src="/assets/teste.jpg"
           fill
           alt="Mountain Image"
           className="object-cover absolute z-[-10] brightness-75"
           quality={100}
           loading="lazy"
-        />
+        /> */}
         <Header session={session} />
         <MobileMenu />
         <HeaderText />

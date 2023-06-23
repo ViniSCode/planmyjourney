@@ -11,15 +11,15 @@ export function OurServices() {
               width={660}
               height={666}
               quality={100}
-              src="/assets/avatar-blue.png"
+              src="/assets/avatar-blue-dark.png"
               className="w-full h-full max-w-[370px] max-w-h-[373px] md:max-w-[660px] md:max-h-[666px] lg:w-[430px] lg:h-[436px]"
             />
           </div>
           <div className="mt-12 max-w-[370px] md:max-w-[666px] lg:max-w-[548px] md:mt-16">
-            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px]">
+            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px] text-white">
               Discover and Share Travel Plans
             </strong>
-            <p className="font-medium text-gray-700 mt-6 text-xs md:text-base">
+            <p className="font-medium text-gray-400 mt-6 text-xs md:text-base">
               Planning your trip is crucial for a stress-free and enjoyable
               experience. It saves time and money by finding the best deals and
               creating a realistic budget. Moreover, it helps you avoid
@@ -33,14 +33,14 @@ export function OurServices() {
               <div className="relative w-full max-w-[250px] md:max-w-[450px] lg:max-w-[400px] order-1">
                 <Image
                   alt="plane icon"
-                  src="/assets/plane-2.png"
+                  src="/assets/plane-2-dark.png"
                   width={275}
                   height={136}
                   quality={100}
                   className="absolute top-[-30px] left-0 lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] lg:max-w-[270px] lg:scale-x-[-1] lg:scale-y-[1]"
                 />
               </div>
-              <button className="min-w-fit max-w-fit bg-pink-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
+              <button className="min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
                 Share Your Plan
               </button>
             </div>
@@ -50,14 +50,14 @@ export function OurServices() {
           <div className="relative w-full max-w-[250px] md:max-w-[450px]">
             <Image
               alt="plane icon"
-              src="/assets/plane-2.png"
+              src="/assets/plane-2-dark.png"
               width={335}
               height={136}
               quality={100}
               className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px]"
             />
           </div>
-          <button className="ml-4 min-w-fit max-w-fit bg-pink-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
+          <button className="ml-4 min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
             Share Your Plan
           </button>
         </div>
@@ -71,16 +71,16 @@ export function OurServices() {
               width={660}
               height={666}
               quality={100}
-              src="/assets/avatar-yellow.png"
+              src="/assets/avatar-yellow-dark.png"
               className="w-full h-full max-w-[370px] max-w-h-[373px] md:max-w-[660px] md:max-h-[666px] lg:w-[430px] lg:h-[436px]"
             />
           </div>
 
           <div className="mt-12 max-w-[370px] md:max-w-[666px] lg:max-w-[548px] md:mt-16 order-1">
-            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px]">
+            <strong className="text-3xl md:text-5xl lg:text-[55px] lg:leading-[80px] text-white">
               Find Your Dream Travel Plan
             </strong>
-            <p className="font-medium text-gray-700 mt-6 text-xs md:text-base">
+            <p className="font-medium text-gray-400 mt-6 text-xs md:text-base">
               Planning your trip is crucial for a stress-free and enjoyable
               experience. It saves time and money by finding the best deals and
               creating a realistic budget. Moreover, it helps you avoid
@@ -92,7 +92,7 @@ export function OurServices() {
               <div className="relative w-full max-w-[250px] md:max-w-[450px] lg:max-w-[400px]">
                 <Image
                   alt="plane icon"
-                  src="/assets/plane-2.png"
+                  src="/assets/plane-2-dark.png"
                   width={275}
                   height={136}
                   quality={100}
@@ -109,7 +109,7 @@ export function OurServices() {
           <div className="relative w-full max-w-[250px] md:max-w-[450px]">
             <Image
               alt="plane icon"
-              src="/assets/plane-2.png"
+              src="/assets/plane-2-dark.png"
               width={335}
               height={136}
               quality={100}

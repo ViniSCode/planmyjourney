@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
@@ -40,6 +41,9 @@ module.exports = {
         ["share-plan"]: "50% 50%",
         ["images"]: "auto 8.5rem",
       },
+      backgroundImage: {
+        "navbar-blue-dark": "linear-gradient(180deg, #0C1E37 0%, black 100%)",
+      },
 
       fontFamily: {
         poppins: ["Poppins, sans-serif"],
@@ -53,6 +57,7 @@ module.exports = {
           250: "#F4F4F4",
           260: "#F9F9F9",
           300: "#B6B6B6",
+          400: "#B7B7B7",
           500: "#7D7D7D",
           700: "#595A5F",
           900: "#222222",
@@ -70,7 +75,8 @@ module.exports = {
         },
         blue: {
           400: "#659FE8",
-          500: "#1977F2",
+          500: "#3B87F9",
+          600: "#11344D",
           900: "#032339",
         },
         green: {

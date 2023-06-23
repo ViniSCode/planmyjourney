@@ -4,9 +4,9 @@ import {
   AiOutlineEnvironment,
   AiOutlineGlobal,
   AiOutlineLogin,
-  AiOutlinePhone,
   AiOutlineStar,
 } from "react-icons/ai";
+import { FiSun } from "react-icons/fi";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { RiMapPinAddLine } from "react-icons/ri";
 import { SidebarItems } from "./SidebarItems";
@@ -47,6 +47,11 @@ export function MobileMenu() {
   const { data: session } = useSession();
 
   const menuItems = [
+    {
+      icon: <FiSun size={22} />,
+      href: "/",
+      name: "Theme",
+    },
     { icon: <AiOutlineGlobal size={22} />, href: "/", name: "Services" },
     {
       icon: <AiOutlineEnvironment size={23} />,
@@ -63,7 +68,6 @@ export function MobileMenu() {
       href: "/share",
       name: "Share Plan",
     },
-    { icon: <AiOutlinePhone size={22} />, href: "/", name: "Contact" },
     {
       icon: <AiOutlineLogin size={22} />,
       href: "/login",
@@ -81,7 +85,11 @@ export function MobileMenu() {
       />
       <div
         onClick={() => cycleOpen()}
-        className={`${open ? "fixed z-[90] w-[100vw] h-[100vh] inset-0" : ""}`}
+        className={`${
+          open
+            ? "fixed z-[90] w-[100vw] h-[100vh] inset-0 closeModalBackground"
+            : ""
+        }`}
       >
         <AnimatePresence>
           (
@@ -89,7 +97,7 @@ export function MobileMenu() {
             animate={open ? "open" : "closed"}
             variants={aside}
             transition={{ duration: 0.2 }}
-            className="flex flex-col bg-gray-900 py-36 h-[100%] w-0 fixed top-0 left-0 right-0 bottom-0 z-50 shadow-lg overflow-x-hidden"
+            className="flex flex-col bg-navbar-blue-dark  py-36 h-[100%] w-0 fixed top-0 left-0 right-0 bottom-0 z-50 shadow-lg overflow-x-hidden"
           >
             <motion.div
               animate={open ? "open" : "closed"}

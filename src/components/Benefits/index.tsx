@@ -50,7 +50,9 @@ export function Benefits() {
 
   return (
     <section className="mt-40 md:max-w-[660px] lg:max-w-full">
-      <h2 className="text-3xl font-bold text-center">Our Benefits</h2>
+      <h2 className="text-3xl font-bold text-center text-white">
+        Our Benefits
+      </h2>
       <div className="mt-20 flex flex-col md:flex-row md:flex-wrap gap-10 md:gap-5 justify-between lg:justify-center items-center lg:gap-8">
         {cards.map(({ title, icon, description }, index) => (
           <BenefitsCard

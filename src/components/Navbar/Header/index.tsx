@@ -1,61 +1,67 @@
 import { Session } from "next-auth";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
+import { useTheme } from "next-themes";
 import Link from "next/link";
-import { Logo } from "./Logo";
+import { FiMoon, FiSun, FiX } from "react-icons/fi";
+import { MobileLogo } from "./MobileLogo";
 
 interface HeaderProps {
   session: Session;
 }
 
 export function Header({ session }: HeaderProps) {
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
   return (
     <div>
-      <nav className="select-none max-w-[1120px] lg:pt-0 pt-2 mx-auto fixed inset-0 z-50 px-9 lg:px-6 w-full h-[5rem] bg-gray-900 shadow-lg md:bg-transparent md:shadow-none md:relative">
+      <nav className="select-none max-w-[1120px] lg:pt-0 pt-2 mx-auto fixed inset-0 z-50 px-9 lg:px-6 w-full h-[5rem] shadow-lg md:bg-none bg-navbar-blue-dark md:shadow-none md:relative">
         <div className="text-center pt-4 flex justify-center gap-8 md:gap-0 lg:gap-8 lg:justify-between items-center w-full mx-auto relative">
           <span className="lg:hidden"></span>
           <span className="block md:hidden lg:block">
-            <Logo />
+            <MobileLogo />
           </span>
           <ul className="flex gap-10 items-center text-sm">
-            <li className="text-white hidden md:block transition-colors hover:text-pink-500 cursor-pointer text-shadow">
+            <li className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
               <Link href="/">Services</Link>
             </li>
-            <li className="text-white hidden md:block transition-colors hover:text-pink-500 cursor-pointer text-shadow">
+            <li className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
               <Link href="/plans">All Plans</Link>
             </li>
-            <li className="text-white hidden md:block transition-colors hover:text-pink-500 cursor-pointer text-shadow">
+            <li className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
               <Link href="/">Popular Plans</Link>
             </li>
-            <li className="text-white hidden md:block transition-colors hover:text-pink-500 cursor-pointer text-shadow">
+            <li className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
               <Link href="/share">Share Plan</Link>
             </li>
-            <li className="text-white hidden md:block transition-colors hover:text-pink-500 cursor-pointer text-shadow">
-              <Link href="https://www.linkedin.com/in/vinicius-rodrigues-5897831b8/">
-                Contact
-              </Link>
+            <li
+              className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow"
+              onClick={() => {
+                theme == "dark" ? setTheme("light") : setTheme("dark");
+                console.log(currentTheme);
+              }}
+            >
+              <FiSun size={18} className="dark:block hidden text-white" />
+              <FiMoon size={18} className="dark:hidden block text-black" />
             </li>
             {session?.user?.image ? (
-              <li className="hidden md:block transition-colors hover:text-yellow-500 cursor-pointer">
-                <Link href="/profile">
-                  <div className="rounded-full p-[3px] relative bg-gradient-to-r from-pink-500 to-blue-500">
-                    {session.user?.image ? (
-                      <img
-                        src={session.user!.image!}
-                        className="rounded-full h-8 w-8"
-                        referrerPolicy="no-referrer"
-                      />
-                    ) : (
-                      session.user?.name
-                    )}
-                  </div>
-                </Link>
+              <li
+                className="hidden md:block transition-colors hover:text-yellow-500 cursor-pointer"
+                onClick={() => signOut()}
+              >
+                <div className="flex items-center gap-2 text-white relative button-blue-bg py-2 px-4 rounded-full">
+                  <span className="max-w-[100px] truncate">
+                    {session.user && session.user?.name}
+                  </span>
+                  <FiX size={15} />
+                </div>
               </li>
             ) : (
               <li
                 onClick={() => signIn("google")}
                 className="hidden md:block transition-colors hover:text-yellow-500 cursor-pointer"
               >
-                <button className="bg-pink-500 px-8 py-2 rounded-full text-sm text-white hover:brightness-90 transition-[filter]">
+                <button className="bg-blue-500 px-8 py-2 rounded text-sm text-white hover:brightness-90 transition-[filter]">
                   Login
                 </button>
               </li>

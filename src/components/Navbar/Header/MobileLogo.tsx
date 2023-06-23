@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-export function Logo() {
+export function MobileLogo() {
   return (
     <Link href="/">
-      <h1 className="text-xl dark:text-white text-black font-semibold cursor-pointer">
+      <h1 className="text-xl text-white font-semibold cursor-pointer">
         PlanMyJourney
       </h1>
     </Link>

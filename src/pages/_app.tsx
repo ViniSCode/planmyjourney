@@ -6,6 +6,7 @@ import { client, ssrCache } from "@/lib/urql";
 import "@/styles/globals.css";
 import { GetServerSideProps } from "next";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
@@ -32,26 +33,28 @@ export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
       <Provider value={client}>
-        <AppContextProvider>
-          <MapContextProvider apiKey={pageProps.apiKey}>
-            {isPageLoading && <Loading />}
-            <SharePlanContextProvider>
-              <ToastContainer
-                position="top-right"
-                autoClose={7000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-              />
-              <Component {...pageProps} />
-            </SharePlanContextProvider>
-          </MapContextProvider>
-        </AppContextProvider>
+        <ThemeProvider attribute="class">
+          <AppContextProvider>
+            <MapContextProvider apiKey={pageProps.apiKey}>
+              {isPageLoading && <Loading />}
+              <SharePlanContextProvider>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={7000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
+                <Component {...pageProps} />
+              </SharePlanContextProvider>
+            </MapContextProvider>
+          </AppContextProvider>
+        </ThemeProvider>
       </Provider>
     </SessionProvider>
   );
