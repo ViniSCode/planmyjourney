@@ -3,8 +3,7 @@ import Link from "next/link";
 import { FiMoon, FiSun } from "react-icons/fi";
 
 export function MobileLogo() {
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
+  const { theme, setTheme } = useTheme();
 
   return (
     <Link href="/" className="flex items-center justify-between gap-3">
