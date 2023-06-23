@@ -4,7 +4,6 @@ import { HeaderText } from "@/components/Navbar/Header/HeaderText";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { OurServices } from "@/components/OurServices";
 import { PopularPlansSlide } from "@/components/PopularPlansSlider";
-import { TripPlanSelect } from "@/components/TripPlanSelect";
 import { PlanOrderByInput, useGetPlansQuery } from "@/generated/graphql";
 import type { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
@@ -43,7 +42,7 @@ export default function Home({ session }: any) {
         <Header session={session} />
         <MobileMenu />
         <HeaderText />
-        <TripPlanSelect />
+        {/* <TripPlanSelect /> */}
       </header>
       <main className="px-6 mt-80 max-w-[1120px] mx-auto md:mt-48 flex flex-col items-center justify-center gap-20">
         {data && <PopularPlansSlide data={data} />}
