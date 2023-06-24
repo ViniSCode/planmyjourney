@@ -1,6 +1,7 @@
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { FiMoon, FiSun } from "react-icons/fi";
+import { MobileLogo } from "../Header/MobileLogo";
 import { Logo } from "./Logo";
 
 export function PlansHeader() {
@@ -14,7 +15,7 @@ export function PlansHeader() {
             <Logo />
           </span>
           <span className="block md:hidden lg:hidden">
-            <Logo />
+            <MobileLogo />
           </span>
           <ul className="dark:text-white text-black flex gap-10 items-center text-sm">
             <li className="hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
