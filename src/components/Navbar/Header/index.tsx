@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
@@ -5,7 +6,6 @@ import Link from "next/link";
 import { FiMoon, FiSun, FiX } from "react-icons/fi";
 import { Logo } from "./Logo";
 import { MobileLogo } from "./MobileLogo";
-
 interface HeaderProps {
   session: Session;
 }
@@ -15,7 +15,13 @@ export function Header({ session }: HeaderProps) {
   const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: { duration: 0.6, delay: 0.2 },
+      }}
+    >
       <nav className="select-none max-w-[1120px] lg:pt-0 pt-2 mx-auto fixed inset-0 z-50 px-9 lg:px-6 w-full h-[5rem] shadow-lg md:bg-none bg-navbar-blue-dark md:shadow-none md:relative">
         <div className="text-center pt-4 flex justify-center gap-8 md:gap-0 lg:gap-8 lg:justify-between items-center w-full mx-auto relative">
           <span className="lg:hidden"></span>
@@ -72,6 +78,6 @@ export function Header({ session }: HeaderProps) {
           </ul>
         </div>
       </nav>
-    </div>
+    </motion.div>
   );
 }
