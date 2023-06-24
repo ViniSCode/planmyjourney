@@ -15,6 +15,11 @@ export default function LocationMap({ markers, goToLocation }) {
     [90, 180],
   ];
 
+  // var Stadia_AlidadeSmoothDark = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+  // 	maxZoom: 20,
+  // 	attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+  // });
+
   return (
     <div className="w-full h-full">
       <MapContainer
@@ -25,10 +30,12 @@ export default function LocationMap({ markers, goToLocation }) {
         maxBounds={maxBounds}
         className="map-container"
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <div className="dark:hidden block">
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+        </div>
         <GetDirections coords={coords} location={markers} />
         {markers.map((marker, index) => (
           <Marker key={index} position={[marker.lat, marker.lng]}>

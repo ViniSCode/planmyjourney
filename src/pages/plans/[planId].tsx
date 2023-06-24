@@ -48,7 +48,7 @@ export default function PlanId({ session }: any) {
       <main className="px-6 mt-32 max-w-[1120px] md:mt-16 mx-auto pb-20">
         <div
           onClick={() => router.back()}
-          className="cursor-pointer font-medium text-gray-700 bg-gray-200 w-fit p-2 rounded-lg mb-20 hover:bg-gray-250 transition-colors"
+          className="cursor-pointer font-medium dark:text-white text-gray-700 dark:bg-blue-600 bg-gray-200 w-fit p-2 rounded-lg mb-20 hover:bg-gray-250 dark:hover:bg-blue-900 transition-colors"
         >
           <FiArrowLeft size={20} />
         </div>
@@ -56,13 +56,13 @@ export default function PlanId({ session }: any) {
           <div>
             <div className="flex justify-between place-items-baseline">
               <div className="full w-full truncate">
-                <h2 className="text-2xl truncate">
+                <h2 className="text-2xl truncate dark:text-white text-black">
                   {data?.plan.name
                     ? data?.plan.name
                     : data.plan?.location[0].country + " Trip Plan"}
                 </h2>
 
-                <div className="text-gray-900 font-semibold">
+                <div className="dark:text-gray-500 text-gray-900 font-semibold">
                   <span className="text-xs">
                     {Intl.DateTimeFormat("en-US", {
                       month: "short",
@@ -86,8 +86,12 @@ export default function PlanId({ session }: any) {
                 className="rounded-full w-10"
               />
               <div>
-                <span className="block">{data.plan!.member!.name}</span>
-                <small className="block text-gray-700">Author</small>
+                <span className="block dark:text-white text-black">
+                  {data.plan!.member!.name}
+                </span>
+                <small className="block dark:text-gray-500 text-gray-700">
+                  Author
+                </small>
               </div>
             </div>
             <div className="mt-10">
@@ -97,13 +101,15 @@ export default function PlanId({ session }: any) {
                     <div
                       key={index}
                       onClick={() => setGoToLocation({ ...loc })}
-                      className="p-2 bg-white shadow-lg rounded-lg flex items-center gap-2 cursor-pointer w-fit max-w-full xs:max-w-[48%] md:max-w-[48%] lg:max-w-[48%]"
+                      className="p-2 dark:bg-blue-600 bg-white shadow-lg rounded-lg flex items-center gap-2 cursor-pointer w-fit max-w-full xs:max-w-[48%] md:max-w-[48%] lg:max-w-[48%]"
                       title={loc.formatted}
                     >
                       <div className="w-fit h-fit">
-                        <TbMapPinFilled size={20} className="text-red-500" />
+                        <TbMapPinFilled size={20} className="text-blue-500" />
                       </div>
-                      <span className="block truncate">{loc.formatted}</span>
+                      <span className="block truncate dark:text-white">
+                        {loc.formatted}
+                      </span>
                     </div>
                   ))}
               </div>

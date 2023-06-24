@@ -13,30 +13,36 @@ export function ImportantInfo({ plan }: any) {
 
   return (
     <div className="mt-16">
-      <h3 className="text-2xl font-semibold">Important Information</h3>
+      <h3 className="text-2xl font-semibold dark:text-white text-black">
+        Important Information
+      </h3>
 
       <div>
-        <h4 className="mt-16 font-medium text-xl">Duration</h4>
-        <p className="mt-4 text-sm">
+        <h4 className="mt-16 font-medium text-xl dark:text-white text-black">
+          Duration
+        </h4>
+        <p className="mt-4 text-sm dark:text-white text-black">
           The trip plan is intended to last {plan.days} days
         </p>
         <div className="mt-6 flex items-center gap-3">
           <input
             type="number"
-            className="numberOfDays text-xl font-medium bg-gray-200 rounded-lg w-12 h-12 flex items-center text-center text-gray-900 justify-center placeholder:text-center placeholder:text-gray-500 pointer-events-none focus:outline-none border-none"
+            className="numberOfDays text-xl font-medium dark:bg-blue-600 dark:text-white bg-gray-200 rounded-lg w-12 h-12 flex items-center text-center text-gray-900 justify-center placeholder:text-center placeholder:text-gray-500 pointer-events-none focus:outline-none border-none"
             placeholder="0"
             onChange={() => {
               console.log("");
             }}
             value={plan!.days}
           />
-          <span className="font-medium">Days</span>
+          <span className="font-medium dark:text-white text-black">Days</span>
         </div>
       </div>
 
       <div>
-        <h4 className="mt-16 font-medium text-xl">Transportation</h4>
-        <p className="mt-4 text-sm">
+        <h4 className="mt-16 font-medium text-xl dark:text-white text-black">
+          Transportation
+        </h4>
+        <p className="mt-4 text-sm dark:text-white text-black">
           The user can choose to travel by bus, car, subway, or walking,
           depending on their preferences and the local transportation options
           available.
@@ -70,8 +76,10 @@ export function ImportantInfo({ plan }: any) {
       </div>
 
       <div>
-        <h4 className="mt-16 font-medium text-xl">Estimate Expenses</h4>
-        <p className="mt-4 text-sm">
+        <h4 className="mt-16 font-medium text-xl dark:text-white text-black">
+          Estimate Expenses
+        </h4>
+        <p className="mt-4 text-sm dark:text-white text-black">
           Based on user input, the trip is estimated to cost around{" "}
           {estimate_expenses}, including transportation, accommodations,
           activities, and other miscellaneous expenses. However, please note
@@ -82,7 +90,7 @@ export function ImportantInfo({ plan }: any) {
           <input
             type="number"
             name="number"
-            className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500 border-none pointer-events-none"
+            className="numberOfDays text-base font-medium dark:bg-blue-600 dark:text-blue-500 bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-black justify-center placeholder:text-center placeholder:text-gray-500 border-none pointer-events-none"
             placeholder="$800"
             onChange={() => {
               console.log("");
@@ -92,7 +100,7 @@ export function ImportantInfo({ plan }: any) {
           <span className="text-lg block text-gray-700 font-medium">to</span>
           <input
             type="number"
-            className="numberOfDays text-base font-medium bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-green-500 justify-center placeholder:text-center placeholder:text-gray-500 border-none pointer-events-none"
+            className="numberOfDays text-base font-medium dark:bg-blue-600 dark:text-blue-500 bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-black justify-center placeholder:text-center placeholder:text-gray-500 border-none pointer-events-none"
             onChange={() => {
               console.log("");
             }}
@@ -101,8 +109,10 @@ export function ImportantInfo({ plan }: any) {
         </div>
 
         <div className="mt-16">
-          <h4 className="font-medium text-xl">Travel Tips</h4>
-          <ul className="ml-8 mt-6 list-disc flex flex-col gap-3 text-sm">
+          <h4 className="font-medium text-xl dark:text-white text-black">
+            Travel Tips
+          </h4>
+          <ul className="ml-8 mt-6 list-disc flex flex-col gap-3 text-sm dark:text-white text-black">
             <li>
               <p>
                 <span className="font-semibold">Weather: </span>Depending on the

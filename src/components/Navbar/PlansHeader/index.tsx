@@ -21,9 +21,6 @@ export function PlansHeader() {
               <Link href="/">Home</Link>
             </li>
             <li className="hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
-              <Link href="/plans">All Plans</Link>
-            </li>
-            <li className="hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
               <Link href="/">Popular Plans</Link>
             </li>
             <li className="hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">

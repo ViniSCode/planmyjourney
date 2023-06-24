@@ -50,7 +50,7 @@ export function GetDirections({ coords, location }) {
   return (
     <>
       <div
-        className="bg-[#262626] shadow-lg cursor-pointer absolute z-[9999] h-fit max-w-fit bottom-3 right-0 left-0 mx-auto mb-4 w-[90%] ssm:w-[70%] font-poppins px-4 py-3 rounded-md hover:bg-gray-700 transition-colors"
+        className="bg-black shadow-lg cursor-pointer absolute z-[9999] h-fit max-w-fit bottom-3 right-0 left-0 mx-auto mb-4 w-[90%] ssm:w-[70%] font-poppins px-4 py-3 rounded-md hover:bg-gray-700 transition-colors"
         onClick={() => generateGoogleMapsURL(location)}
       >
         <div className="flex items-center gap-2">
