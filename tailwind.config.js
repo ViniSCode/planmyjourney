@@ -10,6 +10,8 @@ module.exports = {
     screens: {
       xxs: "280px",
 
+      heroImage: "300px",
+
       carousel: "360px",
 
       xs: "420px",

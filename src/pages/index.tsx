@@ -31,14 +31,6 @@ export default function Home({ session }: any) {
   return (
     <div className={`pb-20`}>
       <header className="h-[700px] md:h-[100vh] w-full relative flex flex-col px-2">
-        {/* <Image
-          src="/assets/teste.jpg"
-          fill
-          alt="Mountain Image"
-          className="object-cover absolute z-[-10] brightness-75"
-          quality={100}
-          loading="lazy"
-        /> */}
         <Header session={session} />
         <MobileMenu />
         <HeaderText />

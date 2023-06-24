@@ -7,7 +7,7 @@ export function MobileLogo() {
 
   return (
     <Link href="/" className="flex items-center justify-between gap-3">
-      <h1 className="text-xl text-white font-semibold cursor-pointer">
+      <h1 className=" xs:text-xl text-white font-semibold cursor-pointer">
         PlanMyJourney
       </h1>
       <div
