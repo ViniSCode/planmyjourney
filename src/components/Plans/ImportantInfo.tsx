@@ -97,7 +97,9 @@ export function ImportantInfo({ plan }: any) {
             }}
             value={plan.expenses.min}
           />
-          <span className="text-lg block text-gray-700 font-medium">to</span>
+          <span className="text-lg block dark:text-white text-gray-700 font-medium">
+            to
+          </span>
           <input
             type="number"
             className="numberOfDays text-base font-medium dark:bg-blue-600 dark:text-blue-500 bg-gray-200 rounded-lg w-28 h-9 flex items-center text-center text-black justify-center placeholder:text-center placeholder:text-gray-500 border-none pointer-events-none"

@@ -9,7 +9,7 @@ export default function Share({ session }: any) {
   const { name, setName } = useSharePlan();
 
   return (
-    <div className="grid lg:grid-cols-share-plan select-none">
+    <div className="bg-white grid lg:grid-cols-share-plan select-none">
       <div className="h-[50vh] lg:h-screen w-full overflow-hidden">
         <Image
           src="/assets/share-page-image.png"

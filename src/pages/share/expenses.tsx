@@ -9,7 +9,7 @@ export default function Expenses({ session }: any) {
   const { setExpenses, expenses } = useSharePlan();
 
   return (
-    <div className="grid lg:grid-cols-share-plan">
+    <div className="bg-white grid lg:grid-cols-share-plan">
       <div className="h-[50vh] lg:h-screen w-full overflow-hidden">
         <Image
           src="/assets/expenses-page-image.png"

@@ -55,7 +55,7 @@ export default function Images({ apiKey, session }: any) {
   }, [selectedImages, fileInputRef]);
 
   return (
-    <main className="grid lg:grid-cols-map-grid-lg xl:grid-cols-map-grid-xl select-none overflow-hidden">
+    <main className="bg-white grid lg:grid-cols-map-grid-lg xl:grid-cols-map-grid-xl select-none overflow-hidden">
       <div className="xl:flex xl:flex-col xl:justify-center mt-10 mb-20 lg:mb-0 w-full max-w-[80%] md:max-w-[70%] lg:max-w-[80%] xl:w-[80%] xl:max-w-[1280px] 2xl:max-w-[60%] mx-auto">
         <h1 className="text-3xl font-medium text-center">PlanMyJourney</h1>
         <h2 className="mt-10 xl:mt-20 text-2xl font-medium">
