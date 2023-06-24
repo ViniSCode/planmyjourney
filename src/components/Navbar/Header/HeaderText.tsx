@@ -13,10 +13,10 @@ export function HeaderText() {
         className="lg:max-w-[460px] xl:max-w-[530px] w-full order-1 mt-20 lg:mt-0 flex items-center justify-center flex-col lg:block"
       >
         <div className="relative">
-          <h3 className="block dark:text-white text-black w-80 text-center lg:text-start lg:w-full text-4xl md:text-[52px] leading-[1.5] xl:text-6xl xl:leading-[1.5]">
+          <h3 className="block dark:text-white text-black w-80 text-center leading-[1.3] max-w-[200px] text-3xl xs:max-w-full lg:text-start lg:w-full xs:text-4xl md:text-[52px] xs:leading-[1.5] xl:text-6xl xl:leading-[1.5]">
             Explore The World Around You
           </h3>
-          <span className="block absolute w-[200px] h-1 underline-blue-bg top-[50px] md:top-[75px] xl:top-[85px]"></span>
+          <span className="block absolute w-[100px] xs:w-[200px] h-1 underline-blue-bg top-[35px] xs:top-[50px] md:top-[75px] xl:top-[85px]"></span>
         </div>
         <p className="mt-8 dark:text-white max-w-lg text-black text-shadow text-sm text-center lg:text-start">
           Explore your dream destinations and take a break from the everyday

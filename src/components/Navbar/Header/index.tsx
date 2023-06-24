@@ -11,8 +11,7 @@ interface HeaderProps {
 }
 
 export function Header({ session }: HeaderProps) {
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
+  const { theme, setTheme } = useTheme();
 
   return (
     <motion.div

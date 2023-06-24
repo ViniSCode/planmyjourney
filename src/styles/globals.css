@@ -14,6 +14,7 @@ body {
   font-family: "Poppins, sans-serif";
   @apply font-poppins;
   @apply text-gray-900;
+  @apply scroll-smooth;
   @apply dark:bg-gradient-to-r dark:from-black dark:via-slate-900 dark:to-black bg-white;
 }
 
