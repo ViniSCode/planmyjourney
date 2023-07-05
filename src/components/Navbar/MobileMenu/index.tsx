@@ -2,7 +2,6 @@ import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { useSession } from "next-auth/react";
 import {
   AiOutlineEnvironment,
-  AiOutlineGlobal,
   AiOutlineLogin,
   AiOutlineStar,
 } from "react-icons/ai";
@@ -46,7 +45,6 @@ export function MobileMenu() {
   const { data: session } = useSession();
 
   const menuItems = [
-    { icon: <AiOutlineGlobal size={22} />, href: "/", name: "Services" },
     {
       icon: <AiOutlineEnvironment size={23} />,
       href: "/plans",
@@ -54,7 +52,7 @@ export function MobileMenu() {
     },
     {
       icon: <AiOutlineStar size={23} />,
-      href: "/",
+      href: "/plans",
       name: "Popular Plans",
     },
     {

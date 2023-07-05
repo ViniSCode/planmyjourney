@@ -26,6 +26,7 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
 
   return (
     <motion.section
+      id="popular-plans-section"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="w-full h-full"

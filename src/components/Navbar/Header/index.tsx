@@ -1,3 +1,4 @@
+import { scrollTo } from "@/utils/scrollTo";
 import { motion } from "framer-motion";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
@@ -32,13 +33,15 @@ export function Header({ session }: HeaderProps) {
           </span>
           <ul className="flex gap-10 items-center text-sm">
             <li className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
-              <Link href="/">Services</Link>
+              <span onClick={() => scrollTo("services-section")}>Services</span>
             </li>
             <li className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
               <Link href="/plans">All Plans</Link>
             </li>
             <li className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
-              <Link href="/">Popular Plans</Link>
+              <span onClick={() => scrollTo("popular-plans-section")}>
+                Popular Plans
+              </span>
             </li>
             <li className="dark:text-white dark:hover:text-blue-500 hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
               <Link href="/share">Share Plan</Link>

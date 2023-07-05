@@ -1,10 +1,12 @@
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { MobileLogo } from "../Header/MobileLogo";
 import { Logo } from "./Logo";
 
 export function PlansHeader() {
+  const { pathname } = useRouter();
   const { theme, setTheme } = useTheme();
   return (
     <div>
@@ -21,8 +23,12 @@ export function PlansHeader() {
             <li className="hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
               <Link href="/">Home</Link>
             </li>
-            <li className="hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
-              <Link href="/">Popular Plans</Link>
+            <li
+              className={`hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow ${
+                pathname === "/plans" && "md:hidden"
+              }`}
+            >
+              <Link href="/plans">All Plans</Link>
             </li>
             <li className="hidden md:block transition-colors hover:text-blue-500 cursor-pointer text-shadow">
               <Link href="https://www.linkedin.com/in/vinicius-rodrigues-5897831b8/">

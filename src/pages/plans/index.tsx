@@ -76,7 +76,9 @@ export default function Plans() {
             <ListPlans plans={plans} />
           ) : (
             <div className="flex justify-center mt-24">
-              <p>{search ? "No matching plans found" : "No plans available"}</p>
+              <p className="dark:text-white text-black">
+                {search ? "No matching plans found" : "No plans available"}
+              </p>
             </div>
           )}
         </motion.div>

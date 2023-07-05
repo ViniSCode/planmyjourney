@@ -1,8 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export function OurServices() {
   return (
-    <section className="mt-60 flex flex-col item-center justify-center gap-28 md:gap-60 md">
+    <section
+      id="services-section"
+      className="mt-60 flex flex-col item-center justify-center gap-28 md:gap-60 md"
+    >
       <div>
         <div className="flex flex-col lg:flex-row lg:gap-20">
           <div>
@@ -56,9 +60,11 @@ export function OurServices() {
                   className="absolute top-[-30px] left-0 lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] lg:max-w-[270px] lg:scale-x-[-1] lg:scale-y-[1] dark:hidden block"
                 />
               </div>
-              <button className="min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
-                Share Your Plan
-              </button>
+              <Link href="/share">
+                <button className="whitespace-nowrap min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
+                  Share Your Plan
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -81,9 +87,11 @@ export function OurServices() {
               className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] dark:hidden block"
             />
           </div>
-          <button className="ml-4 min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
-            Share Your Plan
-          </button>
+          <Link href="/share">
+            <button className="whitespace-nowrap ml-4 min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
+              Share Plan
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -139,9 +147,11 @@ export function OurServices() {
                   className="absolute top-[-30px] left-0  max-w-[200px] md:max-w-[335px] lg:max-w-[270px] block dark:hidden"
                 />
               </div>
-              <button className="min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base">
-                Find a Plan
-              </button>
+              <Link href="/plans">
+                <button className="whitespace-nowrap min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base">
+                  Find a Plan
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -164,9 +174,11 @@ export function OurServices() {
               className="absolute top-[-30px] left-0 right-[unset] w-full lg:right-0 lg:left-[unset] max-w-[200px] md:max-w-[335px] dark:hidden block"
             />
           </div>
-          <button className="ml-4 min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base">
-            Share Your Plan
-          </button>
+          <Link href="/plans">
+            <button className="whitespace-nowrap ml-4 min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base">
+              Find Plan
+            </button>
+          </Link>
         </div>
       </div>
     </section>

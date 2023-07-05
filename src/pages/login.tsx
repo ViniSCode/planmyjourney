@@ -13,7 +13,7 @@ export default function Login({ session }: any) {
   }
 
   return (
-    <div className="grid lg:grid-cols-share-plan select-none">
+    <div className="bg-white grid lg:grid-cols-share-plan select-none">
       <div className="px-4 md:px-0 mt-20 mb-20 lg:mb-0 lg:mt-0 lg:h-screen w-full flex items-center lg:justify-center flex-col">
         <div className="w-full max-w-[360px] mx-auto">
           <h2 className="text-3xl font-medium text-center text-gray-900">

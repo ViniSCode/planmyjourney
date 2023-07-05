@@ -28,13 +28,13 @@ export default function Home({ session }: any) {
   useEffect(() => {
     setMounted(true);
   }, []);
+
   return (
     <div className={`pb-20`}>
       <header className="h-[700px] md:h-[100vh] w-full relative flex flex-col px-2">
         <Header session={session} />
         <MobileMenu />
         <HeaderText />
-        {/* <TripPlanSelect /> */}
       </header>
       <main className="px-6 mt-[45rem] md:mt-80 lg:mt-20 max-w-[1120px] mx-auto flex flex-col items-center justify-center gap-20">
         {data && <PopularPlansSlide data={data} />}
