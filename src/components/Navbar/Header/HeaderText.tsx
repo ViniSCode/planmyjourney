@@ -22,7 +22,7 @@ export function HeaderText() {
           Explore your dream destinations and take a break from the everyday
           stress. Share and discover travel plans with our community.
         </p>
-        <button className="button-blue-bg rounded px-4 py-2 text-white mt-16">
+        <button className="button-blue-bg rounded-full px-6 py-2 text-white mt-16">
           Get started
         </button>
       </motion.div>

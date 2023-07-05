@@ -25,6 +25,14 @@ body {
 .button-blue-bg {
   @apply bg-gradient-to-r from-blue-500 via-blue-500 to-[#083F92] hover:opacity-80 transition-opacity;
 }
+.button-yellow-bg {
+  background: linear-gradient(
+    135deg,
+    #fbdc41 0%,
+    #fbdc41 0.01%,
+    #705d00 98.73%
+  );
+}
 
 .blue-bg-500 {
   @apply bg-gradient-to-r from-blue-500 via-blue-500 to-[#083F92];

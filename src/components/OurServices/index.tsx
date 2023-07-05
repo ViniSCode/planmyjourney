@@ -61,7 +61,7 @@ export function OurServices() {
                 />
               </div>
               <Link href="/share">
-                <button className="whitespace-nowrap min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
+                <button className="whitespace-nowrap min-w-fit max-w-fit button-blue-bg w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
                   Share Your Plan
                 </button>
               </Link>
@@ -88,7 +88,7 @@ export function OurServices() {
             />
           </div>
           <Link href="/share">
-            <button className="whitespace-nowrap ml-4 min-w-fit max-w-fit bg-blue-500 w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
+            <button className="whitespace-nowrap ml-4 min-w-fit max-w-fit button-blue-bg w-full text-white rounded-full px-6 py-3 text-xs md:text-base">
               Share Plan
             </button>
           </Link>
@@ -148,7 +148,7 @@ export function OurServices() {
                 />
               </div>
               <Link href="/plans">
-                <button className="whitespace-nowrap min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base">
+                <button className="whitespace-nowrap min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base hover:brightness-90 transition-[filter]">
                   Find a Plan
                 </button>
               </Link>
@@ -175,7 +175,7 @@ export function OurServices() {
             />
           </div>
           <Link href="/plans">
-            <button className="whitespace-nowrap ml-4 min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base">
+            <button className="whitespace-nowrap ml-4 min-w-fit max-w-fit bg-yellow-500 w-full text-gray-900 rounded-full px-6 py-3 text-xs md:text-base hover:brightness-90 transition-[filter]">
               Find Plan
             </button>
           </Link>

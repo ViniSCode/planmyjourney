@@ -1,6 +1,7 @@
 import { GetPlansQuery } from "@/generated/graphql";
 import { motion, useDragControls } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
@@ -23,6 +24,11 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
   }, []);
 
   const controls = useDragControls();
+
+  const handleClick = (event: any) => {
+    console.log(event.movementX + 20);
+    // controls.start(event);
+  };
 
   return (
     <motion.section
@@ -52,7 +58,6 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
             <div
               className="w-72 h-fit relative border-2 border-transparent bg-gray-260 dark:bg-transparent dark:border-blue-500 rounded-3xl p-4"
               key={index}
-              // onClick={() => router.push(`/plans/${plan.id}`)}
             >
               <div className="w-full h-[250px]">
                 <Image
@@ -71,7 +76,6 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
                 </span>
                 <strong className="dark:text-white text-black text-xl max-w-[190px] truncate">
                   {plan.name ? plan.name : plan.location[0].country}
-                  sdfsdfsdfsdfsdfsdff
                 </strong>
                 <p className="max-w-[190px] dark:text-gray-450 text-gray-700 text-sm font-semibold">
                   the trip plan is estimated to cost around{" "}
@@ -87,6 +91,14 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
           ))}
         </motion.div>
       </div>
+      <Link
+        href="/plans"
+        className="w-full flex items-center justify-center mt-20"
+      >
+        <button className="button-blue-bg px-6 py-2 rounded-full text-white">
+          All Plans
+        </button>
+      </Link>
     </motion.section>
   );
 }
