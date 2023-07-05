@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 export function HeaderText() {
   return (
     <motion.div className="mt-40 md:mt-0 max-w-[370px] md:max-w-[1120px] mx-auto w-full px-8 flex flex-col lg:flex-row items-center justify-center lg:justify-between h-full gap-10">
@@ -22,9 +23,11 @@ export function HeaderText() {
           Explore your dream destinations and take a break from the everyday
           stress. Share and discover travel plans with our community.
         </p>
-        <button className="button-blue-bg rounded-full px-6 py-2 text-white mt-16">
-          Get started
-        </button>
+        <Link href="/plans">
+          <button className="button-blue-bg rounded-full px-6 py-2 text-white mt-16">
+            Get started
+          </button>
+        </Link>
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
