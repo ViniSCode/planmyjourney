@@ -29,7 +29,7 @@ export default function Plans() {
   const [search, setSearch] = useState("");
   const { querySearch, setQuerySearch } = useApp();
   const [plans, setPlans] = useState<Plan[]>([]);
-  const [orderBy, setOrderBy] = useState(() => PlanOrderByInput.CreatedAtDesc);
+  const [orderBy, setOrderBy] = useState(PlanOrderByInput.UpdatedAtDesc);
   const { ref: endRef, inView: endView } = useInView();
 
   const [{ data, fetching, error }] = useGetPlansQuery({
@@ -70,7 +70,7 @@ export default function Plans() {
       </header>
       <main className="px-6 mt-32 max-w-[1120px] md:mt-16 mx-auto pb-20">
         <SearchBar search={search} setSearch={setSearch} />
-        <PlanFilter />
+        <PlanFilter setOrderBy={setOrderBy} orderBy={orderBy} />
         <motion.div>
           {plans.length > 0 ? (
             <ListPlans plans={plans} />
