@@ -1,18 +1,23 @@
 import { GetPlansQuery } from "@/generated/graphql";
+import { fadeInVariant } from "@/utils/transitions";
 import { motion, useDragControls } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
 interface PopularPlansSlideProps {
   data: GetPlansQuery | undefined;
+  section2Ref: any;
+  section2View: boolean;
 }
 
-export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
+export function PopularPlansSlide({
+  data,
+  section2Ref,
+  section2View,
+}: PopularPlansSlideProps) {
   const [carouselWidth, setCarouselWidth] = useState(0);
   const [isGrabbing, setIsGrabbing] = useState(false);
-  const router = useRouter();
   const slideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,9 +37,12 @@ export function PopularPlansSlide({ data }: PopularPlansSlideProps) {
 
   return (
     <motion.section
+      ref={section2Ref}
       id="popular-plans-section"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      variants={fadeInVariant}
+      initial="hidden"
+      animate={section2View ? "visible" : "hidden"}
+      custom={1}
       className="w-full h-full"
     >
       <h2 className="text-3xl dark:text-white text-black font-bold text-center">

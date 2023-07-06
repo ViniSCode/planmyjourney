@@ -1,13 +1,20 @@
+import { fadeInXReverseVariant, fadeInXVariant } from "@/utils/transitions";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-
-export function OurServices() {
+export function OurServices({ section3Ref, section3View }: any) {
   return (
     <section
+      ref={section3Ref}
       id="services-section"
       className="mt-60 flex flex-col item-center justify-center gap-28 md:gap-60 md"
     >
-      <div>
+      <motion.div
+        variants={fadeInXVariant}
+        initial="hidden"
+        animate={section3View ? "visible" : "hidden"}
+        custom={1}
+      >
         <div className="flex flex-col lg:flex-row lg:gap-20">
           <div>
             <Image
@@ -93,9 +100,14 @@ export function OurServices() {
             </button>
           </Link>
         </div>
-      </div>
+      </motion.div>
 
-      <div>
+      <motion.div
+        variants={fadeInXReverseVariant}
+        initial="hidden"
+        animate={section3View ? "visible" : "hidden"}
+        custom={3}
+      >
         <div className="flex flex-col lg:flex-row lg:gap-20">
           <div className="order-2">
             <Image
@@ -180,7 +192,7 @@ export function OurServices() {
             </button>
           </Link>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

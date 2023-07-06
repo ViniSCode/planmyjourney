@@ -1,16 +1,15 @@
+import { fadeInXVariant, fadeInYVariant } from "@/utils/transitions";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-export function HeaderText() {
+export function HeaderText({ section1View }: any) {
   return (
     <motion.div className="mt-40 md:mt-0 max-w-[370px] md:max-w-[1120px] mx-auto w-full px-8 flex flex-col lg:flex-row items-center justify-center lg:justify-between h-full gap-10">
       <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        animate={{
-          opacity: 1,
-          x: 0,
-          transition: { duration: 0.6, delay: 0.5 },
-        }}
+        variants={fadeInXVariant}
+        initial="hidden"
+        animate="visible"
+        custom={2}
         className="lg:max-w-[460px] xl:max-w-[530px] w-full order-1 mt-20 lg:mt-0 flex items-center justify-center flex-col lg:block"
       >
         <div className="relative">
@@ -30,12 +29,10 @@ export function HeaderText() {
         </Link>
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.6, delay: 0.8 },
-        }}
+        variants={fadeInYVariant}
+        initial="hidden"
+        animate="visible"
+        custom={4}
         className="w-full relative mt-52 max-w-[420px] xl:max-w-[440px] order-0 lg:order-2 lg:mt-0 select-none pointer-events-none"
       >
         <Image

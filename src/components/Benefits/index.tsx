@@ -1,3 +1,5 @@
+import { fadeInVariant } from "@/utils/transitions";
+import { motion } from "framer-motion";
 import {
   FiClock,
   FiDollarSign,
@@ -8,7 +10,7 @@ import {
 } from "react-icons/fi";
 import { BenefitsCard } from "./BenefitsCard";
 
-export function Benefits() {
+export function Benefits({ section4Ref, section4View }: any) {
   const cards = [
     {
       title: "Travel Planning",
@@ -49,7 +51,13 @@ export function Benefits() {
   ];
 
   return (
-    <section className="mt-80 md:max-w-[660px] lg:max-w-full">
+    <motion.section
+      variants={fadeInVariant}
+      initial="hidden"
+      animate={section4View ? "visible" : "hidden"}
+      className="mt-80 md:max-w-[660px] lg:max-w-full"
+      ref={section4Ref}
+    >
       <h2 className="text-3xl font-bold text-center dark:text-white text-black">
         Our Benefits
       </h2>
@@ -63,6 +71,6 @@ export function Benefits() {
           />
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -8,6 +8,7 @@ import { PlanOrderByInput, useGetPlansQuery } from "@/generated/graphql";
 import type { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 export default function Home({ session }: any) {
   const [mounted, setMounted] = useState(false);
@@ -29,17 +30,39 @@ export default function Home({ session }: any) {
     setMounted(true);
   }, []);
 
+  const { ref: section1Ref, inView: section1View } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: section2Ref, inView: section2View } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: section3Ref, inView: section3View } = useInView({
+    triggerOnce: true,
+  });
+  const { ref: section4Ref, inView: section4View } = useInView({
+    triggerOnce: true,
+  });
+
   return (
     <div className={`pb-20`}>
-      <header className="h-[700px] md:h-[100vh] w-full relative flex flex-col px-2">
+      <header
+        className="h-[700px] md:h-[100vh] w-full relative flex flex-col px-2"
+        ref={section1Ref}
+      >
         <Header session={session} />
         <MobileMenu />
-        <HeaderText />
+        <HeaderText section1View={section1View} />
       </header>
       <main className="px-6 mt-[45rem] md:mt-80 lg:mt-20 max-w-[1120px] mx-auto flex flex-col items-center justify-center gap-20">
-        {data && <PopularPlansSlide data={data} />}
-        <OurServices />
-        <Benefits />
+        {data && (
+          <PopularPlansSlide
+            data={data}
+            section2Ref={section2Ref}
+            section2View={section2View}
+          />
+        )}
+        <OurServices section3Ref={section3Ref} section3View={section3View} />
+        <Benefits section4Ref={section4Ref} section4View={section4View} />
       </main>
     </div>
   );
